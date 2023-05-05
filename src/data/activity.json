@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Spinning",
+    "description": "Activity Description"
+  },
+  {
+    "id": 2,
+    "name": "Functional",
+    "description": "Activity Description"
+  },
+  {
+    "id": 3,
+    "name": "Bodybuilding",
+    "description": "Activity Description"
+  },
+  {
+    "id": 4,
+    "name": "Spinning",
+    "description": "Activity Description"
+  },
+  {
+    "id": 5,
+    "name": "Box",
+    "description": "Activity Description"
+  }
+]
