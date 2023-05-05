@@ -1,27 +1,27 @@
 [
   {
     "id": 1,
-    "firstName": "Spinning",
+    "name": "Spinning",
     "description": "Activity Description"
   },
   {
     "id": 2,
-    "firstName": "Functional",
+    "name": "Functional",
     "description": "Activity Description"
   },
   {
     "id": 3,
-    "firstName": "Bodybuilding",
+    "name": "Bodybuilding",
     "description": "Activity Description"
   },
   {
     "id": 4,
-    "firstName": "Spinning",
+    "name": "Spinning",
     "description": "Activity Description"
   },
   {
     "id": 5,
-    "firstName": "Box",
+    "name": "Box",
     "description": "Activity Description"
   }
 ]
