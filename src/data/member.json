@@ -3,7 +3,7 @@
     "id": 1,
     "firstName": "Susana",
     "lastName": "Minot",
-    "DNI": 35213877,
+    "dni": 35213877,
     "email": "sminot0@netlog.com",
     "phone": "5403096541",
     "password": "hJbPfP"
@@ -12,7 +12,7 @@
     "id": 2,
     "firstName": "Deck",
     "lastName": "Circuit",
-    "DNI": 31754828,
+    "dni": 31754828,
     "email": "dcircuit1@g.co",
     "phone": "9273706494",
     "password": "vF7uGhjyoffe"
@@ -21,7 +21,7 @@
     "id": 3,
     "firstName": "Charmain",
     "lastName": "Abby",
-    "DNI": 32208529,
+    "dni": 32208529,
     "email": "cabby2@globo.com",
     "phone": "1763060997",
     "password": "d9vUeOyuKs"
@@ -30,7 +30,7 @@
     "id": 4,
     "firstName": "Lamond",
     "lastName": "Atmore",
-    "DNI": 16287619,
+    "dni": 16287619,
     "email": "latmore3@g.co",
     "phone": "8484579677",
     "password": "rIW1VVX"
@@ -39,7 +39,7 @@
     "id": 5,
     "firstName": "Lester",
     "lastName": "McDell",
-    "DNI": 12673033,
+    "dni": 12673033,
     "email": "lmcdell4@statcounter.com",
     "phone": "5243291019",
     "password": "rmu10psw6J"
