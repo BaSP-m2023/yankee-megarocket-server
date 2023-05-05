@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "firstName": "Rahel",
+    "lastName": "Warrell",
+    "DNI": 35445121,
+    "email": "rwarrell0@joomla.org",
+    "phone": "2065305876",
+    "password": "fymCVQHvXcV5",
+    "rate": "$14.45"
+  },
+  {
+    "id": 2,
+    "firstName": "Sabine",
+    "lastName": "Locke",
+    "DNI": 18952755,
+    "email": "slocke1@pcworld.com",
+    "phone": "1835129042",
+    "password": "3nNjalrvfbF",
+    "rate": "$10.23"
+  },
+  {
+    "id": 3,
+    "firstName": "Friedrick",
+    "lastName": "Perigoe",
+    "DNI": 32211626,
+    "email": "fperigoe2@mapy.cz",
+    "phone": "6563233891",
+    "password": "Ms2QlQql",
+    "rate": "$12.96"
+  },
+  {
+    "id": 4,
+    "firstName": "Mikael",
+    "lastName": "Racher",
+    "DNI": 6125225,
+    "email": "mracher3@infoseek.co.jp",
+    "phone": "7249462211",
+    "password": "B6fDln",
+    "rate": "$13.95"
+  },
+  {
+    "id": 5,
+    "firstName": "Patti",
+    "lastName": "Caldera",
+    "DNI": 16258111,
+    "email": "pcaldera4@a8.net",
+    "phone": "9051458710",
+    "password": "0xoxJ2tW5T",
+    "rate": "$12.87"
+  }
+]
