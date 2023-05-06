@@ -14,14 +14,9 @@ router.get('/get', (req, res) => {
 
 router.get('/getById/:id', (req, res) => {
   const adminId = req.params.id;
-  if (!adminId) {
-    return res.send('Please enter a valid id');
-  }
   const foundAdmin = admins.find((admin) => admin.id.toString() === adminId);
-  if (foundAdmin) {
-    return res.send(foundAdmin);
-  }
-  return res.send('Admin not found!');
+  if (!foundAdmin) return res.send('Admin not found!');
+  return res.send(foundAdmin);
 });
 
 module.exports = router;
