@@ -8,12 +8,9 @@ const admins = require('./data/admins.json');
 const app = express();
 const port = process.env.PORT || 4000;
 
-const activityRouter = require('./resources/activity');
-
 const trainerRouter = require('./resources/trainer');
 
-app.use('/activity', activityRouter);
-app.use('/trainer', trainerRouter);
+app.use('/', trainerRouter);
 
 app.use(cors());
 app.use(express.json());
