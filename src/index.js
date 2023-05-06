@@ -1,6 +1,6 @@
 // use "import" to import libraries
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -20,7 +20,9 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+const superAdminsRouter = require('./resources/super-admins');
 
+app.use('/superAdmins', superAdminsRouter);
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
