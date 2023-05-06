@@ -5,7 +5,7 @@ const admins = require('../data/admins.json');
 const router = express.Router();
 
 router.get('/get', (req, res) => {
-  if (!admins) {
+  if (admins.length < 1) {
     res.send('There are not Admins');
   } else {
     res.send(admins);
