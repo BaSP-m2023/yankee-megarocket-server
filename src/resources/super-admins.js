@@ -3,12 +3,20 @@ const superAdmins = require('../data/super-admins.json');
 
 const router = express.Router();
 
-router.get('/get', (req, res) => {
-  res.send(superAdmins);
+router.get('/', (req, res) => {
+  if (superAdmins) {
+    res.send(superAdmins);
+  } else {
+    res.send('Superadmin Error');
+  }
 });
-router.get('/get-by-id/:id', (req, res) => {
-  const superAdminID = parseInt(req.params.id, 10);
-  const foundSuperAdmin = superAdmins.find((superAdmin) => superAdmin.id === superAdminID);
-  res.send(foundSuperAdmin);
+router.get('/:id', (req, res) => {
+  const superAdminID = req.params.id;
+  const foundSuperAdmin = superAdmins.find((superA) => superA.id.toString() === superAdminID);
+  if (foundSuperAdmin) {
+    res.send(foundSuperAdmin);
+  } else {
+    res.send('SuperAdmin not found');
+  }
 });
 module.exports = router;
