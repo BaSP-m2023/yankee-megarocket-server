@@ -3,7 +3,7 @@ import { writeFile } from 'fs/promises';
 import superAdmins from '../data/super-admins.json';
 
 const router = Router();
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   const { id, email, password } = req.body;
 
   if (!id || !email || !password) {
@@ -11,10 +11,8 @@ router.post('/signup', async (req, res) => {
     return;
   }
 
-  const SuperAdmin = { id, email, password };
-
   try {
-    superAdmins.push(SuperAdmin);
+    superAdmins.push({ id, email, password });
     await writeFile('src/data/super-admins.json', JSON.stringify(superAdmins, null, 2));
     res.send('Success, Super admin user was created');
   } catch (error) {

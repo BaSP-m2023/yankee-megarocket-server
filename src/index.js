@@ -5,7 +5,7 @@ import cors from 'cors';
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
 
-const superAdminsRouter = require('./resources/super-admins').default;
+const superAdminRouter = require('./resources/super-admins').default;
 const adminRouter = require('./resources/admins');
 
 const app = express();
@@ -17,7 +17,7 @@ app.use('/', trainerRouter);
 
 app.use(cors());
 app.use(express.json());
-app.use('/', superAdminsRouter);
+app.use('/', superAdminRouter);
 
 app.use('/admins', adminRouter);
 
