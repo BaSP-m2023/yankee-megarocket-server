@@ -8,6 +8,10 @@ const admins = require('./data/admins.json');
 const app = express();
 const port = process.env.PORT || 4000;
 
+const trainerRouter = require('./resources/trainer');
+
+app.use('/', trainerRouter);
+
 app.use(cors());
 app.use(express.json());
 
