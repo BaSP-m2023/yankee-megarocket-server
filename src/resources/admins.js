@@ -4,7 +4,7 @@ const admins = require('../data/admins.json');
 
 const router = express.Router();
 
-router.get('/get', (req, res) => {
+router.get('/', (req, res) => {
   if (admins.length < 1) {
     res.send('There are not Admins');
   } else {
@@ -12,7 +12,7 @@ router.get('/get', (req, res) => {
   }
 });
 
-router.get('/getById/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const adminId = req.params.id;
   const foundAdmin = admins.find((admin) => admin.id.toString() === adminId);
   if (!foundAdmin) return res.send('Admin not found!');
