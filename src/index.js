@@ -4,7 +4,7 @@ import cors from 'cors';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
-const deleteSubscription = require('./resources/subscription');
+const subscriptionRouter = require('./resources/subscription');
 const adminRouter = require('./resources/admins');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use('/', trainerRouter);
 
 app.use(cors());
 app.use(express.json());
-app.use('/', deleteSubscription);
+app.use('/', subscriptionRouter);
 
 app.use('/admins', adminRouter);
 

@@ -3,8 +3,8 @@ import { promises as fs } from 'fs';
 
 const router = Router();
 
-router.delete('/', async (req, res) => {
-  const { id } = req.body;
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
 
   if (!id) {
     res.status(400).json({ error: 'id is required' });
