@@ -2,9 +2,10 @@ import express from 'express';
 import cors from 'cors';
 
 // use "require" to import JSON files
-const superAdminRouter = require('./resources/super-admins').default;
 
-const subscriptionRouter = require('./resources/subscription');
+import superAdminRouter from './resources/super-admins';
+import subscriptionRouter from './resources/subscription';
+
 const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
 
