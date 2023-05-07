@@ -17,7 +17,7 @@ app.use('/', trainerRouter);
 
 app.use(cors());
 app.use(express.json());
-app.use('/super-admins', superAdminsRouter);
+app.use('/', superAdminsRouter);
 
 app.use('/admins', adminRouter);
 
