@@ -6,13 +6,20 @@ import cors from 'cors';
 const admins = require('./data/admins.json');
 const superAdmins = require('./data/super-admins.json');
 const superAdminsRouter = require('./resources/super-admins').default;
+const adminRouter = require('./resources/admins');
 
 const app = express();
 const port = process.env.PORT || 4000;
 
+const trainerRouter = require('./resources/trainer');
+
+app.use('/', trainerRouter);
+
 app.use(cors());
 app.use(express.json());
 app.use('/super-admins', superAdminsRouter);
+
+app.use('/admins', adminRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
