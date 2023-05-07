@@ -8,6 +8,7 @@ import subscriptionRouter from './resources/subscription';
 
 const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
+const classRouter = require('./resources/class');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -19,6 +20,7 @@ app.use('/subscriptions', subscriptionRouter);
 
 app.use('/admins', adminRouter);
 app.use('/trainers', trainerRouter);
+app.use('/classes', classRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
