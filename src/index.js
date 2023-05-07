@@ -3,7 +3,7 @@ import cors from 'cors';
 
 // use "require" to import JSON files
 
-const subscriptions = require('./resources/subscription');
+const subscriptionRouter = require('./resources/subscription');
 const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
 
@@ -12,7 +12,7 @@ const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
-app.use('/', subscriptions);
+app.use('/subscriptions', subscriptionRouter);
 
 app.use('/admins', adminRouter);
 app.use('/trainers', trainerRouter);
