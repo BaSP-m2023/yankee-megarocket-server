@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { writeFile } from 'fs/promises';
-import superAdmins, { push } from '../data/super-admins.json';
+import superAdmins from '../data/super-admins.json';
 
 const router = Router();
 router.post('/signup', async (req, res) => {
@@ -14,7 +14,7 @@ router.post('/signup', async (req, res) => {
   const SuperAdmin = { id, email, password };
 
   try {
-    push(SuperAdmin);
+    superAdmins.push(SuperAdmin);
     await writeFile('src/data/super-admins.json', JSON.stringify(superAdmins, null, 2));
     res.send('Success, Super admin user was created');
   } catch (error) {
