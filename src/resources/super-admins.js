@@ -11,10 +11,10 @@ router.post('/signup', async (req, res) => {
     return;
   }
 
-  const newSuperAdmin = { id, email, password };
+  const SuperAdmin = { id, email, password };
 
   try {
-    push(newSuperAdmin);
+    push(SuperAdmin);
     await writeFile('src/data/super-admins.json', JSON.stringify(superAdmins, null, 2));
     res.send('Success, Super admin user was created');
   } catch (error) {
