@@ -1,25 +1,20 @@
-// GET
 const express = require('express');
 
 const router = express.Router();
 
-const members = require('../data/member.json');
+const member = require('../data/member.json');
 
-router.get('/get', (req, res) => {
-  if (members.length === 0) {
+router.get('/', (req, res) => {
+  if (member.length === 0) {
     res.send('oops! There are no members!');
   } else {
-    res.send(members);
+    res.send(member);
   }
 });
 
-// FIN DEL GET
-
-// GET BY ID
-
-router.get('/getById/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const memberId = req.params.id;
-  const foundMember = members.find((member) => member.id.toString() === memberId);
+  const foundMember = member.find((aMember) => aMember.id.toString() === memberId);
   if (foundMember) {
     res.send(foundMember);
   } else {
@@ -28,4 +23,3 @@ router.get('/getById/:id', (req, res) => {
 });
 
 module.exports = router;
-// FIN DEL GET BY ID

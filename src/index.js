@@ -4,7 +4,7 @@ import cors from 'cors';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
-const membersRouter = require('./resources/member.js');
+const membersRouter = require('./resources/member');
 
 const app = express();
 const port = process.env.PORT || 4000;
