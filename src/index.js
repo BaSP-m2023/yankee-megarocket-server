@@ -6,18 +6,20 @@ import cors from 'cors';
 import superAdminRouter from './resources/super-admins';
 import subscriptionRouter from './resources/subscription';
 
+const activityRouter = require('./resources/activity');
 const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
 const classRouter = require('./resources/class');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 app.use('/super-admins', superAdminRouter);
 app.use('/subscriptions', subscriptionRouter);
 
+app.use('/activity', activityRouter);
 app.use('/admins', adminRouter);
 app.use('/trainers', trainerRouter);
 app.use('/classes', classRouter);
