@@ -11,11 +11,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const subscriptionId = req.params.id;
   const findSubscription = subscription.find((sub) => sub.id.toString() === subscriptionId);
-  if (findSubscription) {
-    res.send(findSubscription);
-  } else {
-    res.send('subscription not found');
-  }
+  if (!findSubscription) return res.send('subscription not found');
+  return res.send(findSubscription);
 });
 
 module.exports = router;
