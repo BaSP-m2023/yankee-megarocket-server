@@ -22,10 +22,8 @@ router.delete('/:id', async (req, res) => {
   activities.splice(activityIndex, 1);
 
   fs.writeFile('src/data/activity.json', JSON.stringify(activities, null, 2), (err) => {
-    if (err) {
-      res.send('Error! Activity cannot be deleted');
-    }
-    res.send('Successfully removed');
+    if (err) return res.send('Error! Activity cannot be deleted');
+    return res.send('Successfully removed');
   });
 });
 
