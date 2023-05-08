@@ -21,21 +21,28 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const newClass = req.body;
-  if (Object.keys(newClass).length === 6
-  && Object.values(newClass).length === 6
-  && Object.values(newClass).indexOf({}) >= 0) {
-    classes.push(newClass);
-    fs.writeFile('src/data/class.json', JSON.stringify(classes, null, 2), (err) => {
-      if (err) {
-        res.send('Error! Could not create class!');
-      } else {
-        res.send('Class Created!');
-      }
-    });
-  } else {
-    res.send('Error. Class must contain exactly 6 items with some value each.');
+  const {
+    id, activityId, hour, day, trainerId, maxCapacity,
+  } = req.body;
+
+  if (!id || !activityId || !hour || !day || !trainerId || !maxCapacity) {
+    res.status(400).json({ error: 'All fields must be completed' });
+    return;
   }
+  const classExists = classes.find((classData) => classData.id === id);
+
+  if (classExists) {
+    res.status(400).json({ error: 'This ID already exists' });
+    return;
+  }
+  classes.push(req.body);
+  fs.writeFile('src/data/class.json', JSON.stringify(classes), (err) => {
+    if (err) {
+      res.status(500).json({ error: 'Error! Class could not be created' });
+    } else {
+      res.send('Class successfully created');
+    }
+  });
 });
 
 module.exports = router;
