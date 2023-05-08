@@ -10,7 +10,6 @@ router.post('/', async (req, res) => {
     res.status(400).json({ error: 'The fields cannot be blank' });
     return;
   }
-
   try {
     superAdmins.push({ id, email, password });
     await writeFile('src/data/super-admins.json', JSON.stringify(superAdmins, null, 2));

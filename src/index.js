@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 
-// use "require" to import JSON files
 import superAdminRouter from './resources/super-admins';
 import subscriptionRouter from './resources/subscription';
 
