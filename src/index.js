@@ -20,10 +20,8 @@ app.get('/admins', (req, res) => {
   });
 });
 const superAdminRouter = require('./resources/super-admins');
-// const subscriptionRouter = require('./resources/subscription');
 
 app.use('/superAdmin', superAdminRouter);
-// app.use('/subscriptions', subscriptionRouter);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
