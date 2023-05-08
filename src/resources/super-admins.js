@@ -19,4 +19,5 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'Error, Super admin user could not be created' });
   }
 });
+
 export default router;
