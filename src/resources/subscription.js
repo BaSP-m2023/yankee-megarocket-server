@@ -53,7 +53,7 @@ router.put('/', (req, res) => {
       res.status(400).json({ error: 'Error in edition' });
     }
   });
-  res.send('Member Successfully edited');
+  res.send('Subscription Successfully edited');
 });
 
 export default router;
