@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const activityID = req.params.id;
   const foundActivity = activities.find((activity) => activity.id.toString() === activityID);
-  if (!foundActivity) return res.send('Activity not found');
+  if (!foundActivity) return res.status(404).send('Activity not found');
   return res.send(foundActivity);
 });
 
