@@ -10,7 +10,7 @@ router.put('/:id', (req, res) => {
   const activityId = activities.findIndex((activity) => activity.id.toString() === id);
   const activityUpdate = req.body;
 
-  if (activityId === -1) return res.send('No activity Found with this id');
+  if (activityId === -1) return res.status(404).send('No activity Found with this id');
   const activity = activities[activityId];
   activities[activityId] = {
     ...activity,
@@ -23,7 +23,7 @@ router.put('/:id', (req, res) => {
     }
   });
 
-  return res.json({ msg: 'Activity updated', activity: activities[activityId] });
+  return res.json('Activity updated');
 });
 
 module.exports = router;
