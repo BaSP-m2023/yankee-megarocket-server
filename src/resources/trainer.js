@@ -26,14 +26,14 @@ router.get('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const trainerId = req.params.id;
+  const foundTrainer = trainers.find((trainer) => trainer.id.toString() === trainerId);
+  if (!foundTrainer) return res.send('Trainer not found!');
   const filteredTrainers = trainers.filter((trainer) => trainer.id.toString() !== trainerId);
-  fs.writeFile('../data/trainer.json', JSON.stringify(filteredTrainers, null, 2), (err) => {
-    if (err) {
-      res.send('Error! User cannot be deleted');
-    } else {
-      res.send('User Deleted');
-    }
+  fs.writeFile('src/data/trainer.json', JSON.stringify(filteredTrainers, null, 2), (err) => {
+    if (err) return res.status(500).send('Trainer could not be deleted!');
+    return res.send('Trainer Deleted!');
   });
+  return null;
 });
 
 module.exports = router;
