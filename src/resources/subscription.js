@@ -5,7 +5,8 @@ const subscription = require('../data/subscription.json');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send(subscription);
+  if (subscription.length < 1) return res.send('subscription not found');
+  return res.send(subscription);
 });
 
 router.get('/:id', (req, res) => {
