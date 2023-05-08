@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 const trainers = require('../data/trainer.json');
 
@@ -21,6 +22,18 @@ router.get('/:id', (req, res) => {
   } else {
     res.status(404).send('Trainer not found');
   }
+});
+
+router.delete('/:id', (req, res) => {
+  const trainerId = req.params.id;
+  const filteredTrainers = trainers.filter((trainer) => trainer.id.toString() !== trainerId);
+  fs.writeFile('../data/trainer.json', JSON.stringify(filteredTrainers, null, 2), (err) => {
+    if (err) {
+      res.send('Error! User cannot be deleted');
+    } else {
+      res.send('User Deleted');
+    }
+  });
 });
 
 module.exports = router;
