@@ -50,4 +50,16 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+router.delete('/:id', (req, res) => {
+  const classId = req.params.id;
+  const foundClass = classes.find((idClass) => idClass.id.toString() === classId);
+  if (!foundClass) return res.status(404).send('Class not found');
+  const filteredClass = classes.filter((idClass) => idClass.id.toString() !== classId);
+  fs.writeFile('src/data/class.json', JSON.stringify(filteredClass, null, 2), (err) => {
+    if (err) return res.status(500).send('Class could not be deleted');
+    return res.send('Class has been removed');
+  });
+  return null;
+});
+
 module.exports = router;
