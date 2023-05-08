@@ -38,4 +38,16 @@ router.post('/', (req, res) => {
   }
 });
 
+router.delete('/:id', (req, res) => {
+  const classId = req.params.id;
+  const filteredClass = classes.filter((IdClass) => IdClass.id.toString() !== classId);
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(filteredClass, null, 2), (err) => {
+    if (err) {
+      res.send('Class could not be deleted');
+    } else {
+      res.send('Class has been removed');
+    }
+  });
+});
+
 module.exports = router;
