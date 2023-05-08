@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { promises as fs } from 'fs';
 
+const subscription = require('../data/subscription.json');
+
 const router = Router();
 
 router.delete('/:id', async (req, res) => {
@@ -26,6 +28,32 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+router.put('/', (req, res) => {
+  const {
+    id, classId, memberId, date,
+  } = req.body;
+
+  if (!id || !classId || !memberId || !date) {
+    res.status(400).json({ error: 'All fields must be completed' });
+    return;
+  }
+  const subscriptionExists = subscription.find((memberData) => memberData.id === id);
+  const subscriptionIndex = subscription.findIndex((memberData) => memberData.id === id);
+
+  if (!subscriptionExists) {
+    res.status(400).json({ error: 'This ID does not exist' });
+    return;
+  }
+
+  subscription.splice(subscriptionIndex, 1, req.body);
+  fs.writeFile('src/data/subscription.json', JSON.stringify(subscription, null, 2), (err) => {
+    if (err) {
+      res.status(400).json({ error: 'Error in edition' });
+    }
+  });
+  res.send('Member Successfully edited');
 });
 
 export default router;
