@@ -1,15 +1,5 @@
 [
   {
-    "id": 1,
-    "firstName": "Cristen",
-    "lastName": "Daveran",
-    "dni": 18143686,
-    "phone": "458-469-4561",
-    "email": "cdaveran0@ebay.com",
-    "password": "2ZI3jA1"
-  },
-
-  {
     "id": 2,
     "firstName": "Paule",
     "lastName": "Flanigan",
