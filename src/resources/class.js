@@ -5,13 +5,13 @@ const router = express.Router();
 const fs = require('fs');
 const classes = require('../data/class.json');
 
-router.post('/post', (req, res) => {
+router.post('/', (req, res) => {
   const newClass = req.body;
-  classes.push(newClass);
   if (Object.keys(newClass).length === 6
-    && Object.values(newClass).length === 6
-    && Object.values(newClass).indexOf({}) >= 0) {
-    fs.writeFile('src/data/class.json', JSON.stringify(classes), (err) => {
+  && Object.values(newClass).length === 6
+  && Object.values(newClass).indexOf({}) >= 0) {
+    classes.push(newClass);
+    fs.writeFile('src/data/class.json', JSON.stringify(classes, null, 2), (err) => {
       if (err) {
         res.send('Error! Could not create class!');
       } else {
