@@ -1,9 +1,8 @@
 import { Router } from 'express';
-// import { promises as fs } from 'fs';
 
 const router = Router();
-const subscription = require('../data/subscription.json');
 const fs = require('fs');
+const subscription = require('../data/subscription.json');
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
@@ -36,16 +35,18 @@ router.post('/', async (req, res) => {
   } = req.body;
 
   if (!id || !classId || !memberId || !date) {
-    res.status(400).json({ error: 'Complete fields' });
+    res.status(400).send({ error: 'Complete fields' });
+    return;
+  }
+  const subscriptionExist = subscription.find((subscriptionData) => subscriptionData.id === id);
+  if (subscriptionExist) {
+    res.status(400).json({ error: 'This ID already exist' });
     return;
   }
   subscription.push(req.body);
   fs.writeFile('src/data/subscription.json', JSON.stringify(subscription), (err) => {
-    if (err) {
-      res.send('Error! Subscription cannot be created.');
-    } else {
-      res.send('Subscription Created!');
-    }
+    if (err) return res.send('Error! Subscription cannot be created.');
+    return res.send('Subscription Created!');
   });
 });
 
