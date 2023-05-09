@@ -42,4 +42,29 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.put('/', (req, res) => {
+  const {
+    id, classId, memberId, date,
+  } = req.body;
+
+  if (!id || !classId || !memberId || !date) {
+    res.status(400).json({ error: 'All fields must be completed' });
+    return;
+  }
+  const subscriptionExists = subscription.find((memberData) => memberData.id === id);
+  if (!subscriptionExists) {
+    res.status(400).json({ error: 'This ID does not exist' });
+    return;
+  }
+  const subscriptionIndex = subscription.findIndex((memberData) => memberData.id === id);
+  subscription.splice(subscriptionIndex, 1, req.body);
+  fs.writeFile('src/data/subscription.json', JSON.stringify(subscription, null, 2), (err) => {
+    if (err) {
+      return res.status(400).json({ error: 'Error in edition' });
+    }
+    return res.send('subscription edites');
+  });
+  res.send('Subscription Successfully edited');
+});
+
 module.exports = router;
