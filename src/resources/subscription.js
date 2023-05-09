@@ -40,17 +40,15 @@ router.put('/', (req, res) => {
     return;
   }
   const subscriptionExists = subscription.find((memberData) => memberData.id === id);
-  const subscriptionIndex = subscription.findIndex((memberData) => memberData.id === id);
-
   if (!subscriptionExists) {
     res.status(400).json({ error: 'This ID does not exist' });
     return;
   }
-
+  const subscriptionIndex = subscription.findIndex((memberData) => memberData.id === id);
   subscription.splice(subscriptionIndex, 1, req.body);
   fs.writeFile('src/data/subscription.json', JSON.stringify(subscription, null, 2), (err) => {
     if (err) {
-      res.status(400).json({ error: 'Error in edition' });
+      return res.status(400).json({ error: 'Error in edition' });
     }
   });
   res.send('Subscription Successfully edited');
