@@ -25,24 +25,17 @@ router.post('/', async (req, res) => {
 router.delete('/:id', (req, res) => {
   const superAdminId = req.params.id;
   const filterSAdmins = superAdmins.filter((sprAdmin) => sprAdmin.id.toString() !== superAdminId);
-  const found = [];
-  for (let i = 0; i < superAdmins.length; i += 1) {
-    if (superAdminId === superAdmins[i].id.toString()) {
-      const idFound = true;
-      found.push(idFound);
+  const superAdminFound = superAdmins.find((superA) => superA.id.toString() === superAdminId);
+  if (!superAdminFound) {
+    return res.status(404).send('Super Admin not found!');
+  }
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(filterSAdmins, null, 2), (err) => {
+    if (err) {
+      return res.status(500).send('Error! could not delete superadmin');
     }
-  }
-  if (found[0]) {
-    fs.writeFile('src/data/super-admins.json', JSON.stringify(filterSAdmins, null, 2), (err) => {
-      if (err) {
-        res.send('Error! Could not delete super admin!');
-      } else {
-        res.send('Super admin has been deleted');
-      }
-    });
-  } else {
-    res.send('Error. Id does not exist');
-  }
+    return res.send('Superadmin deleted');
+  });
+  return null;
 });
 
 export default router;
