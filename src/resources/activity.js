@@ -11,20 +11,19 @@ router.post('/', (req, res) => {
   } = req.body;
 
   if (!id || !name || !description) {
-    res.status(400).json({ error: 'All fields must be completed' });
-    return;
+    return res.status(400).json({ error: 'All fields must be completed' });
   }
   const activityExists = activities.find((activityData) => activityData.id === id);
 
   if (activityExists) {
-    res.status(400).json({ error: 'This ID already exists' });
-    return;
+    return res.status(400).json({ error: 'This ID already exists' });
   }
   activities.push(req.body);
   fs.writeFile('src/data/activity.json', JSON.stringify(activities), (err) => {
     if (err) return res.status(500).json({ error: 'Error! Activity could not be created' });
     return res.send('Activity successfully created');
   });
+  return null;
 });
 
 module.exports = router;
