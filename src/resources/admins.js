@@ -1,4 +1,5 @@
 const express = require('express');
+
 const fs = require('fs');
 
 const admins = require('../data/admins.json');
@@ -35,6 +36,27 @@ router.get('/:id', (req, res) => {
   const foundAdmin = admins.find((admin) => admin.id.toString() === adminId);
   if (!foundAdmin) return res.send('Admin not found!');
   return res.send(foundAdmin);
+});
+
+router.put('/:id', (req, res) => {
+  const adminId = req.params.id;
+  const updatedData = req.body;
+  const updatedAdmin = admins.find((admin) => admin.id.toString() === adminId);
+  if (!updatedAdmin) {
+    return res.send('Admin not found');
+  }
+  admins[adminId - 1].firstName = updatedData.firstName || admins[adminId - 1].firstName;
+  admins[adminId - 1].lastName = updatedData.lastName || admins[adminId - 1].lastName;
+  admins[adminId - 1].dni = updatedData.dni || admins[adminId - 1].dni;
+  admins[adminId - 1].phone = updatedData.phone || admins[adminId - 1].phone;
+  admins[adminId - 1].email = updatedData.email || admins[adminId - 1].email;
+  admins[adminId - 1].password = updatedData.password || admins[adminId - 1].password;
+  fs.writeFile('src/data/admins.json', JSON.stringify(admins, null, 2), (err) => {
+    if (err) {
+      res.send(err);
+    }
+  });
+  return res.send(admins[adminId - 1]);
 });
 
 module.exports = router;
