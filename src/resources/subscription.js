@@ -50,6 +50,7 @@ router.put('/', (req, res) => {
     if (err) {
       return res.status(400).json({ error: 'Error in edition' });
     }
+    return res.send('subscription edites');
   });
   res.send('Subscription Successfully edited');
 });
