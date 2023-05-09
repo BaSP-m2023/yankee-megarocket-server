@@ -4,6 +4,7 @@ import cors from 'cors';
 const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
 const classRouter = require('./resources/class');
+const superAdminRouter = require('./resources/super-admins');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/admins', adminRouter);
 app.use('/trainers', trainerRouter);
 app.use('/classes', classRouter);
+app.use('/super-admins', superAdminRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
