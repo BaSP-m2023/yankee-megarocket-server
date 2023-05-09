@@ -22,11 +22,8 @@ router.post('/', (req, res) => {
   }
   activities.push(req.body);
   fs.writeFile('src/data/activity.json', JSON.stringify(activities), (err) => {
-    if (err) {
-      res.status(500).json({ error: 'Error! Activity could not be created' });
-    } else {
-      res.send('Activity successfully created');
-    }
+    if (err) return res.status(500).json({ error: 'Error! Activity could not be created' });
+    return res.send('Activity successfully created');
   });
 });
 
