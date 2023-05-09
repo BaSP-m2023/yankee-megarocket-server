@@ -5,6 +5,18 @@ import superAdmins from '../data/super-admins.json';
 const fs = require('fs');
 
 const router = Router();
+
+router.get('/', (req, res) => {
+  if (!superAdmins) return res.send('superAdmin error');
+  return res.send(superAdmins);
+});
+
+router.get('/:id', (req, res) => {
+  const superAdminID = req.params.id;
+  const foundSuperAdmin = superAdmins.find((superA) => superA.id.toString() === superAdminID);
+  if (!foundSuperAdmin) return res.send('SuperAdmin not found');
+  return res.send(foundSuperAdmin);
+});
 router.post('/', async (req, res) => {
   const { id, email, password } = req.body;
 
@@ -12,7 +24,6 @@ router.post('/', async (req, res) => {
     res.status(400).json({ error: 'The fields cannot be blank' });
     return;
   }
-
   try {
     superAdmins.push({ id, email, password });
     await writeFile('src/data/super-admins.json', JSON.stringify(superAdmins, null, 2));

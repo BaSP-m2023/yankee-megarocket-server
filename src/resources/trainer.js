@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 const trainers = require('../data/trainer.json');
 
@@ -21,6 +22,18 @@ router.get('/:id', (req, res) => {
   } else {
     res.status(404).send('Trainer not found');
   }
+});
+
+router.delete('/:id', (req, res) => {
+  const trainerId = req.params.id;
+  const foundTrainer = trainers.find((trainer) => trainer.id.toString() === trainerId);
+  if (!foundTrainer) return res.send('Trainer not found!');
+  const filteredTrainers = trainers.filter((trainer) => trainer.id.toString() !== trainerId);
+  fs.writeFile('src/data/trainer.json', JSON.stringify(filteredTrainers, null, 2), (err) => {
+    if (err) return res.status(500).send('Trainer could not be deleted!');
+    return res.send('Trainer Deleted!');
+  });
+  return null;
 });
 
 module.exports = router;
