@@ -11,23 +11,19 @@ router.post('/', (req, res) => {
   } = req.body;
 
   if (!id || !firstName || !lastName || !dni || !phone || !email || !password) {
-    res.status(400).json({ error: 'All fields must be completed' });
-    return;
+    return res.status(400).json({ error: 'All fields must be completed' });
   }
   const adminExists = admins.find((adminData) => adminData.id === id);
 
   if (adminExists) {
-    res.status(400).json({ error: 'This ID already exists' });
-    return;
+    return res.status(400).json({ error: 'This ID already exists' });
   }
   admins.push(req.body);
   fs.writeFile('src/data/admins.json', JSON.stringify(admins), (err) => {
-    if (err) {
-      res.status(500).json({ error: 'Error! Admin could not be created' });
-    } else {
-      res.send('Admin successfully created');
-    }
+    if (err) return res.status(500).json({ error: 'Error! Admin could not be created' });
+    return res.send('Admin successfully created');
   });
+  return null;
 });
 router.get('/', (req, res) => {
   if (admins.length < 1) {

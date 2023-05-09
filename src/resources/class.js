@@ -26,23 +26,19 @@ router.post('/', (req, res) => {
   } = req.body;
 
   if (!id || !activityId || !hour || !day || !trainerId || !maxCapacity) {
-    res.status(400).json({ error: 'All fields must be completed' });
-    return;
+    return res.status(400).json({ error: 'All fields must be completed' });
   }
   const classExists = classes.find((classData) => classData.id === id);
 
   if (classExists) {
-    res.status(400).json({ error: 'This ID already exists' });
-    return;
+    return res.status(400).json({ error: 'This ID already exists' });
   }
   classes.push(req.body);
   fs.writeFile('src/data/class.json', JSON.stringify(classes), (err) => {
-    if (err) {
-      res.status(500).json({ error: 'Error! Class could not be created' });
-    } else {
-      res.send('Class successfully created');
-    }
+    if (err) return res.status(500).json({ error: 'Error! Class could not be created' });
+    return res.send('Class successfully created');
   });
+  return null;
 });
 
 module.exports = router;
