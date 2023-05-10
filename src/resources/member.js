@@ -28,4 +28,17 @@ router.post('/', (req, res) => {
     }
   });
 });
+
+router.delete('/:id', (req, res) => {
+  const memberId = req.params.id;
+  const foundMember = members.find((idMember) => idMember.id.toString() === memberId);
+  if (!foundMember) return res.status(404).send('Member not found');
+  const filteredMember = members.filter((idMember) => idMember.id.toString() !== memberId);
+  fs.writeFile('src/data/member.json', JSON.stringify(filteredMember, null, 2), (err) => {
+    if (err) return res.status(500).send('Member could not be deleted');
+    return res.send('Member has been removed');
+  });
+  return null;
+});
+
 module.exports = router;
