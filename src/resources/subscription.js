@@ -1,6 +1,5 @@
 const express = require('express');
 const fs = require('fs');
-
 const subscription = require('../data/subscription.json');
 
 const router = express.Router();
@@ -65,6 +64,27 @@ router.put('/', (req, res) => {
     return res.send('subscription edites');
   });
   res.send('Subscription Successfully edited');
+});
+
+router.post('/', async (req, res) => {
+  const {
+    id, classId, memberId, date,
+  } = req.body;
+
+  if (!id || !classId || !memberId || !date) {
+    res.status(400).send({ error: 'Complete fields' });
+    return;
+  }
+  const subscriptionExist = subscription.find((subscriptionData) => subscriptionData.id === id);
+  if (subscriptionExist) {
+    res.status(400).json({ error: 'This ID already exist' });
+    return;
+  }
+  subscription.push(req.body);
+  fs.writeFile('src/data/subscription.json', JSON.stringify(subscription), (err) => {
+    if (err) return res.send('Error! Subscription cannot be created.');
+    return res.send('Subscription Created!');
+  });
 });
 
 module.exports = router;
