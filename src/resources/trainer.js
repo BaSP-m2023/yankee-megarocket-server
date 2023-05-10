@@ -24,6 +24,35 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.put('/:id', (req, res) => {
+  const trainerId = req.params.id;
+
+  if (!Number.isInteger(Number(trainerId))) {
+    res.send('Invalid activity ID');
+    return;
+  }
+
+  const trainerIndex = trainers.findIndex((act) => act.id === Number(trainerId));
+  if (trainerIndex === -1) {
+    res.send('Trainer not found');
+    return;
+  }
+
+  const updatedTrainer = req.body;
+
+  trainers[trainerIndex] = {
+    ...trainers[trainerIndex],
+    ...updatedTrainer,
+    id: trainers[trainerIndex].id,
+  };
+
+  fs.writeFile('src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
+    if (err) {
+      res.send('Error! trainer cannot be updated');
+    }
+    res.send('Trainer updated successfully');
+  });
+});
 router.delete('/:id', (req, res) => {
   const trainerId = req.params.id;
   const foundTrainer = trainers.find((trainer) => trainer.id.toString() === trainerId);
@@ -34,6 +63,23 @@ router.delete('/:id', (req, res) => {
     return res.send('Trainer Deleted!');
   });
   return null;
+});
+
+router.post('/', (req, res) => {
+  const previousId = trainers.length - 1;
+  const trainerId = trainers[previousId].id + 1;
+  const {
+    firstName, lastName, dni, email, phone, password, rate,
+  } = req.body;
+  if (!firstName || !lastName || !dni || !email || !phone || !password || !rate) {
+    return res.send('All field are required');
+  }
+  const newTrainer = {
+    trainerId, firstName, lastName, dni, email, phone, password, rate,
+  };
+  trainers.push(newTrainer);
+  fs.writeFile('src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => res.send(err));
+  return res.send('new trainer added successfully');
 });
 
 module.exports = router;
