@@ -8,7 +8,6 @@ const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
 const classRouter = require('./resources/class');
 const activityRouter = require('./resources/activity');
-
 const subscriptionRouter = require('./resources/subscription');
 
 const app = express();

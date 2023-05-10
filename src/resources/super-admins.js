@@ -17,6 +17,7 @@ router.get('/:id', (req, res) => {
   if (!foundSuperAdmin) return res.send('SuperAdmin not found');
   return res.send(foundSuperAdmin);
 });
+
 router.post('/', async (req, res) => {
   const { id, email, password } = req.body;
 
@@ -47,6 +48,28 @@ router.delete('/:id', (req, res) => {
     return res.send('Superadmin deleted');
   });
   return null;
+});
+
+router.put('/:id', (req, res) => {
+  const idSuperAdmin = req.params.id;
+  const indexSuperAdmin = superAdmins.findIndex((superAdmin) => superAdmin.id.toString()
+  === idSuperAdmin);
+  const superAdminUpd = req.body;
+
+  if (indexSuperAdmin === -1) return res.status(404).send('No Super Admin Found with this id');
+  const superAdmin = superAdmins[indexSuperAdmin];
+  superAdmins[indexSuperAdmin] = {
+    ...superAdmin,
+    ...superAdminUpd,
+  };
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(superAdmins, null, 2), (err) => {
+    if (err) {
+      return res.status(500).send('Error updating Super Admin');
+    }
+    return res.json('Super Admin updated');
+  });
+
+  return res.json('Super Admin updated succesfully!');
 });
 
 export default router;
