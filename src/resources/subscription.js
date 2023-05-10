@@ -1,7 +1,20 @@
-import { Router } from 'express';
-import { promises as fs } from 'fs';
+const express = require('express');
+const fs = require('fs');
+const subscription = require('../data/subscription.json');
 
-const router = Router();
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  if (subscription.length < 1) return res.send('subscription not found');
+  return res.send(subscription);
+});
+
+router.get('/:id', (req, res) => {
+  const subscriptionId = req.params.id;
+  const findSubscription = subscription.find((sub) => sub.id.toString() === subscriptionId);
+  if (!findSubscription) return res.send('subscription not found');
+  return res.send(findSubscription);
+});
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
@@ -28,4 +41,50 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-export default router;
+router.put('/', (req, res) => {
+  const {
+    id, classId, memberId, date,
+  } = req.body;
+
+  if (!id || !classId || !memberId || !date) {
+    res.status(400).json({ error: 'All fields must be completed' });
+    return;
+  }
+  const subscriptionExists = subscription.find((memberData) => memberData.id === id);
+  if (!subscriptionExists) {
+    res.status(400).json({ error: 'This ID does not exist' });
+    return;
+  }
+  const subscriptionIndex = subscription.findIndex((memberData) => memberData.id === id);
+  subscription.splice(subscriptionIndex, 1, req.body);
+  fs.writeFile('src/data/subscription.json', JSON.stringify(subscription, null, 2), (err) => {
+    if (err) {
+      return res.status(400).json({ error: 'Error in edition' });
+    }
+    return res.send('subscription edites');
+  });
+  res.send('Subscription Successfully edited');
+});
+
+router.post('/', async (req, res) => {
+  const {
+    id, classId, memberId, date,
+  } = req.body;
+
+  if (!id || !classId || !memberId || !date) {
+    res.status(400).send({ error: 'Complete fields' });
+    return;
+  }
+  const subscriptionExist = subscription.find((subscriptionData) => subscriptionData.id === id);
+  if (subscriptionExist) {
+    res.status(400).json({ error: 'This ID already exist' });
+    return;
+  }
+  subscription.push(req.body);
+  fs.writeFile('src/data/subscription.json', JSON.stringify(subscription), (err) => {
+    if (err) return res.send('Error! Subscription cannot be created.');
+    return res.send('Subscription Created!');
+  });
+});
+
+module.exports = router;

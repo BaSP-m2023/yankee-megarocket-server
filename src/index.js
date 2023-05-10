@@ -2,13 +2,14 @@ import express from 'express';
 import cors from 'cors';
 
 import superAdminRouter from './resources/super-admins';
-import subscriptionRouter from './resources/subscription';
 
 const memberRouter = require('./resources/member');
 const adminRouter = require('./resources/admins');
 const trainerRouter = require('./resources/trainer');
 const classRouter = require('./resources/class');
 const activityRouter = require('./resources/activity');
+
+const subscriptionRouter = require('./resources/subscription');
 
 const app = express();
 const port = process.env.PORT || 4000;

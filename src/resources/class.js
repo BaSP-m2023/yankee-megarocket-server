@@ -21,21 +21,48 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const newClass = req.body;
-  if (Object.keys(newClass).length === 6
-  && Object.values(newClass).length === 6
-  && Object.values(newClass).indexOf({}) >= 0) {
-    classes.push(newClass);
-    fs.writeFile('src/data/class.json', JSON.stringify(classes, null, 2), (err) => {
-      if (err) {
-        res.send('Error! Could not create class!');
-      } else {
-        res.send('Class Created!');
-      }
-    });
-  } else {
-    res.send('Error. Class must contain exactly 6 items with some value each.');
+  const {
+    id, activityId, hour, day, trainerId, maxCapacity,
+  } = req.body;
+
+  if (!id || !activityId || !hour || !day || !trainerId || !maxCapacity) {
+    return res.status(400).json({ error: 'All fields must be completed' });
   }
+  const classExists = classes.find((classData) => classData.id === id);
+
+  if (classExists) {
+    return res.status(400).json({ error: 'This ID already exists' });
+  }
+  classes.push(req.body);
+  fs.writeFile('src/data/class.json', JSON.stringify(classes), (err) => {
+    if (err) return res.status(500).json({ error: 'Error! Class could not be created' });
+    return res.send('Class successfully created');
+  });
+  return null;
+});
+
+router.delete('/:id', (req, res) => {
+  const classId = req.params.id;
+  const filteredClass = classes.filter((IdClass) => IdClass.id.toString() !== classId);
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(filteredClass, null, 2), (err) => {
+    if (err) {
+      res.send('Class could not be deleted');
+    } else {
+      res.send('Class has been removed');
+    }
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const classId = req.params.id;
+  const foundClass = classes.find((idClass) => idClass.id.toString() === classId);
+  if (!foundClass) return res.status(404).send('Class not found');
+  const filteredClass = classes.filter((idClass) => idClass.id.toString() !== classId);
+  fs.writeFile('src/data/class.json', JSON.stringify(filteredClass, null, 2), (err) => {
+    if (err) return res.status(500).send('Class could not be deleted');
+    return res.send('Class has been removed');
+  });
+  return null;
 });
 
 module.exports = router;
