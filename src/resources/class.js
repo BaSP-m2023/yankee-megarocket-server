@@ -1,8 +1,8 @@
 const express = require('express');
-const fs = require('fs');
 
 const router = express.Router();
-
+const fs = require('fs');
+const path = require('path');
 const classes = require('../data/class.json');
 
 router.get('/', (req, res) => {
@@ -18,6 +18,16 @@ router.get('/:id', (req, res) => {
   const foundClass = classes.find((aClass) => aClass.id.toString() === classId);
   if (!foundClass) return res.status(404).send('Class not found!');
   return res.send(foundClass);
+});
+
+router.get('/:id', (req, res) => {
+  const classId = req.params.id;
+  const foundClass = classes.find((aClass) => aClass.id.toString() === classId);
+  if (foundClass) {
+    res.send(foundClass);
+  } else {
+    res.send('Class not found!');
+  }
 });
 
 router.post('/', (req, res) => {
@@ -61,6 +71,28 @@ router.delete('/:id', (req, res) => {
   fs.writeFile('src/data/class.json', JSON.stringify(filteredClass, null, 2), (err) => {
     if (err) return res.status(500).send('Class could not be deleted');
     return res.send('Class has been removed');
+  });
+  return null;
+});
+
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const iClasses = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/class.json')));
+  const classId = iClasses.findIndex((aClass) => aClass.id.toString() === id);
+  const classUpdate = req.body;
+  if (classId === -1) return res.status(404).send('No class found with this id');
+  const updatedClasses = iClasses.map((aClass) => {
+    if (aClass.id.toString() === id) {
+      return {
+        ...aClass,
+        ...classUpdate,
+      };
+    }
+    return aClass;
+  });
+  fs.writeFile(path.join(__dirname, '../data/classes.json'), JSON.stringify(updatedClasses, null, 2), (err) => {
+    if (err) return res.status(500).send('Error updating class');
+    return res.json('Class updated');
   });
   return null;
 });
