@@ -39,14 +39,14 @@ router.get('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const adminId = req.params.id;
+  const foundAdmin = admins.find((admin) => admin.id.toString() === adminId);
+  if (!foundAdmin) return res.send('Admin not found!');
   const filteredAdmins = admins.filter((admin) => admin.id.toString() !== adminId);
   fs.writeFile('src/data/admins.json', JSON.stringify(filteredAdmins, null, 2), (err) => {
-    if (err) {
-      res.send('Error! Admin cannot not be deleted');
-    } else {
-      res.send('Admin deleted!');
-    }
+    if (err) return res.status(500).send('Error! Admin cannot not be deleted');
+    return res.send('Admin deleted!');
   });
+  return null;
 });
 
 module.exports = router;
