@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "bc066323-ab23-45dc-a60f-1647c0a029c3",
+		"name": "Yankee Megarocket Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23500002"
+	},
+	"item": [
+		{
+			"name": "Admins",
+			"item": []
+		},
+		{
+			"name": "Activities",
+			"item": []
+		},
+		{
+			"name": "Super-admins",
+			"item": []
+		},
+		{
+			"name": "Classes",
+			"item": []
+		},
+		{
+			"name": "Trainers",
+			"item": []
+		},
+		{
+			"name": "Subscriptions",
+			"item": []
+		},
+		{
+			"name": "Members",
+			"item": []
+		}
+	]
+}
