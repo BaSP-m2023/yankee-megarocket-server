@@ -1,4 +1,4 @@
-const Class = require('../models/Class');
+import Class from '../models/Class';
 
 export const updateClass = async (req, res) => {
   try {
@@ -63,9 +63,4 @@ export const deleteClass = async (req, res) => {
       error: true,
     });
   }
-};
-
-module.exports = {
-  deleteClass,
-  updateClass,
 };

@@ -4,11 +4,6 @@ const { Schema } = mongoose;
 
 const classSchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-      lowercase: true,
-    },
     activityId: {
       type: String,
       required: true,

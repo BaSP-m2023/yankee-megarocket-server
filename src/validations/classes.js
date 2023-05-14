@@ -2,7 +2,6 @@ const Joi = require('joi');
 
 const validateCreation = (req, res, next) => {
   const validateClassSchema = Joi.object({
-    id: Joi.string().alphanum().lowercase().required(),
     activityId: Joi.string().alphanum().lowercase().required(),
     hour: Joi.number().min(8).max(21).required(),
     day: Joi.string().lowercase().valid('monday', 'tuesday', 'wednesday', 'thursday', 'friday').required(),
