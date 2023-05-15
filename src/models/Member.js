@@ -4,17 +4,17 @@ const { Schema } = mongoose;
 
 const memberSchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-    },
     firstName: {
       type: String,
       required: true,
+      min: 3,
+      max: 30,
     },
     lastName: {
       type: String,
       required: true,
+      min: 3,
+      max: 30,
     },
     dni: {
       type: Number,
@@ -31,6 +31,8 @@ const memberSchema = new Schema(
     password: {
       type: String,
       required: true,
+      min: 8,
+      max: 30,
     },
   },
   { timeStamps: true },

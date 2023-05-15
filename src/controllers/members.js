@@ -28,10 +28,9 @@ export const getMemberId = async (req, res) => {
 export const createMember = async (req, res) => {
   try {
     const {
-      id, firstName, lastName, dni, email, phone, password,
+      firstName, lastName, dni, email, phone, password,
     } = req.body;
     await Member.create({
-      id,
       firstName,
       lastName,
       dni,
@@ -55,10 +54,9 @@ export const createMember = async (req, res) => {
 export const editMember = async (req, res) => {
   try {
     const {
-      _id, id, firstName, lastName, dni, email, phone, password,
+      _id, firstName, lastName, dni, email, phone, password,
     } = req.body;
     await Member.findOneAndUpdate({ _id }, {
-      id,
       firstName,
       lastName,
       dni,
@@ -69,7 +67,6 @@ export const editMember = async (req, res) => {
     return res.status(201).json({
       message: 'Member Updated',
       data: {
-        id,
         firstName,
         lastName,
         dni,
@@ -81,5 +78,31 @@ export const editMember = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).send(error);
+  }
+};
+export const deleteMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const foundMember = await Member.findById(id);
+    await Member.findByIdAndDelete(id);
+
+    if (!foundMember) {
+      return res.status(404).json({
+        message: 'Id not found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Member Deleted',
+      data: foundMember,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Server error',
+      data: undefined,
+      error: true,
+    });
   }
 };
