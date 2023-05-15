@@ -6,10 +6,14 @@ const memberSchema = new Schema(
   {
     firstName: {
       type: String,
+      min: 3,
+      max: 20,
       required: true,
     },
     lastName: {
       type: String,
+      min: 3,
+      max: 20,
       required: true,
     },
     dni: {
@@ -26,6 +30,8 @@ const memberSchema = new Schema(
     },
     password: {
       type: String,
+      min: 8,
+      max: 30,
       required: true,
     },
   },
