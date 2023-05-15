@@ -50,8 +50,6 @@ const trainerSchema = new Schema(
     },
     assignedActivities: {
       type: [String],
-      required: true,
-      default: [],
     },
   },
   { timestamps: true },
