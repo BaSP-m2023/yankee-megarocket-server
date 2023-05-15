@@ -1,9 +1,10 @@
 import express from 'express';
-import { getAllSubscriptions, getSubscription } from '../controllers/subscriptions';
+import { createSubscription, getAllSubscriptions, getSubscription } from '../controllers/subscriptions';
 
 const router = express.Router();
 
 router.get('/', getAllSubscriptions);
 router.get('/:id', getSubscription);
+router.post('/', createSubscription);
 
 export default router;
