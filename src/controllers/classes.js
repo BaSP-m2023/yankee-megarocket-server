@@ -34,7 +34,7 @@ export const updateClass = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       msg: 'Server error',
-      data: error,
+      data: undefined,
       error: true,
     });
   }
@@ -59,7 +59,7 @@ export const deleteClass = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       msg: 'Server error. Class was not deleted',
-      data: [],
+      data: undefined,
       error: true,
     });
   }
