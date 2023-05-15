@@ -1,5 +1,5 @@
 import { isValidObjectId } from 'mongoose';
-import { Member } from '../models/Member';
+import Member from '../models/Member';
 
 export const getMember = async (req, res) => {
   try {
