@@ -43,7 +43,7 @@ export const deleteMember = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'This is not a valid ID',
         data: {},
         error: true,
@@ -51,13 +51,13 @@ export const deleteMember = async (req, res) => {
     }
     const deletedMember = await Member.findByIdAndDelete(id);
     if (!deletedMember) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: `This id was not found ${id}`,
         data: {},
         error: true,
       });
     }
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Member Deleted',
       data: deletedMember,
       error: false,
