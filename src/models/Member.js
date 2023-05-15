@@ -6,15 +6,15 @@ const memberSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: true,
       min: 3,
-      max: 30,
+      max: 20,
+      required: true,
     },
     lastName: {
       type: String,
-      required: true,
       min: 3,
-      max: 30,
+      max: 20,
+      required: true,
     },
     dni: {
       type: Number,
@@ -30,12 +30,12 @@ const memberSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
       min: 8,
       max: 30,
+      required: true,
     },
   },
-  { timeStamps: true },
+  { timestamps: true },
 );
 
 export default mongoose.model('Member', memberSchema);
