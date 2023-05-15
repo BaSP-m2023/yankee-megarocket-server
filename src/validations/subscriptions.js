@@ -1,7 +1,6 @@
-import Joi from 'joi';
+const Joi = require('joi');
 
-
-const validateSubCreation = (req, res, next) =>{
+const validateSubCreation = (req, res, next) => {
   const validateSubscription = Joi.object({
     classId: Joi.string().max(24).required(),
     memberId: Joi.string().max(24).required(),
@@ -9,12 +8,12 @@ const validateSubCreation = (req, res, next) =>{
   });
 
   const subscriptionData = validateSubscription.validate(req.body);
-  if(!subscriptionData.error) return next();
+  if (!subscriptionData.error) return next();
   return res.status(400).json({
     message: `An error has occurred: ${subscriptionData.error.details[0].message}`,
     data: undefined,
-    error: true
-  })
-}
+    error: true,
+  });
+};
 
-module.exports = {validateSubCreation}
+module.exports = { validateSubCreation };

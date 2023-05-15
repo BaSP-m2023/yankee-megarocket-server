@@ -1,4 +1,4 @@
-import  { isValidObjectId } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 import Subscription from '../models/Subscription';
 
 export const getAllSubscriptions = async (req, res) => {
@@ -47,13 +47,13 @@ export const getSubscription = async (req, res) => {
       message: 'The subscription has been found',
       data: foundSubscription,
       error: false,
-    });;
+    });
   } catch (error) {
     return res.status(500).json({
       message: 'An error has occurred!',
       data: undefined,
       error,
-    });;
+    });
   }
 };
 
@@ -68,13 +68,13 @@ export const createSubscription = async (req, res) => {
     return res.status(200).json({
       message: 'The subscription has been created',
       data: createSub,
-      error: false
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
       message: 'An error has occurred!',
       data: undefined,
       error,
-    });;
+    });
   }
 };
