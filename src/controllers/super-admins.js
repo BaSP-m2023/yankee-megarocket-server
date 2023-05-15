@@ -51,17 +51,14 @@ export const getSuperAdmin = async (req, res) => {
 
 export const createSuperAdmin = async (req, res) => {
   try {
-    const {
-      email,
-      password,
-    } = req.body;
-    const trainer = await SuperAdmins.create({
-      email,
-      password,
+    const { body } = req;
+    const superAdmin = await SuperAdmins.create({
+      email: body.email,
+      password: body.password,
     });
     res.status(201).json({
       message: 'Superadmin was created successfully!',
-      data: trainer,
+      data: superAdmin,
       error: false,
     });
   } catch (error) {
