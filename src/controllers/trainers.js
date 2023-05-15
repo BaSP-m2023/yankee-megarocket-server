@@ -12,14 +12,14 @@ export const getTrainers = async (req, res) => {
     }
     return res.status(200).json({
       message: 'Trainers found',
-      data: [],
+      data: trainers,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
       message: 'Server error',
-      data: [],
-      error: error.message,
+      data: undefined,
+      error,
     });
   }
 };
@@ -33,7 +33,7 @@ export const getTrainer = async (req, res) => {
     if (!foundTrainer) {
       return res.status(404).json({
         message: 'Trainer not found',
-        data: [],
+        data: id,
         error: true,
       });
     }
@@ -45,8 +45,8 @@ export const getTrainer = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Server error',
-      data: [],
-      error: error.message,
+      data: undefined,
+      error,
     });
   }
 };
@@ -56,9 +56,15 @@ export const getTrainer = async (req, res) => {
 export const createTrainer = async (req, res) => {
   try {
     const {
-      firstName, lastName, dni, email, phone, password, rate,
+      firstName,
+      lastName,
+      dni,
+      email,
+      phone,
+      password,
+      rate,
     } = req.body;
-    const trainer = new Trainer({
+    const trainer = await Trainer.create({
       firstName,
       lastName,
       dni,
@@ -67,17 +73,16 @@ export const createTrainer = async (req, res) => {
       password,
       rate,
     });
-    await trainer.save();
-    return res.status(201).json({
-      message: 'Trainer created successfully',
-      data: [],
+    res.status(201).json({
+      message: 'Trainer was created successfully!',
+      data: trainer,
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
-      message: 'Cannot create a new trainer',
-      data: [],
-      error: error.message,
+    res.status(500).json({
+      message: error,
+      data: undefined,
+      error,
     });
   }
 };
