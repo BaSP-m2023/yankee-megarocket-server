@@ -6,25 +6,25 @@ const adminSchema = new Schema(
     firstName: {
       type: String,
       required: true,
-      minLength: 3,
-      maxLength: 15,
+      min: 3,
+      max: 15,
     },
     lastName: {
       type: String,
       required: true,
-      minLength: 3,
-      maxLength: 15,
+      min: 3,
+      max: 15,
     },
     dni: {
       type: Number,
       required: true,
-      minLength: 7,
-      maxLength: 8,
+      min: 7,
+      max: 8,
     },
     phone: {
       type: Number,
       required: true,
-      minLength: 10,
+      min: 10,
     },
     email: {
       type: String,
@@ -35,7 +35,7 @@ const adminSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minLength: 6,
+      min: 6,
     },
   },
   { timestamps: true },

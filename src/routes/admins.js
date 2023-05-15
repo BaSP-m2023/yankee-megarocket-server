@@ -6,6 +6,6 @@ const router = express.Router();
 
 router
   .delete('/:id', adminsController.deleteAdmin)
-  .put('/:id', validations.validateUpdateAdmin, adminsController.updateAdmin);
+  .put('/:id', validations.validationCreation, adminsController.updateAdmin);
 
 module.exports = router;
