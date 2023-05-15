@@ -22,7 +22,7 @@ export const updateClass = async (req, res) => {
     if (!foundClass) {
       return res.status(404).json({
         msg: `Class with id: ${id} not found`,
-        data: [{}],
+        data: {},
         error: false,
       });
     }
@@ -47,7 +47,7 @@ export const deleteClass = async (req, res) => {
     if (!foundClass) {
       return res.status(404).json({
         msg: `Class with id: ${id} not found`,
-        data: [{}],
+        data: {},
         error: false,
       });
     }

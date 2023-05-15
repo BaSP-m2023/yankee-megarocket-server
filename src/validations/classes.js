@@ -9,7 +9,7 @@ const validateCreation = (req, res, next) => {
     maxCapacity: Joi.number().min(3).max(30).required(),
   });
   const validation = validateClassSchema.validate(req.body);
-  if (!validation.error) return next;
+  if (!validation.error) return next();
   return res.status(400).json({
     message: `There was an error: ${validation.error.details[0].message}`,
     data: undefined,
@@ -26,7 +26,7 @@ const validateUpdate = (req, res, next) => {
     maxCapacity: Joi.number().min(3).max(30),
   });
   const validation = validateClassSchema.validate(req.body);
-  if (!validation.error) return next;
+  if (!validation.error) return next();
   return res.status(400).json({
     message: `There was an error: ${validation.error.details[0].message}`,
     data: undefined,
