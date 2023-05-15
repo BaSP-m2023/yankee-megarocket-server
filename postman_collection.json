@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "201a7b35-795b-4fbe-a120-4a0b341a789a",
+		"_postman_id": "d8195c66-91f1-402c-a5b6-f4ab53696b82",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27291209"
@@ -91,7 +91,41 @@
 		},
 		{
 			"name": "Trainers",
-			"item": []
+			"item": [
+				{
+					"name": "Get trainer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create trainer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Subscriptions",
@@ -99,7 +133,84 @@
 		},
 		{
 			"name": "Members",
-			"item": []
+			"item": [
+				{
+					"name": "Get members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/members",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id Members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/members/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"members",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64613f5dcb551427a34fff73"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Blois\",\n    \"dni\": 32208529,\n    \"email\": \"Aprobame@Radium.com\",\n    \"phone\": \"1763060997\",\n    \"password\": \"d9vUeOyuKs\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/members",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

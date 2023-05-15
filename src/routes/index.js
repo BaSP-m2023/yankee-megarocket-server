@@ -1,12 +1,15 @@
 import express from 'express';
 
-import superAdminRoutes from './super-admins';
+import trainerRoutes from './trainers';
+
+import membersRoutes from './members';
 
 import classesRoutes from './classes';
 
 const router = express.Router();
 
-router.use('/super-admins', superAdminRoutes);
+router.use('/trainers', trainerRoutes);
+router.use('/members', membersRoutes);
 
 router.use('/classes', classesRoutes);
 
