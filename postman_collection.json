@@ -32,7 +32,84 @@
 		},
 		{
 			"name": "Members",
-			"item": []
+			"item": [
+          {
+          "name": "Get members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by Id Members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/members/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "members",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "64613f5dcb551427a34fff73"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create member",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Blois\",\n    \"dni\": 32208529,\n    \"email\": \"Aprobame@Radium.com\",\n    \"phone\": \"1763060997\",\n    \"password\": \"d9vUeOyuKs\"\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
 		}
 	]
 }

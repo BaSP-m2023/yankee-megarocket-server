@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import Member from '../models/Member';
 
 export const getMember = async (req, res) => {
@@ -6,7 +7,7 @@ export const getMember = async (req, res) => {
     if (!member) {
       return res.status(404).json({
         message: 'There are no members created',
-        data: {},
+        data: [],
         error: true,
       });
     }
@@ -17,7 +18,7 @@ export const getMember = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error, // error.toString()
+      message: error,
       data: undefined,
       error: true,
     });
@@ -27,6 +28,13 @@ export const getMember = async (req, res) => {
 export const getMemberId = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({
+        message: 'This is not a valid ID',
+        data: {},
+        error: true,
+      });
+    }
     const foundMember = await Member.findById(id);
     if (!foundMember) {
       return res.status(404).json({
@@ -42,7 +50,7 @@ export const getMemberId = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error, // error.toString()
+      message: error,
       data: undefined,
       error: true,
     });
@@ -54,6 +62,13 @@ export const createMember = async (req, res) => {
     const {
       firstName, lastName, dni, email, phone, password,
     } = req.body;
+    if (!firstName || !lastName || !dni || !email || !phone || !password) {
+      return res.status(400).json({
+        message: 'Theres a missing field',
+        data: {},
+        error: true,
+      });
+    }
     await Member.create({
       firstName,
       lastName,
@@ -62,12 +77,6 @@ export const createMember = async (req, res) => {
       phone,
       password,
     });
-    if (!firstName || !lastName || !dni || !email || !phone || !password) {
-      return res.status(400).json({
-        message: 'Theres a missing field',
-        error: true,
-      });
-    }
     return res.status(201).json({
       message: 'Member created',
       data: Member,
@@ -75,7 +84,7 @@ export const createMember = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error, // error.toString()
+      message: error,
       data: undefined,
       error: true,
     });
