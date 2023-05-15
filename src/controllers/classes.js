@@ -19,7 +19,7 @@ const getClasses = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Server error',
-      data: error,
+      data: undefined,
       error: true,
     });
   }
@@ -32,7 +32,7 @@ const getClass = async (req, res) => {
     if (!foundClass) {
       return res.status(404).json({
         message: 'Class not found',
-        data: [],
+        data: {},
         error: true,
       });
     }
@@ -44,7 +44,7 @@ const getClass = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Server error',
-      data: error,
+      data: undefined,
       error: true,
     });
   }
@@ -65,7 +65,7 @@ const createClass = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Server error',
-      data: error,
+      data: undefined,
       error: true,
     });
   }
