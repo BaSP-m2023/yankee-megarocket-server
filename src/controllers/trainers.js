@@ -3,21 +3,35 @@ import Trainer from '../models/Trainer';
 export const deleteTrainer = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedTrainer = await Trainer.findOneAndDelete({ id });
+    const deletedTrainer = await Trainer.findOneAndDelete(id);
     if (!deletedTrainer) {
-      return res.status(404).send('Trainer not found');
+      return res.status(404).json({
+        message: 'Trainer not found',
+        data: [],
+        error: true,
+      });
     }
-    return res.send('Trainer deleted');
+    return res.status(200).json({
+      message: 'Trainer deleted',
+      data: deletedTrainer,
+      error: false,
+    });
   } catch (error) {
-    return res.send(error);
+    return res.status(500).json({
+      message: 'Server error',
+      data: undefined,
+      error,
+    });
   }
 };
+
 export const updateTrainer = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedTrainer = await Trainer.findOneAndUpdate(
-      { id },
-      req.body,
+    const { body } = req.body;
+    const updatedTrainer = await Trainer.findByIdAndUpdate(
+      id,
+      body,
       { new: true },
     );
     if (!updatedTrainer) {
@@ -33,6 +47,10 @@ export const updateTrainer = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
   }
 };
