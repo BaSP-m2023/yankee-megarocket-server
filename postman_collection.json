@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bc066323-ab23-45dc-a60f-1647c0a029c3",
+		"_postman_id": "5eb3f0c4-1696-4434-946b-f8a15261e01c",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23500002"
+		"_exporter_id": "25295561"
 	},
 	"item": [
 		{
@@ -24,7 +24,32 @@
 		},
 		{
 			"name": "Trainers",
-			"item": []
+			"item": [
+				{
+					"name": "Get trainer",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create trainer",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Subscriptions",
