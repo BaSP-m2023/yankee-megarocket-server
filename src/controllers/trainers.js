@@ -17,9 +17,9 @@ export const getTrainers = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
+      message: error,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -44,9 +44,9 @@ export const getTrainer = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
+      message: error,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -82,7 +82,7 @@ export const createTrainer = async (req, res) => {
     res.status(500).json({
       message: error,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
