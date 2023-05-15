@@ -18,13 +18,14 @@ const adminSchema = new Schema(
     dni: {
       type: Number,
       required: true,
-      min: 7,
-      max: 8,
+      min: 1000000,
+      max: 99999999,
     },
     phone: {
       type: Number,
       required: true,
-      min: 10,
+      min: 10000000,
+      max: 99999999,
     },
     email: {
       type: String,
