@@ -2,7 +2,7 @@ import Class from '../models/Class';
 
 const getClasses = async (req, res) => {
   try {
-    const classes = await Class.find({});
+    const classes = await Class.find();
 
     if (classes.length === 0) {
       return res.status(404).json({
@@ -18,7 +18,7 @@ const getClasses = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
+      message: error,
       data: undefined,
       error: true,
     });
@@ -43,7 +43,7 @@ const getClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
+      message: error,
       data: undefined,
       error: true,
     });
@@ -64,7 +64,7 @@ const createClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
+      message: error,
       data: undefined,
       error: true,
     });

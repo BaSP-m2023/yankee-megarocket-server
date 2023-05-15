@@ -7,7 +7,6 @@ const classSchema = new Schema(
     activityId: {
       type: String,
       required: true,
-      lowercase: true,
     },
     hour: {
       type: Number,
@@ -23,7 +22,6 @@ const classSchema = new Schema(
     trainerId: {
       type: String,
       required: true,
-      lowercase: true,
     },
     maxCapacity: {
       type: Number,
