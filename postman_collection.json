@@ -24,7 +24,68 @@
 		},
 		{
 			"name": "Trainers",
-			"item": []
+			"item": [{
+        "name": "Delete Trainer",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "localhost:4000/api/trainers/:id",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "api",
+              "trainers",
+              ":id"
+            ],
+            "variable": [
+              {
+                "key": "id",
+                "value": "64624e32b5725b8336d25b2f"
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Put Trainer",
+        "request": {
+          "method": "PUT",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n  \"firstName\": \"Matias\",\r\n  \"lastName\": \"Sauvanet\",\r\n  \"dni\": 30253569,\r\n  \"email\": \"araefe@mapy.cz\",\r\n  \"phone\": 1234567890,\r\n  \"password\": \"123qwer\",\r\n  \"rate\": 10,\r\n  \"assignedActivities\": []\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "localhost:4000/api/trainers/:id",
+            "host": [
+              "localhost"
+            ],
+            "port": "4000",
+            "path": [
+              "api",
+              "trainers",
+              ":id"
+            ],
+            "variable": [
+              {
+                "key": "id",
+                "value": "64624ea0b5725b8336d25b31"
+              }
+            ]
+          }
+        },
+        "response": []
+      }
+    ]
 		},
 		{
 			"name": "Subscriptions",
