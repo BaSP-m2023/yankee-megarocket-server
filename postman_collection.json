@@ -1,38 +1,111 @@
 {
-	"info": {
-		"_postman_id": "bc066323-ab23-45dc-a60f-1647c0a029c3",
-		"name": "Yankee Megarocket Server",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23500002"
-	},
-	"item": [
-		{
-			"name": "Admins",
-			"item": []
-		},
-		{
-			"name": "Activities",
-			"item": []
-		},
-		{
-			"name": "Super-admins",
-			"item": []
-		},
-		{
-			"name": "Classes",
-			"item": []
-		},
-		{
-			"name": "Trainers",
-			"item": []
-		},
-		{
-			"name": "Subscriptions",
-			"item": []
-		},
-		{
-			"name": "Members",
-			"item": []
-		}
-	]
+  "info": {
+    "_postman_id": "a3cbed55-133a-4d2b-9d10-e2fb1fc7ca5e",
+    "name": "Yankee Megarocket Server",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27279635"
+  },
+  "item": [
+    {
+      "name": "Admins",
+      "item": [
+        {
+          "name": "New Request",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/admins/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "admins",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6460ee754a738ca0c5a86a62"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\r\n    \"firstName\": \"Juan\"\r\n    }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/admins/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "admins",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6460ee754a738ca0c5a86a62"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": []
+    },
+    {
+      "name": "Super-admins",
+      "item": []
+    },
+    {
+      "name": "Classes",
+      "item": []
+    },
+    {
+      "name": "Trainers",
+      "item": []
+    },
+    {
+      "name": "Subscriptions",
+      "item": []
+    },
+    {
+      "name": "Members",
+      "item": []
+    }
+  ]
 }

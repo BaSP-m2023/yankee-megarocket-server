@@ -5,7 +5,7 @@ const validations = require('../validations/admins');
 const router = express.Router();
 
 router
-  .delete('/:id', adminsController.deleteAdmins)
-  .put('/:id', validations.validateUpdate, adminsController.updateAdmins);
+  .delete('/:id', adminsController.deleteAdmin)
+  .put('/:id', validations.validateUpdateAdmin, adminsController.updateAdmin);
 
 module.exports = router;
