@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import Member from '../models/Member';
 
 export const editMember = async (req, res) => {
@@ -5,10 +6,17 @@ export const editMember = async (req, res) => {
     const {
       _id, firstName, lastName, dni, email, phone, password,
     } = req.body;
+    if (!isValidObjectId(_id)) {
+      return res.status(404).json({
+        message: 'This is not a valid ID',
+        data: {},
+        error: true,
+      });
+    }
     const memberFound = await Member.findById(_id);
     if (!memberFound) {
       return res.status(404).json({
-        message: 'Member Updated',
+        message: 'Member Not Found',
         data: _id,
         error: true,
       });
@@ -39,7 +47,7 @@ export const editMember = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server Erorr',
+      message: error,
       data: undefined,
       error: true,
     });
@@ -48,10 +56,17 @@ export const editMember = async (req, res) => {
 export const deleteMember = async (req, res) => {
   try {
     const { id } = req.params;
-    const foundMember = await Member.findById(id);
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({
+        message: 'This is not a valid ID',
+        data: {},
+        error: true,
+      });
+    }
+    const foundMember = await Member.findById({ id });
     if (!foundMember) {
       return res.status(404).json({
-        message: `${id} This id was not found`,
+        message: `This id was not found ${id}`,
         data: {},
         error: true,
       });
@@ -64,7 +79,7 @@ export const deleteMember = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
+      message: error,
       data: undefined,
       error: true,
     });
