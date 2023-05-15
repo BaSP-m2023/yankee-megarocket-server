@@ -6,7 +6,7 @@ import { memberEditValidation } from '../validations/members';
 
 const router = express.Router();
 
-router.put('/', memberEditValidation, editMember);
+router.put('/:id', memberEditValidation, editMember);
 router.delete('/:id', deleteMember);
 
 export default router;

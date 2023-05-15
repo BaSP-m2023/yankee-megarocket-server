@@ -2,7 +2,6 @@ const Joi = require('joi');
 
 const memberEditValidation = (req, res, next) => {
   const memberValidation = Joi.object({
-    _id: Joi.string().min(24),
     firstName: Joi.string().min(3).max(20),
     lastName: Joi.string().min(3).max(20),
     dni: Joi.number().min(1000000).max(99999999),

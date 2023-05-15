@@ -3,26 +3,27 @@ import Member from '../models/Member';
 
 export const editMember = async (req, res) => {
   try {
+    const { id } = req.params;
     const {
-      _id, firstName, lastName, dni, email, phone, password,
+      firstName, lastName, dni, email, phone, password,
     } = req.body;
-    if (!isValidObjectId(_id)) {
+    if (!isValidObjectId(id)) {
       return res.status(404).json({
         message: 'This is not a valid ID',
         data: {},
         error: true,
       });
     }
-    const memberFound = await Member.findById(_id);
+    const memberFound = await Member.findById(id);
     if (!memberFound) {
       return res.status(404).json({
         message: 'Member Not Found',
-        data: _id,
+        data: {},
         error: true,
       });
     }
-    await Member.findOneAndUpdate(
-      { _id },
+    await Member.findByIdAndUpdate(
+      id,
       {
         firstName,
         lastName,
