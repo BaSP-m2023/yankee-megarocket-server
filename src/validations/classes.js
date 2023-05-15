@@ -19,6 +19,8 @@ const validateCreation = (req, res, next) => {
   });
 };
 
-module.exports = {
+const validate = {
   validateCreation,
 };
+
+export default validate;
