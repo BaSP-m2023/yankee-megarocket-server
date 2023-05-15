@@ -11,6 +11,7 @@ export const getAdmins = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Error! getting administrators.',
+      data: undefined,
       error,
     });
   }
@@ -22,17 +23,22 @@ export const getAdminById = async (req, res) => {
     const admin = await Admin.findById(id);
 
     if (!admin) {
-      return res.status(200).json({
+      return res.status(404).json({
         message: 'The requested administrator was not found.',
-        data: admin,
+        data: {},
         error: false,
       });
     }
 
-    return res.status(200).send(admin);
+    return res.status(200).send(admin).json({
+      message: 'The administrator was found',
+      data: admin,
+      error: false,
+    });
   } catch (error) {
     return res.status(500).json({
       message: 'Error! getting the administrator.',
+      data: undefined,
       error,
     });
   }
@@ -52,6 +58,13 @@ export const createAdmin = async (req, res) => {
       password,
     });
 
+    if (!admin) {
+      return res.status(404).json({
+        message: 'All fields must be completed.',
+        data: {},
+        error: false,
+      });
+    }
     const createdAdmin = await admin.save();
     return res.status(201).json({
       message: 'The administrator was created.',
@@ -61,6 +74,7 @@ export const createAdmin = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Error! Failed to create the administrator.',
+      data: undefined,
       error,
     });
   }
