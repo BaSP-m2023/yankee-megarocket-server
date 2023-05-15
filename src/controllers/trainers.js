@@ -24,8 +24,6 @@ export const getTrainers = async (req, res) => {
   }
 };
 
-//= ==========================================================================
-
 export const getTrainer = async (req, res) => {
   try {
     const { id } = req.params;
@@ -33,7 +31,7 @@ export const getTrainer = async (req, res) => {
     if (!foundTrainer) {
       return res.status(404).json({
         message: 'Trainer not found',
-        data: id,
+        data: {},
         error: true,
       });
     }
@@ -50,8 +48,6 @@ export const getTrainer = async (req, res) => {
     });
   }
 };
-
-//= ==========================================================================
 
 export const createTrainer = async (req, res) => {
   try {
