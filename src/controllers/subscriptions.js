@@ -61,7 +61,7 @@ export const createSubscription = async (req, res) => {
   try {
     const { body } = req;
     const createSub = await Subscription.create(body);
-    return res.status(200).json({
+    return res.status(201).json({
       message: 'The subscription has been created',
       data: createSub,
       error: false,
