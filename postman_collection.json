@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "6306c8ed-185f-4263-bac4-18b26743deb7",
+		"_postman_id": "7d0e70a1-ae48-43e4-bc79-e0ce46aadb4a",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27291209"
+		"_exporter_id": "27174053",
+		"_collection_link": "https://bold-capsule-455035.postman.co/workspace/RADIUMROCKET~f4809546-7980-442a-bf9b-3c98ba54f37e/collection/27174053-7d0e70a1-ae48-43e4-bc79-e0ce46aadb4a?action=share&creator=27174053&source=collection_link"
 	},
 	"item": [
 		{
@@ -221,6 +222,72 @@
 					"response": []
 				},
 				{
+					"name": "editMembers",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"firstName\": \"Juan Manuel\",\r\n    \"lastName\": \"Blois\",\r\n    \"dni\": 31754828,\r\n    \"email\": \"aprobame@elcurso.com\",\r\n    \"phone\": \"9273706494\",\r\n    \"password\": \"vF7uGhjyoffe\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/members/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"members",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64624b7e9f23acb63b6a3e04"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMembers",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/members/64603f5dcb551427a34fff74",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"members",
+								"64603f5dcb551427a34fff74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create member",
 					"request": {
 						"method": "POST",
@@ -258,7 +325,10 @@
 					"name": "Get  SuperAdmins",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
