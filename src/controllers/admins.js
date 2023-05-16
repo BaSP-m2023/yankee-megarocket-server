@@ -59,7 +59,7 @@ export const deleteAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error.',
+      message: 'Error,',
       data: undefined,
       error: true,
     });
