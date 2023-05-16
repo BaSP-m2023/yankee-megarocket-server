@@ -45,18 +45,11 @@ export const getAdminById = async (req, res) => {
 };
 export const createAdmin = async (req, res) => {
   try {
-    const {
-      firstName, lastName, dni, phone, email, password,
-    } = req.body;
+    const { body } = req;
 
-    const admin = new Admin({
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      password,
-    });
+    const admin = new Admin(
+      body,
+    );
 
     if (!admin) {
       return res.status(400).json({
