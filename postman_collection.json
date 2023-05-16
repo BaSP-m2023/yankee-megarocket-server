@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d8195c66-91f1-402c-a5b6-f4ab53696b82",
+		"_postman_id": "6306c8ed-185f-4263-bac4-18b26743deb7",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27291209"
@@ -12,10 +12,6 @@
 		},
 		{
 			"name": "Activities",
-			"item": []
-		},
-		{
-			"name": "Super-admins",
 			"item": []
 		},
 		{
@@ -98,7 +94,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers"
+							]
 						}
 					},
 					"response": []
@@ -106,10 +111,28 @@
 				{
 					"name": "Create trainer",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Friedrick\",\r\n    \"lastName\": \"Perigoe\",\r\n    \"dni\": 32211626,\r\n    \"email\": \"fperigoe2@mapy.cz\",\r\n    \"phone\": 6563233891,\r\n    \"password\": \"Ms2QlQql\",\r\n    \"rate\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers"
+							]
 						}
 					},
 					"response": []
@@ -120,7 +143,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/trainers/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462d285ebb82e6a2e413836"
+								}
+							]
 						}
 					},
 					"response": []
@@ -205,6 +244,67 @@
 							"path": [
 								"api",
 								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Super-admins",
+			"item": [
+				{
+					"name": "Get  SuperAdmins",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get SuperAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/superadmins/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"superadmins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create SuperAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/superadmins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"superadmins",
+								""
 							]
 						}
 					},
