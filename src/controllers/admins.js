@@ -23,8 +23,8 @@ export const updateAdmin = async (req, res) => {
     if (!foundAdmin) {
       return res.status(404).json({
         message: `${id} was not found`,
-        data: [{}],
-        error: false,
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
@@ -34,9 +34,9 @@ export const updateAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server error',
-      data: error,
-      error,
+      message: 'Error,',
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -48,8 +48,8 @@ export const deleteAdmin = async (req, res) => {
     if (!foundAdmin) {
       return res.status(404).json({
         message: `${id} was not found`,
-        data: [{}],
-        error: false,
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
@@ -60,8 +60,8 @@ export const deleteAdmin = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Server error.',
-      data: [],
-      error,
+      data: undefined,
+      error: true,
     });
   }
 };
