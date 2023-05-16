@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validateUpdate = (req, res, next) => {
+const validateCreation = (req, res, next) => {
   const validateClassSchema = Joi.object({
     activityId: Joi.string().alphanum().required(),
     hour: Joi.number().min(8).max(21).required(),
@@ -18,5 +18,5 @@ const validateUpdate = (req, res, next) => {
 };
 
 module.exports = {
-  validateUpdate,
+  validateCreation,
 };

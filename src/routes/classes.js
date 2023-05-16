@@ -5,7 +5,7 @@ const validations = require('../validations/classes');
 const router = express.Router();
 
 router
-  .put('/:id', validations.validateUpdate, classesController.updateClass)
+  .put('/:id', validations.validateCreation, classesController.updateClass)
   .delete('/:id', classesController.deleteClass);
 
 module.exports = router;
