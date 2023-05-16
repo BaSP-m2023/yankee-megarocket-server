@@ -94,7 +94,7 @@ export const updateSuperAdmin = async (req, res) => {
         error: true,
       });
     }
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Superadmin Updated',
       data: {
         body,
