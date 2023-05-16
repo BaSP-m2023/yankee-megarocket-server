@@ -3,10 +3,10 @@ import Activity from '../models/Activity';
 export const updateActivity = async (req, res) => {
   try {
     const { id } = req.params;
-    const { activityName, activityDescription } = req.body;
+    const { body } = req;
     const findActivity = await Activity.findByIdAndUpdate(
       id,
-      { activityName, activityDescription },
+      body,
       { new: true },
     );
     if (!findActivity) {
