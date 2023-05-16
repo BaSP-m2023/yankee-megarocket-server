@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "d8195c66-91f1-402c-a5b6-f4ab53696b82",
+		"_postman_id": "7d0e70a1-ae48-43e4-bc79-e0ce46aadb4a",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27291209"
+		"_exporter_id": "27174053",
+		"_collection_link": "https://bold-capsule-455035.postman.co/workspace/RADIUMROCKET~f4809546-7980-442a-bf9b-3c98ba54f37e/collection/27174053-7d0e70a1-ae48-43e4-bc79-e0ce46aadb4a?action=share&creator=27174053&source=collection_link"
 	},
 	"item": [
 		{
@@ -12,10 +13,6 @@
 		},
 		{
 			"name": "Activities",
-			"item": []
-		},
-		{
-			"name": "Super-admins",
 			"item": []
 		},
 		{
@@ -98,7 +95,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers"
+							]
 						}
 					},
 					"response": []
@@ -106,10 +112,28 @@
 				{
 					"name": "Create trainer",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Friedrick\",\r\n    \"lastName\": \"Perigoe\",\r\n    \"dni\": 32211626,\r\n    \"email\": \"fperigoe2@mapy.cz\",\r\n    \"phone\": 6563233891,\r\n    \"password\": \"Ms2QlQql\",\r\n    \"rate\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers"
+							]
 						}
 					},
 					"response": []
@@ -120,7 +144,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/trainers/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462d285ebb82e6a2e413836"
+								}
+							]
 						}
 					},
 					"response": []
@@ -181,34 +221,7 @@
 					},
 					"response": []
 				},
-        {
-					"name": "Get by Id Members",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/members/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"members",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "64613f5dcb551427a34fff73"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-        {
+				{
 					"name": "editMembers",
 					"request": {
 						"method": "PUT",
@@ -244,7 +257,7 @@
 					},
 					"response": []
 				},
-        {
+				{
 					"name": "deleteMembers",
 					"request": {
 						"method": "DELETE",
@@ -298,6 +311,70 @@
 							"path": [
 								"api",
 								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Super-admins",
+			"item": [
+				{
+					"name": "Get  SuperAdmins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get SuperAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/superadmins/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"superadmins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create SuperAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/superadmins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"superadmins",
+								""
 							]
 						}
 					},
