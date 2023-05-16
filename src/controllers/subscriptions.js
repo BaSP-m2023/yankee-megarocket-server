@@ -7,7 +7,7 @@ export const getAllSubscriptions = async (req, res) => {
     if (!subscriptions) {
       return res.status(404).json({
         message: 'There are no subscriptions created',
-        data: {},
+        data: [],
         error: true,
       });
     }
@@ -18,9 +18,9 @@ export const getAllSubscriptions = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'An error has occurred!',
+      message: 'Error!',
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -29,9 +29,9 @@ export const getSubscription = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'This is not a valid ID',
-        data: {},
+        data: [],
         error: true,
       });
     }
@@ -39,7 +39,7 @@ export const getSubscription = async (req, res) => {
     if (!foundSubscription) {
       return res.status(404).json({
         message: 'subscription not found',
-        data: undefined,
+        data: [],
         error: true,
       });
     }
@@ -50,21 +50,17 @@ export const getSubscription = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'An error has occurred!',
+      message: 'Error',
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
 
 export const createSubscription = async (req, res) => {
   try {
-    const { classId, memberId, date } = req.body;
-    const createSub = await Subscription.create({
-      classId,
-      memberId,
-      date,
-    });
+    const { body } = req;
+    const createSub = await Subscription.create(body);
     return res.status(200).json({
       message: 'The subscription has been created',
       data: createSub,
@@ -72,9 +68,9 @@ export const createSubscription = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'An error has occurred!',
+      message: 'Error',
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
