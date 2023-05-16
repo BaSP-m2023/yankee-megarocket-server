@@ -26,7 +26,7 @@ export const getAdminById = async (req, res) => {
       return res.status(404).json({
         message: 'The requested administrator was not found.',
         data: {},
-        error: false,
+        error: true,
       });
     }
 
@@ -59,10 +59,10 @@ export const createAdmin = async (req, res) => {
     });
 
     if (!admin) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'All fields must be completed.',
         data: {},
-        error: false,
+        error: true,
       });
     }
     const createdAdmin = await admin.save();
