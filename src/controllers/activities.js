@@ -17,7 +17,7 @@ export const updateActivity = async (req, res) => {
       });
     }
     return res.status(200).json({
-      msg: 'Activity updated succesfully!',
+      msg: 'Activity updated successfully!',
       data: findActivity,
       error: false,
     });
@@ -30,10 +30,27 @@ export const updateActivity = async (req, res) => {
   }
 };
 
-export const deleteActivity = async () => {
+export const deleteActivity = async (req, res) => {
   try {
-    return undefined;
+    const { id } = req.params;
+    const findActivity = await Activity.findByIdAndDelete(id);
+    if (!findActivity) {
+      return res.status(404).json({
+        msg: `The activity with id: ${id} was not found`,
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      msg: 'Activity deleted successfully!',
+      data: findActivity,
+      error: false,
+    });
   } catch (error) {
-    return undefined;
+    return res.status(500).json({
+      msg: error,
+      data: undefined,
+      error: true,
+    });
   }
 };
