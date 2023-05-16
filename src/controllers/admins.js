@@ -10,9 +10,9 @@ export const getAdmins = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error! getting administrators.',
+      message: error,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -37,9 +37,9 @@ export const getAdminById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error! getting the administrator.',
+      message: error,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };
@@ -73,9 +73,9 @@ export const createAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error! Failed to create the administrator.',
+      message: error,
       data: undefined,
-      error,
+      error: true,
     });
   }
 };

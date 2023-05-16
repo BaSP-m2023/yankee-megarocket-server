@@ -17,7 +17,7 @@ const adminSchema = new Schema(
     dni: {
       type: Number,
       required: true,
-      min: 7,
+      min: 1000000,
     },
     phone: {
       type: Number,
