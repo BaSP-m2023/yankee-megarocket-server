@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "7d0e70a1-ae48-43e4-bc79-e0ce46aadb4a",
+		"_postman_id": "065dbbbe-c79f-4abf-baf6-8f75573d50ba",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27174053",
-		"_collection_link": "https://bold-capsule-455035.postman.co/workspace/RADIUMROCKET~f4809546-7980-442a-bf9b-3c98ba54f37e/collection/27174053-7d0e70a1-ae48-43e4-bc79-e0ce46aadb4a?action=share&creator=27174053&source=collection_link"
+		"_collection_link": "https://bold-capsule-455035.postman.co/workspace/RADIUMROCKET~f4809546-7980-442a-bf9b-3c98ba54f37e/collection/27174053-065dbbbe-c79f-4abf-baf6-8f75573d50ba?action=share&creator=27174053&source=collection_link"
 	},
 	"item": [
 		{
@@ -479,7 +479,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/super-admins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admins",
+								""
+							]
 						}
 					},
 					"response": []
@@ -517,7 +527,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/superadmins/",
+							"raw": "http://localhost:4000/api/super-admins/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -525,8 +535,71 @@
 							"port": "4000",
 							"path": [
 								"api",
-								"superadmins",
+								"super-admins",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update superAdmin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"superadmin@yahoo.com.ar\",\r\n    \"password\": \"soyelmejorsuperadmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/super-admins/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462b3d6d69e332a68666690"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete SuperAdmin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/super-admins/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462b3d6d69e332a68666690"
+								}
 							]
 						}
 					},
