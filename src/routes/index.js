@@ -4,6 +4,7 @@ import classesRoutes from './classes';
 import membersRoutes from './members';
 import superAdminsRoutes from './super-admins';
 import trainerRoutes from './trainers';
+import adminsRoutes from './admins';
 
 import activityRoutes from './activities';
 
@@ -14,5 +15,6 @@ router.use('/members', membersRoutes);
 router.use('/activities', activityRoutes);
 router.use('/super-admins', superAdminsRoutes);
 router.use('/trainers', trainerRoutes);
+router.use('/admins', adminsRoutes);
 
 export default router;
