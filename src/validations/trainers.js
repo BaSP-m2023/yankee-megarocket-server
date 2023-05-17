@@ -21,5 +21,4 @@ const validateTrainer = (req, res, next) => {
     error: true,
   });
 };
-
 export default validateTrainer;

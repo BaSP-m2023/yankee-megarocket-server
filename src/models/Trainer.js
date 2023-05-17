@@ -17,9 +17,9 @@ const trainerSchema = new Schema(
     },
     dni: {
       type: Number,
+      required: true,
       min: 1000000,
       max: 99999999,
-      required: true,
     },
     email: {
       type: String,
