@@ -1,15 +1,151 @@
 {
 	"info": {
-		"_postman_id": "065dbbbe-c79f-4abf-baf6-8f75573d50ba",
+		"_postman_id": "b8ad5258-9f7f-422a-8e2b-32b11696b08a",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27174053",
-		"_collection_link": "https://bold-capsule-455035.postman.co/workspace/RADIUMROCKET~f4809546-7980-442a-bf9b-3c98ba54f37e/collection/27174053-065dbbbe-c79f-4abf-baf6-8f75573d50ba?action=share&creator=27174053&source=collection_link"
+		"_exporter_id": "24163673"
 	},
 	"item": [
 		{
 			"name": "Admins",
-			"item": []
+			"item": [
+				{
+					"name": "Post - admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"firstName\": \"Luchi\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luch@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById - admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462dce582927fa9ffe2dab9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update - admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Luchitoo\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luchito@luchito.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646155d3f94573fa8d3b969f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646155d3f94573fa8d3b969f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Activities",
@@ -91,7 +227,7 @@
 					},
 					"response": []
 				}
-      ]
+			]
 		},
 		{
 			"name": "Classes",

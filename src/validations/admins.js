@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validationCreation = (req, res, next) => {
+const validations = (req, res, next) => {
   const validationAdmin = Joi.object({
     firstName: Joi.string().required().min(3).max(10),
     lastName: Joi.string().required().min(3).max(10),
@@ -9,6 +9,7 @@ const validationCreation = (req, res, next) => {
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8).alphanum(),
   });
+
   const validation = validationAdmin.validate(req.body);
   if (!validation.error) return next();
   return res.status(400).json({
@@ -18,5 +19,5 @@ const validationCreation = (req, res, next) => {
   });
 };
 module.exports = {
-  validationCreation,
+  validations,
 };
