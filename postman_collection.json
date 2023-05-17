@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "abd50d82-42c7-4694-ae99-7cad4f1cf11b",
+		"_postman_id": "b8ad5258-9f7f-422a-8e2b-32b11696b08a",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24163673"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"firstName\": \"Luchi\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luchit@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"raw": " {\r\n    \"firstName\": \"Luchi\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luch@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -83,12 +83,151 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update - admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Luchitoo\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luchito@luchito.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646155d3f94573fa8d3b969f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646155d3f94573fa8d3b969f"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Activities",
-			"item": []
+			"item": [
+				{
+					"name": "Create Activity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"activityName\": \"Boxing\",\n    \"activityDescription\": \"Practice get punched in the face and not fall over\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/activities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/activities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id Activity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/activities/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646294697abbe85fa5dfeff1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Classes",
@@ -244,7 +383,81 @@
 		},
 		{
 			"name": "Subscriptions",
-			"item": []
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/subscriptions",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create sub",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"newells\",\r\n    \"memberId\": \"4444444\",\r\n    \"date\": \"10/05/2023\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/subscriptions",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/subscriptions/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscriptions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646240ce1c656317d8ab0d83"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Members",
@@ -402,7 +615,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:4000/api/super-admins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admins",
+								""
+							]
 						}
 					},
 					"response": []
@@ -440,7 +663,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/superadmins/",
+							"raw": "http://localhost:4000/api/super-admins/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -448,8 +671,71 @@
 							"port": "4000",
 							"path": [
 								"api",
-								"superadmins",
+								"super-admins",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update superAdmin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"superadmin@yahoo.com.ar\",\r\n    \"password\": \"soyelmejorsuperadmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/super-admins/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462b3d6d69e332a68666690"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete SuperAdmin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/super-admins/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462b3d6d69e332a68666690"
+								}
 							]
 						}
 					},
