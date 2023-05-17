@@ -6,7 +6,6 @@ import superAdminsRoutes from './super-admins';
 import subscriptionRoutes from './subscriptions';
 import trainerRoutes from './trainers';
 import adminsRoutes from './admins';
-
 import activityRoutes from './activities';
 
 const router = express.Router();
