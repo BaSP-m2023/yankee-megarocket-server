@@ -4,13 +4,19 @@ const { Schema } = mongoose;
 
 const superAdminSchema = new Schema(
   {
-    firstName: {
+    email: {
       type: String,
       required: true,
+      validate: {
+        validator(emailValid) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValid);
+        },
+      },
     },
-    lastName: {
+    password: {
       type: String,
       required: true,
+      minLength: 6,
     },
   },
   { timestamps: true },
