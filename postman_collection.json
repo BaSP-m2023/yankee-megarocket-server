@@ -7,6 +7,86 @@
 	},
 	"item": [
 		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "Post - admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"firstName\": \"Luchi\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luchit@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById - admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6462dce582927fa9ffe2dab9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Activities",
 			"item": []
 		},
@@ -370,86 +450,6 @@
 								"api",
 								"superadmins",
 								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Admins",
-			"item": [
-				{
-					"name": "Post - admin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\r\n    \"firstName\": \"Luchi\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luchit@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/admins/",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get - admin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins/",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetById - admin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins/:id",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "6462dce582927fa9ffe2dab9"
-								}
 							]
 						}
 					},
