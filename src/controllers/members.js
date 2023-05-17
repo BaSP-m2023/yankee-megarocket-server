@@ -29,7 +29,7 @@ export const getMemberId = async (req, res) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'This is not a valid ID',
         data: {},
         error: true,
