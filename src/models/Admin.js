@@ -6,26 +6,21 @@ const adminSchema = new Schema(
     firstName: {
       type: String,
       required: true,
-      min: 3,
-      max: 15,
+      maxlength: 10,
     },
     lastName: {
       type: String,
       required: true,
-      min: 3,
-      max: 15,
+      maxlength: 10,
     },
     dni: {
       type: Number,
       required: true,
       min: 1000000,
-      max: 99999999,
     },
     phone: {
       type: Number,
       required: true,
-      min: 10000000,
-      max: 99999999,
     },
     email: {
       type: String,
@@ -36,9 +31,11 @@ const adminSchema = new Schema(
     password: {
       type: String,
       required: true,
-      min: 6,
+      minlength: 8,
     },
+
   },
   { timestamps: true },
 );
+
 export default mongoose.model('Admin', adminSchema);
