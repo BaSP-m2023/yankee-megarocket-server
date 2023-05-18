@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b8ad5258-9f7f-422a-8e2b-32b11696b08a",
+		"_postman_id": "b23bc8ed-1243-4d5b-a84a-9cfb278c0f4e",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24163673"
+		"_exporter_id": "27273437"
 	},
 	"item": [
 		{
@@ -296,6 +296,22 @@
 			"name": "Classes",
 			"item": [
 				{
+					"name": "Update class",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/classes/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"classes",
+								":id"
+							],{
 					"name": "get classes",
 					"request": {
 						"method": "GET",
@@ -356,6 +372,43 @@
 								"api",
 								"classes",
 								""
+							],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": null
+                }
+              ]
+						}
+					},
+					"response": []
+				}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete class",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/classes/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"classes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},

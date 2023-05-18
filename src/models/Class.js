@@ -19,7 +19,7 @@ const classSchema = new Schema(
       required: true,
       enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
     },
-    trainerId: {
+    tarinerId: {
       type: String,
       required: true,
     },
