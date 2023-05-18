@@ -1,14 +1,14 @@
-const express = require('express');
-const classesController = require('../controllers/classes');
-const validations = require('../validations/classes');
+import express from 'express';
+import classesController from '../controllers/classes';
+import validation from '../validations/classes';
 
 const router = express.Router();
 
 router
   .get('/', classesController.getClasses)
   .get('/:id', classesController.getClass)
-  .post('/', validations.validateCreation, classesController.createClass)
-  .put('/:id', validations.validateCreation, classesController.updateClass)
+  .post('/', validation.validateCreation, classesController.createClass)
+  .put('/:id', validation.validateCreation, classesController.updateClass)
   .delete('/:id', classesController.deleteClass);
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
 import Class from '../models/Class';
 
-export const updateClass = async (req, res) => {
+const updateClass = async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -34,7 +34,7 @@ export const updateClass = async (req, res) => {
   }
 };
 
-export const deleteClass = async (req, res) => {
+const deleteClass = async (req, res) => {
   try {
     const { id } = req.params;
     const foundClass = await Class.findByIdAndDelete(id);
@@ -134,6 +134,8 @@ const classesController = {
   getClass,
   getClasses,
   createClass,
+  updateClass,
+  deleteClass,
 };
 
 export default classesController;
