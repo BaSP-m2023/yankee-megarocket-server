@@ -3,8 +3,15 @@ import Admins from '../models/Admin';
 export const getAdmins = async (req, res) => {
   try {
     const admins = await Admins.find();
+    if (!admins.length) {
+      return res.status(404).json({
+        message: 'There are no admins!',
+        data: [],
+        error: true,
+      });
+    }
     return res.status(200).json({
-      message: 'Complete admins list',
+      message: 'Admins found successfully!',
       data: admins,
       error: false,
     });
@@ -23,14 +30,13 @@ export const getAdminById = async (req, res) => {
     const admin = await Admins.findById(id);
     if (!admin) {
       return res.status(404).json({
-        message: 'The requested administrator was not found.',
+        message: `Admin with: ${id} not found!`,
         data: {},
         error: true,
       });
     }
-
-    return res.status(200).send(admin).json({
-      message: 'The administrator was found',
+    return res.status(200).json({
+      message: 'Admin found successfully!',
       data: admin,
       error: false,
     });
@@ -42,24 +48,20 @@ export const getAdminById = async (req, res) => {
     });
   }
 };
-export const createAdmin = async (req, res) => {
+
+export const postAdmin = async (req, res) => {
   try {
     const { body } = req;
-
-    const admin = new Admins(
-      body,
-    );
-
-    if (!admin) {
+    const createdAdmin = await Admins.create(body);
+    if (!createdAdmin) {
       return res.status(400).json({
-        message: 'All fields must be completed.',
+        message: 'Admin could not be created!',
         data: {},
         error: true,
       });
     }
-    const createdAdmin = await admin.save();
     return res.status(201).json({
-      message: 'The administrator was created.',
+      message: 'Admin created successfully!',
       data: createdAdmin,
       error: false,
     });
@@ -72,66 +74,57 @@ export const createAdmin = async (req, res) => {
   }
 };
 
-export const updateAdmin = async (req, res) => {
+export const putAdminById = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      firstName, lastName, dni, email, phone, password,
-    } = req.body;
-    const foundAdmin = await Admins.findByIdAndUpdate(
+    const { body } = req;
+    const updatedAdmin = await Admins.findByIdAndUpdate(
       id,
-      {
-        firstName,
-        lastName,
-        dni,
-        email,
-        phone,
-        password,
-      },
+      body,
       {
         new: true,
       },
     );
-    if (!foundAdmin) {
-      return res.status(404).json({
-        message: `${id} was not found`,
+    if (!updatedAdmin) {
+      return res.status(400).json({
+        message: 'Admin could not be found and updated!',
         data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Admin was updated succesfully',
-      data: foundAdmin,
+      message: 'Admin was updated succesfully!',
+      data: updatedAdmin,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error,',
+      message: error,
       data: undefined,
       error: true,
     });
   }
 };
 
-export const deleteAdmin = async (req, res) => {
+export const deleteAdminById = async (req, res) => {
   try {
     const { id } = req.params;
-    const foundAdmin = await Admins.findByIdAndDelete(id);
-    if (!foundAdmin) {
-      return res.status(404).json({
-        message: `${id} was not found`,
+    const deletedAdmin = await Admins.findByIdAndDelete(id);
+    if (!deletedAdmin) {
+      return res.status(400).json({
+        message: 'Admin could not be found and deleted!',
         data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
       message: 'Admin was deleted succesfully',
-      data: foundAdmin,
+      data: deletedAdmin,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error,',
+      message: error,
       data: undefined,
       error: true,
     });

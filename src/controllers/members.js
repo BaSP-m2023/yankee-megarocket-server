@@ -59,24 +59,11 @@ export const getMemberId = async (req, res) => {
 
 export const createMember = async (req, res) => {
   try {
-    const {
-      firstName, lastName, dni, email, phone, password,
-    } = req.body;
-    if (!firstName || !lastName || !dni || !email || !phone || !password) {
-      return res.status(400).json({
-        message: 'Theres a missing field',
-        data: {},
-        error: true,
-      });
-    }
-    await Member.create({
-      firstName,
-      lastName,
-      dni,
-      email,
-      phone,
-      password,
-    });
+    const body = req;
+    await Member.create(
+      body,
+      { new: true },
+    );
     return res.status(201).json({
       message: 'Member created',
       data: Member,
