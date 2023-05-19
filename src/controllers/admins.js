@@ -88,7 +88,7 @@ export const putAdminById = async (req, res) => {
     if (!updatedAdmin) {
       return res.status(400).json({
         message: 'Admin could not be found and updated!',
-        data: undefined,
+        data: {},
         error: true,
       });
     }
@@ -113,7 +113,7 @@ export const deleteAdminById = async (req, res) => {
     if (!deletedAdmin) {
       return res.status(400).json({
         message: 'Admin could not be found and deleted!',
-        data: undefined,
+        data: {},
         error: true,
       });
     }
