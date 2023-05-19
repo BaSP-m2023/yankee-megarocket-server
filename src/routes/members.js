@@ -1,15 +1,17 @@
 import express from 'express';
+
 import {
-  createMember, getMember, getMemberId, updateMember, deleteMember,
+  getMembers, getMemberById, postMember, putMemberById, deleteMemberById,
 } from '../controllers/members';
-import { memberCreateValidation } from '../validations/members';
+import isValidMember from '../validations/members';
+import validateId from '../middlewares/validateId';
 
 const router = express.Router();
 
-router.get('/', getMember);
-router.get('/:id', getMemberId);
-router.post('/', memberCreateValidation, createMember);
-router.put('/:id', memberCreateValidation, updateMember);
-router.delete('/:id', deleteMember);
+router.get('/', getMembers);
+router.get('/:id', validateId, getMemberById);
+router.post('/', isValidMember, postMember);
+router.put('/:id', validateId, isValidMember, putMemberById);
+router.delete('/:id', validateId, deleteMemberById);
 
 export default router;

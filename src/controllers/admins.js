@@ -81,9 +81,7 @@ export const putAdminById = async (req, res) => {
     const updatedAdmin = await Admins.findByIdAndUpdate(
       id,
       body,
-      {
-        new: true,
-      },
+      { new: true },
     );
     if (!updatedAdmin) {
       return res.status(400).json({
