@@ -23,6 +23,7 @@ export const getActivities = async (req, res) => {
     });
   }
 };
+
 export const getActivityById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -47,6 +48,7 @@ export const getActivityById = async (req, res) => {
     });
   }
 };
+
 export const postActivity = async (req, res) => {
   try {
     const body = req;
@@ -71,6 +73,7 @@ export const postActivity = async (req, res) => {
     });
   }
 };
+
 export const putActivityById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -100,6 +103,7 @@ export const putActivityById = async (req, res) => {
     });
   }
 };
+
 export const deleteActivityById = async (req, res) => {
   try {
     const { id } = req.params;

@@ -1,77 +1,17 @@
-import Class from '../models/Class';
+import Classes from '../models/Class';
 
-const updateClass = async (req, res) => {
+export const getClasses = async (req, res) => {
   try {
-    const { id } = req.params;
-    const {
-      body,
-    } = req;
-    const foundClass = await Class.findByIdAndUpdate(
-      id,
-      body,
-      {
-        new: true,
-      },
-    );
-    if (!foundClass) {
+    const classes = await Classes.find();
+    if (classes.length) {
       return res.status(404).json({
-        message: `Class with id: ${id} not found`,
-        data: {},
-        error: false,
-      });
-    }
-    return res.status(200).json({
-      message: 'Class updated succesfully',
-      data: foundClass,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Server error',
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const deleteClass = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const foundClass = await Class.findByIdAndDelete(id);
-    if (!foundClass) {
-      return res.status(404).json({
-        message: `Class with id: ${id} not found`,
-        data: {},
-        error: false,
-      });
-    }
-    return res.status(200).json({
-      message: 'Class deleted succesfully',
-      data: foundClass,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Server error. Class was not deleted',
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const getClasses = async (req, res) => {
-  try {
-    const classes = await Class.find();
-
-    if (classes.length === 0) {
-      return res.status(404).json({
-        message: 'Classes not found',
+        message: 'There are no classes!',
         data: [],
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Classes found',
+      message: 'Classes found successfully!',
       data: classes,
       error: false,
     });
@@ -84,10 +24,10 @@ const getClasses = async (req, res) => {
   }
 };
 
-const getClass = async (req, res) => {
+export const getClassById = async (req, res) => {
   try {
     const { id } = req.params;
-    const foundClass = await Class.findById(id);
+    const foundClass = await Classes.findById(id);
     if (!foundClass) {
       return res.status(404).json({
         message: 'Class not found',
@@ -109,16 +49,20 @@ const getClass = async (req, res) => {
   }
 };
 
-const createClass = async (req, res) => {
+export const postClass = async (req, res) => {
   try {
-    const {
-      activityId, hour, day, trainerId, maxCapacity,
-    } = req.body;
-    const newClass = await Class.create({
-      activityId, hour, day, trainerId, maxCapacity,
-    }); return res.status(201).json({
-      message: 'New class created successfully!',
-      data: newClass,
+    const body = req;
+    const createdClass = await Classes.create(body);
+    if (!createdClass) {
+      return res.status(400).json({
+        message: 'Class could not be created!',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Class created successfully!',
+      data: createdClass,
       error: false,
     });
   } catch (error) {
@@ -130,12 +74,57 @@ const createClass = async (req, res) => {
   }
 };
 
-const classesController = {
-  getClass,
-  getClasses,
-  createClass,
-  updateClass,
-  deleteClass,
+export const putClassById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const updatedClass = await Classes.findByIdAndUpdate(
+      id,
+      body,
+      { new: true },
+    );
+    if (!updatedClass) {
+      return res.status(400).json({
+        message: 'Class could not be found and updated!',
+        data: {},
+        error: false,
+      });
+    }
+    return res.status(200).json({
+      message: 'Class was updated succesfully',
+      data: updatedClass,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
 };
 
-export default classesController;
+export const deleteClassById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedClass = await Classes.findByIdAndDelete(id);
+    if (!deletedClass) {
+      return res.status(400).json({
+        message: 'Class could not be found and updated!',
+        data: {},
+        error: false,
+      });
+    }
+    return res.status(200).json({
+      message: 'Class deleted succesfully',
+      data: deletedClass,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};

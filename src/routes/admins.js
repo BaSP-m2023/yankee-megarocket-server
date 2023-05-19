@@ -3,14 +3,14 @@ import {
   getAdmins, getAdminById, postAdmin, putAdminById, deleteAdminById,
 } from '../controllers/admins';
 import validateId from '../middlewares/validateId';
-import { validations } from '../validations/admins';
+import isValidAdmin from '../validations/admins';
 
 const router = express.Router();
 
 router.get('/', getAdmins);
 router.get('/:id', validateId, getAdminById);
-router.post('/', validations, postAdmin);
+router.post('/', isValidAdmin, postAdmin);
 router.delete('/:id', validateId, deleteAdminById);
-router.put('/:id', validateId, validations, putAdminById);
+router.put('/:id', validateId, isValidAdmin, putAdminById);
 
 export default router;
