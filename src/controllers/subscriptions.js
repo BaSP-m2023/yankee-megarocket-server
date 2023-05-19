@@ -11,7 +11,7 @@ export const getSubscriptions = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Subscriptions found Successfully!',
+      message: 'Subscriptions found successfully!',
       data: subscriptions,
       error: false,
     });
@@ -30,13 +30,13 @@ export const getSubscriptionById = async (req, res) => {
     const subscription = await Subscription.findById(id);
     if (!subscription) {
       return res.status(404).json({
-        message: `Subscription with: ${id} not found!`,
+        message: `Subscription with id: ${id} not found!`,
         data: [],
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Member found successfully!',
+      message: 'Subscription found successfully!',
       data: subscription,
       error: false,
     });

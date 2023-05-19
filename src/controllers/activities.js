@@ -2,8 +2,8 @@ import Activities from '../models/Activity';
 
 export const getActivities = async (req, res) => {
   try {
-    const activity = await Activities.find();
-    if (!activity.length) {
+    const activities = await Activities.find();
+    if (!activities.length) {
       return res.status(404).json({
         message: 'There are no activities!',
         data: [],
@@ -12,7 +12,7 @@ export const getActivities = async (req, res) => {
     }
     return res.status(200).json({
       message: 'Activities found successfully!',
-      data: activity,
+      data: activities,
       error: false,
     });
   } catch (error) {
@@ -30,7 +30,7 @@ export const getActivityById = async (req, res) => {
     const activity = await Activities.findById(id);
     if (!activity) {
       return res.status(404).json({
-        message: `Activity with: ${id} not found!`,
+        message: `Activity with id: ${id} not found!`,
         data: {},
         error: true,
       });
@@ -97,7 +97,7 @@ export const putActivityById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       data: undefined,
       error: true,
     });
@@ -116,13 +116,13 @@ export const deleteActivityById = async (req, res) => {
       });
     }
     return res.status(200).json({
-      msg: 'Activity was deleted successfully!',
+      message: 'Activity was deleted successfully!',
       data: deletedActivity,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       data: undefined,
       error: true,
     });

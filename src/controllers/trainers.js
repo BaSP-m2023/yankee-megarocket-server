@@ -30,7 +30,7 @@ export const getTrainerById = async (req, res) => {
     const trainer = await Trainer.findById(id);
     if (!trainer) {
       return res.status(404).json({
-        message: `Trainer with: ${id} not found!`,
+        message: `Trainer with id: ${id} not found!`,
         data: {},
         error: true,
       });
@@ -84,13 +84,13 @@ export const putTrainerById = async (req, res) => {
     );
     if (!updatedTrainer) {
       return res.status(400).json({
-        message: 'Trainer could not be found and updated',
+        message: 'Trainer could not be found and updated!',
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainer updated',
+      message: 'Trainer updated successfully',
       data: updatedTrainer,
       error: false,
     });

@@ -30,7 +30,7 @@ export const getSuperAdminById = async (req, res) => {
     const superAdmin = await SuperAdmins.findById(id);
     if (!superAdmin) {
       return res.status(404).json({
-        message: `SuperAdmin with: ${id} not found!`,
+        message: `SuperAdmin with id: ${id} not found!`,
         data: {},
         error: true,
       });
@@ -84,13 +84,13 @@ export const putSuperAdminById = async (req, res) => {
     );
     if (!superAdminUpdated) {
       return res.status(404).json({
-        message: 'Superadmin Not Found',
+        message: 'Super Admin could not be Found and updated',
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Superadmin Updated',
+      message: 'Super Admin Updated Successfully!',
       data: {
         body,
       },
@@ -110,13 +110,13 @@ export const deleteSuperAdminById = async (req, res) => {
     const deletedSuperAdmin = await SuperAdmins.findByIdAndDelete(id);
     if (!deletedSuperAdmin) {
       return res.status(400).json({
-        message: 'superAdmin could not be found and deleted!',
+        message: 'Super Admin could not be found and deleted!',
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'superAdmin Deleted Successfully!',
+      message: 'Super Admin Deleted Successfully!',
       data: deletedSuperAdmin,
       error: false,
     });

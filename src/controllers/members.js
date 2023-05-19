@@ -11,7 +11,7 @@ export const getMembers = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Members found Successfully!:',
+      message: 'Members found successfully!:',
       data: members,
       error: false,
     });
@@ -30,7 +30,7 @@ export const getMemberById = async (req, res) => {
     const member = await Members.findById(id);
     if (!member) {
       return res.status(404).json({
-        message: `Member with: ${id} not found!`,
+        message: `Member with id: ${id} not found!`,
         data: {},
         error: true,
       });
@@ -55,7 +55,7 @@ export const postMember = async (req, res) => {
     const createdMember = await Members.create(body);
     if (!createdMember) {
       return res.status(400).json({
-        message: 'Member could not be found and created!',
+        message: 'Member could not be created!',
         data: {},
         error: true,
       });
@@ -116,7 +116,7 @@ export const deleteMemberById = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Member Deleted Successfully!',
+      message: 'Member Deleted successfully!',
       data: deletedMember,
       error: false,
     });

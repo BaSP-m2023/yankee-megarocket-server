@@ -30,13 +30,13 @@ export const getClassById = async (req, res) => {
     const foundClass = await Classes.findById(id);
     if (!foundClass) {
       return res.status(404).json({
-        message: 'Class not found',
+        message: `Class with id: ${id} not found`,
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Class found',
+      message: 'Class found successfully',
       data: foundClass,
       error: false,
     });
