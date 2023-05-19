@@ -4,7 +4,7 @@
     "description": "app_name description",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
         "start": "nodemon --exec npm run babel-node -- src/index.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
@@ -41,6 +41,7 @@
         "eslint-plugin-import": "^2.26.0",
         "husky": "^7.0.4",
         "jest": "^29.5.0",
+        "mongodb-memory-server": "^8.12.2",
         "supertest": "^6.3.3"
     }
 }
