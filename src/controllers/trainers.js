@@ -3,15 +3,15 @@ import Trainer from '../models/Trainer';
 export const getTrainers = async (req, res) => {
   try {
     const trainers = await Trainer.find();
-    if (trainers.length === 0) {
+    if (!trainers.length) {
       return res.status(404).json({
-        message: 'No trainers found',
+        message: 'There are no trainers!',
         data: [],
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainers found',
+      message: 'Trainers found successfully!',
       data: trainers,
       error: false,
     });
@@ -24,20 +24,20 @@ export const getTrainers = async (req, res) => {
   }
 };
 
-export const getTrainer = async (req, res) => {
+export const getTrainerById = async (req, res) => {
   try {
     const { id } = req.params;
-    const foundTrainer = await Trainer.findById(id);
-    if (!foundTrainer) {
+    const trainer = await Trainer.findById(id);
+    if (!trainer) {
       return res.status(404).json({
-        message: 'Trainer not found',
+        message: `Trainer with: ${id} not found!`,
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainer found',
-      data: foundTrainer,
+      message: 'Trainer found successfully!',
+      data: trainer,
       error: false,
     });
   } catch (error) {
@@ -49,33 +49,24 @@ export const getTrainer = async (req, res) => {
   }
 };
 
-export const createTrainer = async (req, res) => {
+export const postTrainer = async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      dni,
-      email,
-      phone,
-      password,
-      rate,
-    } = req.body;
-    const trainer = await Trainer.create({
-      firstName,
-      lastName,
-      dni,
-      email,
-      phone,
-      password,
-      rate,
-    });
-    res.status(201).json({
+    const body = req;
+    const trainer = await Trainer.create(body);
+    if (!trainer) {
+      return res.status(400).json({
+        message: 'Trainer could not be found and created!',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(201).json({
       message: 'Trainer was created successfully!',
       data: trainer,
       error: false,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error,
       data: undefined,
       error: true,

@@ -1,5 +1,3 @@
-import { isValidObjectId } from 'mongoose';
-
 import SuperAdmins from '../models/SuperAdmin';
 
 export const getSuperAdmins = async (req, res) => {
@@ -106,26 +104,19 @@ export const putSuperAdminById = async (req, res) => {
     });
   }
 };
-export const deleteSuperAdmin = async (req, res) => {
+export const deleteSuperAdminById = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!isValidObjectId(id)) {
-      return res.status(400).json({
-        message: 'This is not a valid ID',
-        data: {},
-        error: true,
-      });
-    }
     const deletedSuperAdmin = await SuperAdmins.findByIdAndDelete(id);
     if (!deletedSuperAdmin) {
-      return res.status(404).json({
-        message: `This id was not found ${id}`,
+      return res.status(400).json({
+        message: 'superAdmin could not be found and deleted!',
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Member Deleted',
+      message: 'superAdmin Deleted Successfully!',
       data: deletedSuperAdmin,
       error: false,
     });

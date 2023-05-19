@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const validateSuperAdmin = (req, res, next) => {
+const validSuperAdmin = (req, res, next) => {
   const dataValidation = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
@@ -13,4 +13,4 @@ const validateSuperAdmin = (req, res, next) => {
     error: true,
   });
 };
-export default validateSuperAdmin;
+export default validSuperAdmin;
