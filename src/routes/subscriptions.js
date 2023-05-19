@@ -1,15 +1,16 @@
 import express from 'express';
 import {
-  createSubscription, getAllSubscriptions, getSubscription, updateSubscription, deleteSubscription,
+  getSubscriptions, getSubscriptionById,
+  postSubscription, putSubscriptionById, deleteSubscriptionById,
 } from '../controllers/subscriptions';
-import { validateSubscription } from '../validations/subscriptions';
+import validSubscription from '../validations/subscriptions';
 
 const router = express.Router();
 
-router.get('/', getAllSubscriptions);
-router.get('/:id', getSubscription);
-router.post('/', validateSubscription, createSubscription);
-router.put('/:id', validateSubscription, updateSubscription);
-router.delete('/:id', deleteSubscription);
+router.get('/', getSubscriptions);
+router.get('/:id', getSubscriptionById);
+router.post('/', validSubscription, postSubscription);
+router.put('/:id', validSubscription, putSubscriptionById);
+router.delete('/:id', deleteSubscriptionById);
 
 export default router;

@@ -5,15 +5,15 @@ import SuperAdmins from '../models/SuperAdmin';
 export const getSuperAdmins = async (req, res) => {
   try {
     const superAdmins = await SuperAdmins.find();
-    if (superAdmins.length === 0) {
+    if (!superAdmins.length) {
       return res.status(404).json({
-        message: 'No superadmins found',
+        message: 'No superadmins found!',
         data: [],
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Superadmin found',
+      message: 'Superadmin found successfully!',
       data: superAdmins,
       error: false,
     });
@@ -26,20 +26,20 @@ export const getSuperAdmins = async (req, res) => {
   }
 };
 
-export const getSuperAdmin = async (req, res) => {
+export const getSuperAdminById = async (req, res) => {
   try {
     const { id } = req.params;
-    const foundSuperAdmin = await SuperAdmins.findById(id);
-    if (!foundSuperAdmin) {
+    const superAdmin = await SuperAdmins.findById(id);
+    if (!superAdmin) {
       return res.status(404).json({
-        message: 'Superadmin not found',
+        message: `SuperAdmin with: ${id} not found!`,
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Superadmin found',
-      data: foundSuperAdmin,
+      message: 'Superadmin found successfully!',
+      data: superAdmin,
       error: false,
     });
   } catch (error) {
@@ -51,37 +51,34 @@ export const getSuperAdmin = async (req, res) => {
   }
 };
 
-export const createSuperAdmin = async (req, res) => {
+export const postSuperAdmin = async (req, res) => {
   try {
     const { body } = req;
-    const superAdmin = await SuperAdmins.create({
-      email: body.email,
-      password: body.password,
-    });
-    res.status(201).json({
+    const createdSuperAdmin = await SuperAdmins.create(body);
+    if (!createdSuperAdmin) {
+      return res.status(400).json({
+        message: 'SuperAdmin could not be found and created!',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(201).json({
       message: 'Superadmin was created successfully!',
-      data: superAdmin,
+      data: createdSuperAdmin,
       error: false,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error,
       data: undefined,
       error: true,
     });
   }
 };
-export const updateSuperAdmin = async (req, res) => {
+export const putSuperAdminById = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    if (!isValidObjectId(id)) {
-      return res.status(400).json({
-        message: 'This is not a valid ID',
-        data: {},
-        error: true,
-      });
-    }
     const superAdminUpdated = await SuperAdmins.findByIdAndUpdate(
       id,
       body,

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const isValidAdmin = (req, res, next) => {
+const validAdmin = (req, res, next) => {
   const validationAdmin = Joi.object({
     firstName: Joi.string().required().min(3).max(10),
     lastName: Joi.string().required().min(3).max(10),
@@ -18,4 +18,4 @@ const isValidAdmin = (req, res, next) => {
     error: true,
   });
 };
-export default isValidAdmin;
+export default validAdmin;

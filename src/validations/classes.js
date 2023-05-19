@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const isValidClass = (req, res, next) => {
+const validClass = (req, res, next) => {
   const validateClassSchema = Joi.object({
     activityId: Joi.string().alphanum().required(),
     hour: Joi.number().min(8).max(21).required(),
@@ -17,4 +17,4 @@ const isValidClass = (req, res, next) => {
   });
 };
 
-export default isValidClass;
+export default validClass;
