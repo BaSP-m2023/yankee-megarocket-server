@@ -73,21 +73,25 @@ export const postTrainer = async (req, res) => {
     });
   }
 };
-
-export const deleteTrainer = async (req, res) => {
+export const putTrainerById = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedTrainer = await Trainer.findOneAndDelete(id);
-    if (!deletedTrainer) {
-      return res.status(404).json({
-        message: 'Trainer not found',
-        data: [],
+    const { body } = req.body;
+    const updatedTrainer = await Trainer.findByIdAndUpdate(
+      id,
+      body,
+      { new: true },
+    );
+    if (!updatedTrainer) {
+      return res.status(400).json({
+        message: 'Trainer could not be found and updated',
+        data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainer deleted',
-      data: deletedTrainer,
+      message: 'Trainer updated',
+      data: updatedTrainer,
       error: false,
     });
   } catch (error) {
@@ -98,26 +102,20 @@ export const deleteTrainer = async (req, res) => {
     });
   }
 };
-
-export const updateTrainer = async (req, res) => {
+export const deleteTrainerById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { body } = req.body;
-    const updatedTrainer = await Trainer.findByIdAndUpdate(
-      id,
-      body,
-      { new: true },
-    );
-    if (!updatedTrainer) {
-      return res.status(404).json({
-        message: 'Trainer not found',
-        data: [],
+    const deletedTrainer = await Trainer.findOneAndDelete(id);
+    if (!deletedTrainer) {
+      return res.status(400).json({
+        message: 'Trainer could not be found and deleted!',
+        data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainer updated',
-      data: updatedTrainer,
+      message: 'Trainer deleted successfully!',
+      data: deletedTrainer,
       error: false,
     });
   } catch (error) {
