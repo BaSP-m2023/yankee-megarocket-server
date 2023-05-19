@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validations = (req, res, next) => {
+const validAdmin = (req, res, next) => {
   const validationAdmin = Joi.object({
     firstName: Joi.string().required().min(3).max(10),
     lastName: Joi.string().required().min(3).max(10),
@@ -18,6 +18,4 @@ const validations = (req, res, next) => {
     error: true,
   });
 };
-module.exports = {
-  validations,
-};
+export default validAdmin;

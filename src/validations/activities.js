@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const activityCreateValidation = (req, res, next) => {
+const validActivity = (req, res, next) => {
   const activityValidation = Joi.object({
     activityName: Joi.string().min(3).max(30).required(),
     activityDescription: Joi.string().min(10).max(250).required(),
@@ -15,6 +15,4 @@ const activityCreateValidation = (req, res, next) => {
   });
 };
 
-module.exports = {
-  activityCreateValidation,
-};
+export default validActivity;

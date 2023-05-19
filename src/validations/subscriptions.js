@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const validateSubscription = (req, res, next) => {
+const validSubscription = (req, res, next) => {
   const validateData = Joi.object({
     classId: Joi.string().max(24).required(),
     memberId: Joi.string().max(24).required(),
@@ -16,4 +16,4 @@ const validateSubscription = (req, res, next) => {
   });
 };
 
-module.exports = { validateSubscription };
+export default validSubscription;

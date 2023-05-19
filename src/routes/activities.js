@@ -1,14 +1,15 @@
 import express from 'express';
 import {
-  updateActivity, deleteActivity, createActivity, getActivity, getActivityId,
+  putActivityById, deleteActivityById, getActivityById, getActivities, postActivity,
 } from '../controllers/activities';
-import { activityCreateValidation } from '../validations/activities';
+import validActivity from '../validations/activities';
+import validateId from '../middlewares/validateId';
 
 const router = express.Router();
-router.put('/:id', activityCreateValidation, updateActivity);
-router.delete('/:id', deleteActivity);
-router.get('/', getActivity);
-router.get('/:id', getActivityId);
-router.post('/', activityCreateValidation, createActivity);
+router.get('/', getActivities);
+router.get('/:id', validateId, getActivityById);
+router.post('/', validActivity, postActivity);
+router.put('/:id', validateId, validActivity, putActivityById);
+router.delete('/:id', validateId, deleteActivityById);
 
 export default router;

@@ -1,48 +1,42 @@
-import { isValidObjectId } from 'mongoose';
-import Activity from '../models/Activity';
+import Activities from '../models/Activity';
 
-export const updateActivity = async (req, res) => {
+export const getActivities = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { body } = req;
-    const findActivity = await Activity.findByIdAndUpdate(
-      id,
-      body,
-      { new: true },
-    );
-    if (!findActivity) {
+    const activities = await Activities.find();
+    if (!activities.length) {
       return res.status(404).json({
-        msg: `The activity with id: ${id} was not found`,
-        data: {},
+        message: 'There are no activities!',
+        data: [],
         error: true,
       });
     }
     return res.status(200).json({
-      msg: 'Activity updated successfully!',
-      data: findActivity,
+      message: 'Activities found successfully!',
+      data: activities,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       data: undefined,
       error: true,
     });
   }
 };
 
-export const getActivity = async (req, res) => {
+export const getActivityById = async (req, res) => {
   try {
-    const activity = await Activity.find();
+    const { id } = req.params;
+    const activity = await Activities.findById(id);
     if (!activity) {
       return res.status(404).json({
-        message: 'There are no activities created',
-        data: [],
+        message: `Activity with id: ${id} not found!`,
+        data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'This is a list of our activities',
+      message: 'Activity found successfully!',
       data: activity,
       error: false,
     });
@@ -55,52 +49,20 @@ export const getActivity = async (req, res) => {
   }
 };
 
-export const deleteActivity = async (req, res) => {
+export const postActivity = async (req, res) => {
   try {
-    const { id } = req.params;
-    const findActivity = await Activity.findByIdAndDelete(id);
-    if (!findActivity) {
-      return res.status(404).json({
-        msg: `The activity with id: ${id} was not found`,
-        data: {},
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      msg: 'Activity deleted successfully!',
-      data: findActivity,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      msg: error,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-export const getActivityId = async (req, res) => {
-  try {
-    const { id } = req.params;
-    if (!isValidObjectId(id)) {
+    const { body } = req;
+    const createdActivity = await Activities.create(body);
+    if (!createdActivity) {
       return res.status(400).json({
-        message: 'This is not a valid Activity ID',
+        message: 'Activity could not be created!',
         data: {},
         error: true,
       });
     }
-    const foundActivity = await Activity.findById(id);
-    if (!foundActivity) {
-      return res.status(404).json({
-        message: 'Activity not found',
-        data: {},
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      message: 'Here is the requested activity',
-      data: foundActivity,
+    return res.status(201).json({
+      message: 'Activity created successfully!',
+      data: createdActivity,
       error: false,
     });
   } catch (error) {
@@ -111,25 +73,51 @@ export const getActivityId = async (req, res) => {
     });
   }
 };
-export const createActivity = async (req, res) => {
+
+export const putActivityById = async (req, res) => {
   try {
-    const {
-      activityName, activityDescription,
-    } = req.body;
-    if (!activityName || !activityDescription) {
+    const { id } = req.params;
+    const { body } = req;
+    const updateActivity = await Activities.findByIdAndUpdate(
+      id,
+      body,
+      { new: true },
+    );
+    if (!updateActivity) {
       return res.status(400).json({
-        message: 'Theres a missing field',
+        message: 'Activity could not be found and updated!',
         data: {},
         error: true,
       });
     }
-    await Activity.create({
-      activityName,
-      activityDescription,
+    return res.status(200).json({
+      msg: 'Activity was updated successfully!',
+      data: updateActivity,
+      error: false,
     });
-    return res.status(201).json({
-      message: 'Activity created',
-      data: Activity,
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+export const deleteActivityById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedActivity = await Activities.findByIdAndDelete(id);
+    if (!deletedActivity) {
+      return res.status(404).json({
+        message: 'Activity could not be found and Deleted!',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Activity was deleted successfully!',
+      data: deletedActivity,
       error: false,
     });
   } catch (error) {

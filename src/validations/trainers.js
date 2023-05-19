@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const validateTrainer = (req, res, next) => {
+const validTrainer = (req, res, next) => {
   const dataValidation = Joi.object({
     firstName: Joi.string().min(3).max(15).required(),
     lastName: Joi.string().min(3).max(15).required(),
@@ -21,4 +21,4 @@ const validateTrainer = (req, res, next) => {
     error: true,
   });
 };
-export default validateTrainer;
+export default validTrainer;

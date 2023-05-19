@@ -1,109 +1,18 @@
-import { isValidObjectId } from 'mongoose';
-
 import Subscription from '../models/Subscription';
 
-export const getAllSubscriptions = async (req, res) => {
+export const getSubscriptions = async (req, res) => {
   try {
     const subscriptions = await Subscription.find();
-    if (!subscriptions) {
+    if (!subscriptions.length) {
       return res.status(404).json({
-        message: 'There are no subscriptions created',
+        message: 'There are no subscriptions!',
         data: [],
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Subscriptions list',
+      message: 'Subscriptions found successfully!',
       data: subscriptions,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Error!',
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-export const getSubscription = async (req, res) => {
-  try {
-    const { id } = req.params;
-    if (!isValidObjectId(id)) {
-      return res.status(400).json({
-        message: 'This is not a valid ID',
-        data: [],
-        error: true,
-      });
-    }
-    const foundSubscription = await Subscription.findById(id);
-    if (!foundSubscription) {
-      return res.status(404).json({
-        message: 'subscription not found',
-        data: [],
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      message: 'The subscription has been found',
-      data: foundSubscription,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Error',
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-export const createSubscription = async (req, res) => {
-  try {
-    const { body } = req;
-    const createSub = await Subscription.create(body);
-    return res.status(201).json({
-      message: 'The subscription has been created',
-      data: createSub,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Error',
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-export const updateSubscription = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { body } = req;
-    if (!isValidObjectId(id)) {
-      return res.status(400).json({
-        message: 'This is not a valid ID',
-        data: {},
-        error: true,
-      });
-    }
-    const updatedSubscription = await Subscription.findByIdAndUpdate(
-      id,
-      body,
-      { new: true },
-    );
-    if (!updatedSubscription) {
-      return res.status(404).json({
-        message: 'Subscription Not Found',
-        data: {},
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      message: 'Subscription Updated',
-      data: {
-        body,
-      },
       error: false,
     });
   } catch (error) {
@@ -115,26 +24,99 @@ export const updateSubscription = async (req, res) => {
   }
 };
 
-export const deleteSubscription = async (req, res) => {
+export const getSubscriptionById = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!isValidObjectId(id)) {
+    const subscription = await Subscription.findById(id);
+    if (!subscription) {
+      return res.status(404).json({
+        message: `Subscription with id: ${id} not found!`,
+        data: [],
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Subscription found successfully!',
+      data: subscription,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+export const postSubscription = async (req, res) => {
+  try {
+    const { body } = req;
+    const createdSubscription = await Subscription.create(body);
+    if (!createdSubscription) {
       return res.status(400).json({
-        message: 'This is not a valid ID',
+        message: 'Subscription could not be found and created!',
         data: {},
         error: true,
       });
     }
-    const deletedSubscription = await Subscription.findByIdAndDelete(id);
-    if (!deletedSubscription) {
-      return res.status(404).json({
-        message: `This id was not found ${id}`,
+    return res.status(201).json({
+      message: 'Subscription created successfully!',
+      data: createdSubscription,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+export const putSubscriptionById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const updatedSubscription = await Subscription.findByIdAndUpdate(
+      id,
+      body,
+      { new: true },
+    );
+    if (!updatedSubscription) {
+      return res.status(400).json({
+        message: 'Subscription could not be found and updated!',
         data: {},
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Subscription Deleted',
+      message: 'Subscription Updated Successfully!',
+      data: updatedSubscription,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+export const deleteSubscriptionById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedSubscription = await Subscription.findByIdAndDelete(id);
+    if (!deletedSubscription) {
+      return res.status(400).json({
+        message: 'Subscription could not be found and deleted!',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Subscription Deleted Successfully!',
       data: deletedSubscription,
       error: false,
     });
