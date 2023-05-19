@@ -51,7 +51,7 @@ export const getActivityById = async (req, res) => {
 
 export const postActivity = async (req, res) => {
   try {
-    const body = req;
+    const { body } = req;
     const createdActivity = await Activities.create(body);
     if (!createdActivity) {
       return res.status(400).json({
@@ -110,7 +110,7 @@ export const deleteActivityById = async (req, res) => {
     const deletedActivity = await Activities.findByIdAndDelete(id);
     if (!deletedActivity) {
       return res.status(404).json({
-        message: 'Activity could not be found and updated!',
+        message: 'Activity could not be found and Deleted!',
         data: {},
         error: true,
       });

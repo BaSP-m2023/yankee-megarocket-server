@@ -51,7 +51,7 @@ export const getTrainerById = async (req, res) => {
 
 export const postTrainer = async (req, res) => {
   try {
-    const body = req;
+    const { body } = req;
     const trainer = await Trainer.create(body);
     if (!trainer) {
       return res.status(400).json({

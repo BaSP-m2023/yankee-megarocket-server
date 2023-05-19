@@ -51,7 +51,7 @@ export const getClassById = async (req, res) => {
 
 export const postClass = async (req, res) => {
   try {
-    const body = req;
+    const { body } = req;
     const createdClass = await Classes.create(body);
     if (!createdClass) {
       return res.status(400).json({
