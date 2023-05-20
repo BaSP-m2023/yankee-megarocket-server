@@ -91,9 +91,7 @@ export const putTrainerById = async (req, res) => {
     }
     return res.status(200).json({
       message: 'Trainer updated successfully',
-      data: {
-        body,
-      },
+      data: updatedTrainer,
       error: false,
     });
   } catch (error) {
