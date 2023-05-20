@@ -4,7 +4,7 @@ export const getSubscriptions = async (req, res) => {
   try {
     const subscriptions = await Subscription.find()
       .populate('members')
-      .populate('classes');
+      .populate('classId');
     if (!subscriptions.length) {
       return res.status(404).json({
         message: 'There are no subscriptions!',
@@ -31,7 +31,7 @@ export const getSubscriptionById = async (req, res) => {
     const { id } = req.params;
     const subscription = await Subscription.findById(id)
       .populate('members')
-      .populate('classes');
+      .populate('classId');
     if (!subscription) {
       return res.status(404).json({
         message: `Subscription with id: ${id} not found!`,
