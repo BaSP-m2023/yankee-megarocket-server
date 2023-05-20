@@ -2,7 +2,7 @@ import Trainer from '../models/Trainer';
 
 export const getTrainers = async (req, res) => {
   try {
-    const trainers = await Trainer.find();
+    const trainers = await Trainer.find().populate('assignedActivities');
     if (!trainers.length) {
       return res.status(404).json({
         message: 'There are no trainers!',
@@ -27,7 +27,7 @@ export const getTrainers = async (req, res) => {
 export const getTrainerById = async (req, res) => {
   try {
     const { id } = req.params;
-    const trainer = await Trainer.findById(id);
+    const trainer = await Trainer.findById(id).populate('assignedActivities');
     if (!trainer) {
       return res.status(404).json({
         message: `Trainer with id: ${id} not found!`,
