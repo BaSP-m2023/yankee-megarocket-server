@@ -5,15 +5,17 @@ const { Schema } = mongoose;
 const subscriptionSchema = new Schema(
   {
     classId: {
-      type: String,
+      _id: false,
+      type: mongoose.Types.ObjectId,
       required: true,
-      maxLength: 24,
+      ref: 'Class',
     },
-    memberId: {
-      type: String,
+    members: [{
+      _id: false,
+      type: mongoose.Types.ObjectId,
       required: true,
-      maxLength: 24,
-    },
+      ref: 'Member',
+    }],
     date: {
       type: Date,
       required: true,

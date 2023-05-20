@@ -2,7 +2,9 @@ import Subscription from '../models/Subscription';
 
 export const getSubscriptions = async (req, res) => {
   try {
-    const subscriptions = await Subscription.find();
+    const subscriptions = await Subscription.find()
+      .populate('members')
+      .populate('classId');
     if (!subscriptions.length) {
       return res.status(404).json({
         message: 'There are no subscriptions!',
@@ -27,7 +29,9 @@ export const getSubscriptions = async (req, res) => {
 export const getSubscriptionById = async (req, res) => {
   try {
     const { id } = req.params;
-    const subscription = await Subscription.findById(id);
+    const subscription = await Subscription.findById(id)
+      .populate('members')
+      .populate('classId');
     if (!subscription) {
       return res.status(404).json({
         message: `Subscription with id: ${id} not found!`,

@@ -2,8 +2,8 @@ const Joi = require('joi');
 
 const validSubscription = (req, res, next) => {
   const validateData = Joi.object({
-    classId: Joi.string().max(24).required(),
-    memberId: Joi.string().max(24).required(),
+    classId: Joi.string().required(),
+    members: Joi.array().items(Joi.string()).required(),
     date: Joi.date().greater('now').required(),
   });
 
