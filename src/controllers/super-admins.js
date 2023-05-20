@@ -83,7 +83,7 @@ export const putSuperAdminById = async (req, res) => {
       { new: true },
     );
     if (!superAdminUpdated) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'Super Admin could not be Found and updated',
         data: {},
         error: true,

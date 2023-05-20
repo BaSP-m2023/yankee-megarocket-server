@@ -109,7 +109,7 @@ export const deleteActivityById = async (req, res) => {
     const { id } = req.params;
     const deletedActivity = await Activities.findByIdAndDelete(id);
     if (!deletedActivity) {
-      return res.status(404).json({
+      return res.status(400).json({
         message: 'Activity could not be found and Deleted!',
         data: {},
         error: true,
