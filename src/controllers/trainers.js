@@ -76,7 +76,7 @@ export const postTrainer = async (req, res) => {
 export const putTrainerById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { body } = req.body;
+    const { body } = req;
     const updatedTrainer = await Trainer.findByIdAndUpdate(
       id,
       body,
@@ -91,7 +91,9 @@ export const putTrainerById = async (req, res) => {
     }
     return res.status(200).json({
       message: 'Trainer updated successfully',
-      data: updatedTrainer,
+      data: {
+        body,
+      },
       error: false,
     });
   } catch (error) {
@@ -105,7 +107,7 @@ export const putTrainerById = async (req, res) => {
 export const deleteTrainerById = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedTrainer = await Trainer.findOneAndDelete(id);
+    const deletedTrainer = await Trainer.findByIdAndDelete(id);
     if (!deletedTrainer) {
       return res.status(400).json({
         message: 'Trainer could not be found and deleted!',
