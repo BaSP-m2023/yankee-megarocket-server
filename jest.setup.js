@@ -22,4 +22,4 @@ afterAll(async () => {
   await mongoose.connection.close();
   await mongoServer.stop();
   await mongo.stop();
-});
+}, 30000);
