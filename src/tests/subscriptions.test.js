@@ -66,6 +66,15 @@ describe('PUT /api/subscriptions', () => {
     expect(response.body.message).toBe('This is not a valid object Id');
   });
 
+  test('Should respond with a 400 status, subscriptions could not be found and updated', async () => {
+    await Subscription.deleteMany();
+    const response = await request(app).put(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Subscription could not be found and updated!');
+  });
+
   test('should send 500 error', async () => {
     jest.spyOn(Subscription, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).put(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
@@ -96,6 +105,15 @@ describe('DELETE /api/subscriptions', () => {
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBeDefined();
     expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('Should respond with a 400 status, subscriptions could not be found and updated', async () => {
+    await Subscription.deleteMany();
+    const response = await request(app).delete(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Subscription could not be found and deleted!');
   });
 
   test('should send 500 error', async () => {
