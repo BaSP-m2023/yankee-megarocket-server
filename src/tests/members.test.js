@@ -11,6 +11,7 @@ afterEach(async () => {
   await Member.collection.deleteMany();
 });
 
+// eslint-disable-next-line
 const mockMemberSeed = memberSeed[0]._id;
 const mockMemberGood = {
   firstName: 'Juan',
@@ -34,81 +35,19 @@ const mockIdBad = {
   id: '64691519333281ea60b8069a',
 };
 
-describe('GET /api/members', () => {
+describe('put /api/members', () => {
   test('should return status 200', async () => {
-    const response = await request(app).get('/api/members').send();
-    expect(response.status).toBe(200);
-    expect(response.body.data.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.error).toBeFalsy();
-    expect(response.body.message).toBe('Members found successfully!:');
-  });
-  test('should return status 404', async () => {
-    await Member.collection.deleteMany();
-    const response = await request(app).get('/api/members').send();
-    expect(response.body.error).toBeTruthy();
-    expect(response.status).toBe(404);
-    expect(response.body.data.length).toBe(0);
-    expect(response.body.message).toBe('There are no members!');
-  });
-  test('should respond with a 500 status, server error', async () => {
-    jest.spyOn(Member, 'find').mockRejectedValue(new Error('Something went wrong'));
-    const response = await request(app).get('/api/members/').send();
-    expect(response.status).toBe(500);
-    expect(response.body.error).toBeTruthy();
-  });
-});
-
-describe('GETById /api/members/:id', () => {
-  test('should return status 400, send no id', async () => {
-    const response = await request(app).get('/api/members/:id').send();
-    expect(response.status).toBe(400);
-    expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBe(undefined);
-    expect(response.body.message).toBe('This is not a valid object Id');
-  });
-  test('should return status 400, send invalid id', async () => {
-    const response = await request(app).get(`/api/members/${mockMemberBadValidations.phone}`).send();
-    expect(response.status).toBe(400);
-    expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBe(undefined);
-    expect(response.body.message).toBe('This is not a valid object Id');
-  });
-  test('should return status 404, send valid id but without member', async () => {
-    const response = await request(app).get(`/api/members/${mockIdBad.id}`).send();
-    expect(response.status).toBe(404);
-    expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBe(undefined);
-    expect(response.body.message).toBe('Member with id: 64691519333281ea60b8069a not found!');
-  });
-  test('should return status 200', async () => {
-    const response = await request(app).get(`/api/members/${mockMemberSeed}`).send();
-    expect(response.status).toBe(200);
-    /* eslint no-underscore-dangle: 0 */
-    expect(response.body.data._id).toBe(mockMemberSeed.toString());
-    expect(response.body.error).toBeFalsy();
-    expect(response.body.message).toBe('Member found successfully!');
-  });
-  test('should respond with a 500 status, server error', async () => {
-    jest.spyOn(Member, 'findById').mockRejectedValue(new Error('Something went wrong'));
-    const response = await request(app).get(`/api/members/${mockMemberSeed}`).send();
-    expect(response.status).toBe(500);
-    expect(response.body.error).toBeTruthy();
-  });
-});
-
-describe('post /api/members', () => {
-  test('should return status 201', async () => {
     const response = await request(app)
-      .post('/api/members/')
+      .put(`/api/members/${mockMemberSeed}`)
       .send(mockMemberGood);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
     expect(response.body.data.dni).toBe(mockMemberGood.dni);
     expect(response.body.error).toBeFalsy();
-    expect(response.body.message).toBe('Member created successfully!');
+    expect(response.body.message).toBe('Member Updated successfully!');
   });
   test('should return status 400, send data empty', async () => {
     const response = await request(app)
-      .post('/api/members')
+      .put(`/api/members/${mockMemberSeed}`)
       .send(mockMemberEmpty);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
@@ -116,9 +55,9 @@ describe('post /api/members', () => {
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"firstName\" is required');
   });
-  test('should return status 400, send data without a data', async () => {
+  test('should return status 400, valid id without send data', async () => {
     const response = await request(app)
-      .post('/api/members');
+      .put(`/api/members/${mockMemberSeed}`);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBe(undefined);
@@ -127,7 +66,7 @@ describe('post /api/members', () => {
   });
   test('should return status 400, send data with bad inputs', async () => {
     const response = await request(app)
-      .post('/api/members')
+      .put(`/api/members/${mockMemberSeed}`)
       .send(mockMemberBadValidations);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
@@ -136,15 +75,57 @@ describe('post /api/members', () => {
     expect(response.body.message).toBe('There was an error in the validation: \"firstName\" must be a string');
   });
   test('should respond with a 400 status, server error', async () => {
-    jest.spyOn(Member, 'create').mockResolvedValue(null);
-    const response = await request(app).post('/api/members/').send(mockMemberGood);
+    jest.spyOn(Member, 'findByIdAndUpdate').mockResolvedValue(null);
+    const response = await request(app).put(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.message).toBe('Member could not be created!');
+    expect(response.body.message).toBe('Member could not be found and updated!');
   });
   test('should respond with a 500 status, server error', async () => {
-    jest.spyOn(Member, 'create').mockRejectedValue(new Error('Something went wrong'));
-    const response = await request(app).post('/api/members/').send(mockMemberGood);
+    jest.spyOn(Member, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).put(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBeTruthy();
+  });
+});
+
+describe('delete /api/members', () => {
+  test('should return status 400, send valid id but doesnt exist', async () => {
+    const response = await request(app)
+      .delete(`/api/members/${mockIdBad}`)
+      .send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+  test('should return status 400, send invalid id', async () => {
+    const response = await request(app)
+      .delete('/api/members/asdas3123asd')
+      .send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Member could not be found and deleted!');
+  });
+  test('should return status 200', async () => {
+    const response = await request(app)
+    // eslint-disable-next-line
+      .delete(`/api/members/${memberSeed[1]._id}`)
+      .send();
+    expect(response.status).toBe(200);
+    expect(response.body.data.dni).toBe(mockMemberGood.dni);
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toBe('Member Deleted successfully!');
+  });
+  test('should respond with a 400 status, server error', async () => {
+    jest.spyOn(Member, 'findByIdAndDelete').mockResolvedValue(null);
+    const response = await request(app).delete(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Member could not be found and deleted!');
+  });
+  test('should respond with a 500 status, server error', async () => {
+    jest.spyOn(Member, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).delete(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
   });
