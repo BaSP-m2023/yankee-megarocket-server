@@ -24,19 +24,16 @@ beforeAll(async () => {
 describe('PUT /api/classes/:id', () => {
   test('Should respond with a  200 status, class updated', async () => {
     const response = await request(app).put('/api/classes/64693c420b3782bf437c382f').send(mockClass);
-    console.log(response.body.message);
     expect(response.status).toBe(200);
   });
 
   test('Should respond with a 400 status, Id is invalid', async () => {
     const response = await request(app).put('/api/classes/64693c420b3782bf437c382r').send(mockClass);
-    console.log(response.body.message);
     expect(response.status).toBe(400);
   });
 
   test('Should respond with a 400 status, there is missing fields', async () => {
     const response = await request(app).put('/api/classes/64693c420b3782bf437c382f').send(mockClassInvalid);
-    console.log(response.body.message);
     expect(response.status).toBe(400);
   });
 });
