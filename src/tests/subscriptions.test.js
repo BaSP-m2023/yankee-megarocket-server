@@ -42,7 +42,7 @@ describe('PUT /api/subscriptions', () => {
     expect(response.body.message).toBe('Subscription Updated Successfully!');
   });
 
-  test('should send error 400 because this ID is invalid', async () => {
+  test('should send error 400 because this ID doesnt exist', async () => {
     const response = await request(app).put(`/api/subscriptions/${invalidSubMockup.id}`).send(modifiedSubscription);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
@@ -56,6 +56,20 @@ describe('PUT /api/subscriptions', () => {
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBeUndefined();
     expect(response.body.message).toBe('An error has occurred: "date" is required');
+  });
+
+  test('should send 400 error because this ID is an invalid ID', async () => {
+    const response = await request(app).put('/api/subscriptions/1234wewe}').send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('should send 500 error', async () => {
+    jest.spyOn(Subscription, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).put(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
+    expect(response.status).toBe(500);
   });
 });
 
@@ -74,5 +88,19 @@ describe('DELETE /api/subscriptions', () => {
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBeDefined();
     expect(response.body.message).toBe('Subscription could not be found and deleted!');
+  });
+
+  test('should send 400 error because this ID is an invalid ID', async () => {
+    const response = await request(app).delete('/api/subscriptions/1234wewe}').send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('should send 500 error', async () => {
+    jest.spyOn(Subscription, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).delete(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
+    expect(response.status).toBe(500);
   });
 });
