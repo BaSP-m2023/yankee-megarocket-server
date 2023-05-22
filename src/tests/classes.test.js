@@ -44,6 +44,15 @@ describe('PUT /api/classes/:id', () => {
     expect(response.body.message).toBe('Class was updated succesfully');
   });
 
+  test('Should respond with a 400 status, class could not be found and updated', async () => {
+    await Class.deleteMany();
+    const response = await request(app).put(`/api/classes/${ClassId}`).send(mockClass);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toBe('Class could not be found and updated!');
+  });
+
   test('Should respond with a 400 status, Id is invalid', async () => {
     const response = await request(app).put('/api/classes/5454dgd').send(mockClass);
     expect(response.status).toBe(400);
@@ -88,6 +97,15 @@ describe('DELETE /api/classes/:id', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('Should respond with a 400 status, class could not be found and deleted', async () => {
+    await Class.deleteMany();
+    const response = await request(app).delete(`/api/classes/${ClassId}`).send();
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toBe('Class could not be found and deleted!');
   });
 
   test('Should respond with a 500 status, server error', async () => {
