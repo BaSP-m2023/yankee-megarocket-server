@@ -58,6 +58,12 @@ describe('GET /api/members', () => {
     expect(response.body.data.length).toBe(0);
     expect(response.body.message).toBe('There are no members!');
   });
+  test('should respond with a 500 status, server error', async () => {
+    jest.spyOn(Member, 'find').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).get('/api/members/').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('GETById /api/members/:id', () => {
@@ -87,10 +93,16 @@ describe('GETById /api/members/:id', () => {
     expect(response.body.error).toBeFalsy();
     expect(response.body.message).toBe('Member found successfully!');
   });
+  test('should respond with a 500 status, server error', async () => {
+    jest.spyOn(Member, 'findById').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).get(`/api/members/${mockMemberSeed.id}`).send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('post /api/members', () => {
-  test('should return status 2010', async () => {
+  test('should return status 201', async () => {
     const response = await request(app)
       .post('/api/members/')
       .send(mockMemberGood);
@@ -121,5 +133,11 @@ describe('post /api/members', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBe(undefined);
+  });
+  test('should respond with a 500 status, server error', async () => {
+    jest.spyOn(Member, 'create').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).post('/api/members/').send(mockMemberGood);
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
   });
 });
