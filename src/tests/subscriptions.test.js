@@ -29,6 +29,16 @@ describe('PUT /api/subscriptions', () => {
     });
     expect(response.status).toBe(400);
   });
+
+  test('should send error 400 because the date filed is missing', async () => {
+    const response = await request(app).put('/api/subscriptions/64694cb404b48dafdecfa123').send({
+      classId: '64694cb404b48dafdecfa12e',
+      members: [
+        '64655cf22c2d037df75e72dd', '64691789d00ee55da969d212',
+      ],
+    });
+    expect(response.status).toBe(400);
+  });
 });
 
 describe('DELETE /api/subscriptions', () => {
