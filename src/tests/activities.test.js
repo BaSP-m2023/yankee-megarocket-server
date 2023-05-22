@@ -52,3 +52,54 @@ describe('GET /api/activities/:id', () => {
     expect(response.statusCode).toBe(404);
   });
 });
+
+describe('PUT /api/activities/:id', () => {
+  test('It should update one activity', async () => {
+    const response = await request(app).put(`/api/activities/${activityId}`).send(mockActivity);
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('Activity has been updated successfully');
+  });
+  test('It should send error 400 because the Id does not exist', async () => {
+    const response = await request(app).put(`/api/activities/${activityId}`).send({});
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('Activity could not been found');
+  });
+  test('It should send error 400 because the IId is invalid', async () => {
+    const response = await request(app).put(`/api/activities/${activityId}`).send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('Activity could not been found');
+  });
+  test('It should send error 500', async () => {
+    jest.spyOn(Activity, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).put(`/api/activities/${activityId}`).send(mockActivity);
+    expect(response.status).toBe(500);
+  });
+});
+
+describe('DELETE /api/activities/:id', () => {
+  test('It should delete one activity', async () => {
+    const response = await request(app).delete(`/api/activities/${activityId}`).send();
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('Activity has been deleted successfully');
+  });
+  test('It should send error 400 because the Id does not exist', async () => {
+    const response = await request(app).delete(`/api/activities/${activityId}`).send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('Activity could not been found');
+  });
+  test('It should send error 500', async () => {
+    jest.spyOn(Activity, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).delete(`/api/activities/${activityId}`).send();
+    expect(response.status).toBe(500);
+  });
+});
