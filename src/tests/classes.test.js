@@ -28,6 +28,10 @@ const mockClassActivityIdInvalid = {
 
 const ClassId = classesSeed[0]._id;
 
+const nonExistentClassId = {
+  id: '64693b1d0b3782bf437c3826',
+};
+
 beforeEach(async () => {
   await Class.collection.insertMany(classesSeed);
 });
@@ -55,6 +59,13 @@ describe('PUT /api/classes/:id', () => {
 
   test('Should respond with a 400 status, Id is invalid', async () => {
     const response = await request(app).put('/api/classes/5454dgd').send(mockClass);
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('Should respond with a 400 status, Id is not found or non-existent', async () => {
+    const response = await request(app).put(`/api/classes/${nonExistentClassId}`).send(mockClass);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
@@ -106,6 +117,13 @@ describe('DELETE /api/classes/:id', () => {
     expect(response.body.data).toEqual({});
     expect(response.body.error).toBeFalsy();
     expect(response.body.message).toBe('Class could not be found and deleted!');
+  });
+
+  test('Should respond with a 400 status, Id is not found or non-existent', async () => {
+    const response = await request(app).delete(`/api/classes/${nonExistentClassId}`).send(mockClass);
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('This is not a valid object Id');
   });
 
   test('Should respond with a 500 status, server error', async () => {
