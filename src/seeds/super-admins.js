@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: new mongoose.Types.ObjectId('635316fe464e1ad6227622e4'),
-  email: 'test@gmail.com',
-  password: 'password123',
+  _id: new mongoose.Types.ObjectId('6466b3610ebbac7a2a1b9f8f'),
+  email: 'princesita2@grumosa.com',
+  password: 'horadeaventura2',
 }];
