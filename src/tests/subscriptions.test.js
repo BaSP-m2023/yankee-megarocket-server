@@ -30,11 +30,12 @@ describe('GET /api/subscriptions', () => {
     const response = await request(app).get(validRoute).send();
     expect(response.status).toBe(200);
     expect(response.body.data).toBeDefined();
+    expect(response.body.message).toBe('Subscriptions found successfully!');
     expect(response.body.error).toBe(false);
   });
-  test('should return status 404 and no subscriptions message', async () => {
+  test('Should return status 404 and no subscriptions message', async () => {
     await Subscription.collection.deleteMany();
-    const response = await request(app).get('/api/subscriptions').send();
+    const response = await request(app).get(validRoute).send();
     expect(response.status).toBe(404);
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeTruthy();
@@ -42,7 +43,7 @@ describe('GET /api/subscriptions', () => {
   });
   test('should return status 500', async () => {
     jest.spyOn(Subscription, 'populate').mockRejectedValue(new Error('oh no Something went wrong'));
-    const response = await request(app).get('/api/subscriptions/').send();
+    const response = await request(app).get(validRoute).send();
     expect(response.status).toBe(500);
   });
 });
@@ -78,13 +79,15 @@ describe('GET /api/subscriptions/:id', () => {
 
 describe('POST /api/subscriptions/', () => {
   test('should return status 201', async () => {
-    const response = await request(app).post('/api/subscriptions/').send(mockSubscription);
+    const response = await request(app).post(validRoute).send(mockSubscription);
     expect(response.status).toBe(201);
+    expect(response.body.message).toBe('Subscription created successfully!');
+
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
   });
   test('should return status 400 and missing date message', async () => {
-    const response = await request(app).post('/api/subscriptions/').send({
+    const response = await request(app).post(validRoute).send({
       classId: mockSubscription.classId,
       members: mockSubscription.members,
     });
@@ -94,7 +97,7 @@ describe('POST /api/subscriptions/', () => {
     expect(response.body.error).toBeTruthy();
   });
   test('should return status 400 and missing members message', async () => {
-    const response = await request(app).post('/api/subscriptions/').send({
+    const response = await request(app).post(validRoute).send({
       classId: mockSubscription.classId,
       date: mockSubscription.date,
     });
@@ -104,7 +107,7 @@ describe('POST /api/subscriptions/', () => {
     expect(response.body.error).toBeTruthy();
   });
   test('should return status 400 and missing class Id message', async () => {
-    const response = await request(app).post('/api/subscriptions/').send({
+    const response = await request(app).post(validRoute).send({
       members: mockSubscription.members,
       date: mockSubscription.date,
     });
@@ -115,7 +118,7 @@ describe('POST /api/subscriptions/', () => {
   });
   test('should return status 500', async () => {
     jest.spyOn(Subscription, 'create').mockRejectedValue(new Error('Oh no! Something went wrong!'));
-    const response = await request(app).post('/api/subscriptions/').send(mockSubscription);
+    const response = await request(app).post(validRoute).send(mockSubscription);
     expect(response.status).toBe(500);
   });
 });
