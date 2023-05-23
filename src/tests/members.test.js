@@ -30,9 +30,7 @@ const mockMemberBadValidations = {
   phone: 176306099700000000,
   password: 'd9vUeOyuKsasdasd@',
 };
-const mockIdBad = {
-  id: '64691519333281ea60b8069a',
-};
+const mockIdBad = '64691519333281ea60b8069a';
 
 describe('GET /api/members', () => {
   test('should return status 200', async () => {
@@ -74,7 +72,7 @@ describe('GETById /api/members/:id', () => {
     expect(response.body.message).toBe('This is not a valid object Id');
   });
   test('should return status 404, send valid id but without member', async () => {
-    const response = await request(app).get(`/api/members/${mockIdBad.id}`).send();
+    const response = await request(app).get(`/api/members/${mockIdBad}`).send();
     expect(response.status).toBe(404);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toEqual({});
