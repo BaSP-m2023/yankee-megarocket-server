@@ -44,7 +44,7 @@ describe('PUT /api/subscriptions', () => {
     const response = await request(app).put(`/api/subscriptions/${invalidSubMockup}`).send(modifiedSubscription);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBeDefined();
+    expect(response.body.data).toEqual({});
     expect(response.body.message).toBe('Subscription could not be found and updated!');
   });
 
@@ -96,7 +96,7 @@ describe('DELETE /api/subscriptions', () => {
     const response = await request(app).delete(`/api/subscriptions/${invalidSubMockup}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBeDefined();
+    expect(response.body.data).toEqual({});
     expect(response.body.message).toBe('Subscription could not be found and deleted!');
   });
 
@@ -104,7 +104,7 @@ describe('DELETE /api/subscriptions', () => {
     const response = await request(app).delete('/api/subscriptions/1234wewe}').send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBeDefined();
+    expect(response.body.data).toEqual({});
     expect(response.body.message).toBe('This is not a valid object Id');
   });
 
