@@ -54,10 +54,11 @@ describe('GET /api/classes', () => {
     expect(response.body.data.length).toBe(0);
   });
   test('should return status 500 for internal server error', async () => {
-    jest.spyOn(Class, 'create').mockImplementationOnce(() => {
+    jest.spyOn(Class, 'find').mockImplementationOnce(() => {
       throw new Error('Internal server error');
     });
-    const response = await request(app).post('/api/classes').send(mockClass);
+
+    const response = await request(app).get('/api/classes');
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
     expect(response.body).toEqual(expect.objectContaining({ error: true }));
@@ -118,5 +119,15 @@ describe('GET BY ID /api/classes/:id', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
+  });
+  test('should return status 500 for internal server error', async () => {
+    jest.spyOn(Class, 'find').mockImplementationOnce(() => {
+      throw new Error('Internal server error');
+    });
+
+    const response = await request(app).get('/api/classes');
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body).toEqual(expect.objectContaining({ error: true }));
   });
 });
