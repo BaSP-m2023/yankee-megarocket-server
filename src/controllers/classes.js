@@ -3,7 +3,7 @@ import Classes from '../models/Class';
 export const getClasses = async (req, res) => {
   try {
     const classes = await Classes.find();
-    if (classes.length) {
+    if (!classes.length) {
       return res.status(404).json({
         message: 'There are no classes!',
         data: [],
