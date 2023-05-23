@@ -82,7 +82,6 @@ describe('POST /api/subscriptions/', () => {
     const response = await request(app).post(validRoute).send(mockSubscription);
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('Subscription created successfully!');
-
     expect(response.body.data).toBeDefined();
     expect(response.body.error).toBeFalsy();
   });
