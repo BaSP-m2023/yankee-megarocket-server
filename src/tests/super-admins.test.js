@@ -8,6 +8,14 @@ const mockSuper = {
   password: 'superadmin123',
 };
 
+const mockWrongId = {
+  id: '635316fe464e1ad6227622e5',
+};
+
+const mockCoolId = {
+  id: '635316fe464e1ad6227622e4',
+};
+
 beforeEach(async () => {
   await SuperAdmin.collection.insertMany(superAdminSeed);
 });
@@ -42,14 +50,14 @@ describe('get/api/super-admins', () => {
 
 describe('get/api/super-admins/:id', () => {
   test('should return status 200', async () => {
-    const response = await request(app).get('/api/super-admins/635316fe464e1ad6227622e4').send();
+    const response = await request(app).get(`/api/super-admins/${mockCoolId.id}`).send();
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
     expect(response.body.data).toBeDefined();
     expect(response.body.message).toBe('Superadmin found successfully!');
   });
   test('should return status 404 when Id is not found', async () => {
-    const response = await request(app).get('/api/super-admins/635316fe464e1ad6227622e5').send();
+    const response = await request(app).get(`/api/super-admins/${mockWrongId.id}`).send();
     expect(response.status).toBe(404);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data.length).toBe(undefined);
@@ -57,7 +65,7 @@ describe('get/api/super-admins/:id', () => {
   });
   test('should return status 500', async () => {
     jest.spyOn(SuperAdmin, 'findById').mockRejectedValue(new Error('Something went wrong'));
-    const response = await request(app).get('/api/super-admins/635316fe464e1ad6227622e4').send();
+    const response = await request(app).get(`/api/super-admins/${mockCoolId.id}`).send();
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
