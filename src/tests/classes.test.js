@@ -60,6 +60,7 @@ describe('PUT /api/classes/:id', () => {
   test('Should respond with a 400 status, Id is invalid', async () => {
     const response = await request(app).put('/api/classes/5454dgd').send(mockClass);
     expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
@@ -67,6 +68,7 @@ describe('PUT /api/classes/:id', () => {
   test('Should respond with a 400 status, Id is not found or non-existent', async () => {
     const response = await request(app).put(`/api/classes/${nonExistentClassId}`).send(mockClass);
     expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
@@ -91,6 +93,8 @@ describe('PUT /api/classes/:id', () => {
     jest.spyOn(Class, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).put(`/api/classes/${ClassId}`).send(mockClass);
     expect(response.status).toBe(500);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
   });
 });
 
@@ -106,6 +110,7 @@ describe('DELETE /api/classes/:id', () => {
   test('Should respond with a 400 status, invalid Id', async () => {
     const response = await request(app).delete('/api/classes/6469chs').send();
     expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
@@ -122,6 +127,7 @@ describe('DELETE /api/classes/:id', () => {
   test('Should respond with a 400 status, Id is not found or non-existent', async () => {
     const response = await request(app).delete(`/api/classes/${nonExistentClassId}`).send(mockClass);
     expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
@@ -130,5 +136,7 @@ describe('DELETE /api/classes/:id', () => {
     jest.spyOn(Class, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).delete(`/api/classes/${ClassId}`).send();
     expect(response.status).toBe(500);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
   });
 });
