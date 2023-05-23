@@ -133,11 +133,13 @@ describe('post /api/members', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('Member could not be created!');
+    expect(response.body.data).toBe(undefined);
   });
   test('should respond with a 500 status, server error', async () => {
     jest.spyOn(Activity, 'create').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).post('/api/members/').send(mockActivity);
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBe(undefined);
   });
 });
