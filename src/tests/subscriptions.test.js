@@ -14,9 +14,7 @@ afterEach(async () => {
 
 const mockSubscriptionId = subSeed[0]._id;
 
-const invalidSubMockup = {
-  id: '64694cb404b48dafdecfa12e',
-};
+const invalidSubMockup = '64694cb404b48dafdecfa12e';
 
 const modifiedSubscription = {
   classId: '64693c420b3782bf437c123a',
@@ -43,7 +41,7 @@ describe('PUT /api/subscriptions', () => {
   });
 
   test('should send error 400 because this ID doesnt exist', async () => {
-    const response = await request(app).put(`/api/subscriptions/${invalidSubMockup.id}`).send(modifiedSubscription);
+    const response = await request(app).put(`/api/subscriptions/${invalidSubMockup}`).send(modifiedSubscription);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBeDefined();
@@ -92,7 +90,7 @@ describe('DELETE /api/subscriptions', () => {
   });
 
   test('should send 400 error because his ID is invalid', async () => {
-    const response = await request(app).delete(`/api/subscriptions/${invalidSubMockup.id}`).send();
+    const response = await request(app).delete(`/api/subscriptions/${invalidSubMockup}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data).toBeDefined();
