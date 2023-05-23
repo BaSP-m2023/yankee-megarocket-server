@@ -58,6 +58,9 @@ describe('PUT /api/super-admins', () => {
     jest.spyOn(superAdmin, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).put(`/api/super-admins/${superAdminId}`).send(putTestSuperAdmin);
     expect(response.status).toBe(500);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
+    expect(response.body.error).toBeTruthy();
   });
   test('Invalid ID, return error 400', async () => {
     const response = await request(app).put('/api/super-admins/1234asdawaadw').send();
@@ -103,6 +106,9 @@ describe('DELETE /api/super-admins', () => {
     jest.spyOn(superAdmin, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).delete(`/api/super-admins/${superAdminId}`).send();
     expect(response.status).toBe(500);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
+    expect(response.body.error).toBeTruthy();
   });
   test('Invalid ID, return error 400', async () => {
     const response = await request(app).delete('/api/super-admins/1234asdawaadw').send();
