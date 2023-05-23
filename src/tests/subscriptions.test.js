@@ -77,6 +77,9 @@ describe('PUT /api/subscriptions', () => {
     jest.spyOn(Subscription, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).put(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
     expect(response.status).toBe(500);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
 
@@ -118,5 +121,8 @@ describe('DELETE /api/subscriptions', () => {
     jest.spyOn(Subscription, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).delete(`/api/subscriptions/${mockSubscriptionId}`).send(modifiedSubscription);
     expect(response.status).toBe(500);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
