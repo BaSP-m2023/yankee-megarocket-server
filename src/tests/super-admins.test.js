@@ -40,9 +40,9 @@ describe('PUT /api/super-admins', () => {
     expect(response.body.message).toBe('Super Admin Updated Successfully!');
     expect(response.body.error).toBeFalsy();
   });
-  test('should not found id, return error 404', async () => {
+  test('should not found id, return error 400', async () => {
     const response = await request(app).put(`/api/super-admins/${notFoundId}`).send(putTestSuperAdmin);
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(400);
     expect(response.body.data).toBeDefined();
     expect(response.body.message).toBe('Super Admin could not be Found and updated');
     expect(response.body.error).toBeTruthy();
@@ -69,10 +69,10 @@ describe('PUT /api/super-admins', () => {
     expect(response.body.message).toBe('This is not a valid object Id');
     expect(response.body.error).toBeTruthy();
   });
-  test('Should not be found and modify a super admin, return error 404', async () => {
+  test('Should not be found and modify a super admin, return error 400', async () => {
     await superAdmin.deleteMany();
     const response = await request(app).put(`/api/super-admins/${superAdminId}`).send(putTestSuperAdmin);
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(400);
     expect(response.body.data).toEqual({});
     expect(response.body.message).toBe('Super Admin could not be Found and updated');
     expect(response.body.error).toBeTruthy();
