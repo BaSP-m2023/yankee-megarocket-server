@@ -31,9 +31,7 @@ const mockMemberBadValidations = {
   phone: 176306099700000000,
   password: 'd9vUeOyuKsasdasd@',
 };
-const mockIdBad = {
-  id: '64691519333281ea60b8069a',
-};
+const mockIdBad = '64691519333281ea60b8069a';
 
 describe('put /api/members', () => {
   test('should return status 200', async () => {
@@ -80,12 +78,15 @@ describe('put /api/members', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('Member could not be found and updated!');
+    expect(response.body.data).toEqual({});
   });
   test('should respond with a 500 status, server error', async () => {
     jest.spyOn(Member, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).put(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
 
@@ -96,7 +97,8 @@ describe('delete /api/members', () => {
       .send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.message).toBe('This is not a valid object Id');
+    expect(response.body.message).toBe('Member could not be found and deleted!');
+    expect(response.body.data).toEqual({});
   });
   test('should return status 400, send invalid id', async () => {
     const response = await request(app)
@@ -105,6 +107,7 @@ describe('delete /api/members', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('Member could not be found and deleted!');
+    expect(response.body.data).toEqual({});
   });
   test('should return status 200', async () => {
     const response = await request(app)
@@ -120,6 +123,7 @@ describe('delete /api/members', () => {
     jest.spyOn(Member, 'findByIdAndDelete').mockResolvedValue(null);
     const response = await request(app).delete(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
     expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toBe('Member could not be found and deleted!');
   });
@@ -128,5 +132,7 @@ describe('delete /api/members', () => {
     const response = await request(app).delete(`/api/members/${mockMemberSeed}`).send(mockMemberGood);
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
