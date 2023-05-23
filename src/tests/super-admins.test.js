@@ -8,13 +8,12 @@ const mockSuper = {
   password: 'superadmin123',
 };
 
-const mockWrongId = {
-  id: '635316fe464e1ad6227622e5',
-};
+const mockWrongId = '635316fe464e1ad6227622e5';
 
-const mockCoolId = {
-  id: '635316fe464e1ad6227622e4',
-};
+// eslint-disable-next-line no-underscore-dangle
+const mockCoolId = superAdminSeed[0]._id;
+
+const mockSuperAdmin = superAdminSeed[0];
 
 beforeEach(async () => {
   await SuperAdmin.collection.insertMany(superAdminSeed);
@@ -29,7 +28,7 @@ describe('get/api/super-admins', () => {
     const response = await request(app).get('/api/super-admins').send();
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
-    expect(response.body.data).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(0);
     expect(response.body.message).toBe('Superadmin found successfully!');
   });
   test('should return status 404 when superAdmins is empty', async () => {
@@ -45,19 +44,24 @@ describe('get/api/super-admins', () => {
     const response = await request(app).get('/api/super-admins').send();
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
+    expect(response.body.message).toBeDefined();
   });
 });
 
 describe('get/api/super-admins/:id', () => {
   test('should return status 200', async () => {
-    const response = await request(app).get(`/api/super-admins/${mockCoolId.id}`).send();
+    const response = await request(app).get(`/api/super-admins/${mockCoolId}`).send();
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
-    expect(response.body.data).toBeDefined();
+    expect(response.body.data).toEqual({
+      ...mockSuperAdmin,
+      // eslint-disable-next-line no-underscore-dangle
+      _id: mockSuperAdmin._id.toString(),
+    });
     expect(response.body.message).toBe('Superadmin found successfully!');
   });
   test('should return status 404 when Id is not found', async () => {
-    const response = await request(app).get(`/api/super-admins/${mockWrongId.id}`).send();
+    const response = await request(app).get(`/api/super-admins/${mockWrongId}`).send();
     expect(response.status).toBe(404);
     expect(response.body.error).toBeTruthy();
     expect(response.body.data.length).toBe(undefined);
@@ -65,9 +69,10 @@ describe('get/api/super-admins/:id', () => {
   });
   test('should return status 500', async () => {
     jest.spyOn(SuperAdmin, 'findById').mockRejectedValue(new Error('Something went wrong'));
-    const response = await request(app).get(`/api/super-admins/${mockCoolId.id}`).send();
+    const response = await request(app).get(`/api/super-admins/${mockCoolId}`).send();
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
+    expect(response.body.message).toBeDefined();
   });
 });
 
@@ -92,5 +97,6 @@ describe('post/api/super-admins/', () => {
     const response = await request(app).post('/api/super-admins/').send(mockSuper);
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
+    expect(response.body.message).toBeDefined();
   });
 });
