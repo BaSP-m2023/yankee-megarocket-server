@@ -53,6 +53,8 @@ describe('GET /api/members', () => {
     const response = await request(app).get('/api/members/').send();
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
 
