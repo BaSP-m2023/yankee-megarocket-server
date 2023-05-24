@@ -91,7 +91,7 @@ export const putActivityById = async (req, res) => {
       });
     }
     return res.status(200).json({
-      msg: 'Activity was updated successfully!',
+      message: 'Activity was updated successfully!',
       data: updateActivity,
       error: false,
     });
