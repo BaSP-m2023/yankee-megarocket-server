@@ -60,14 +60,14 @@ describe('GETById /api/activities/:id', () => {
     const response = await request(app).get(`/api/activities/${mockActivityBadValidations.phone}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
   test('should return status 404, send valid id but without member', async () => {
     const response = await request(app).get(`/api/activities/${mockIdBad.id}`).send();
     expect(response.status).toBe(404);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('Activity with id: 64691519333281ea60b8069a not found!');
   });
   test('should return status 200', async () => {
@@ -98,21 +98,21 @@ describe('GETById /api/activities/:id', () => {
     const response = await request(app).get('/api/activities/:id').send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
   test('should return status 400, send invalid id', async () => {
     const response = await request(app).get(`/api/activities/${mockActivityBadValidations.phone}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
   test('should return status 404, send valid id but without member', async () => {
     const response = await request(app).get(`/api/activities/${mockIdBad.id}`).send();
     expect(response.status).toBe(404);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('Activity with id: 64691519333281ea60b8069a not found!');
   });
   test('should return status 200', async () => {
@@ -143,21 +143,21 @@ describe('GETById /api/activities/:id', () => {
     const response = await request(app).get('/api/activities/:id').send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
   test('should return status 400, send invalid id', async () => {
     const response = await request(app).get(`/api/activities/${mockActivityBadValidations.phone}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('This is not a valid object Id');
   });
   test('should return status 404, send valid id but without member', async () => {
     const response = await request(app).get(`/api/activities/${mockIdBad.id}`).send();
     expect(response.status).toBe(404);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data.length).toBetoBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
     expect(response.body.message).toBe('Activity with id: 64691519333281ea60b8069a not found!');
   });
   test('should return status 200', async () => {
@@ -188,7 +188,7 @@ describe('POST /api/activities/', () => {
     const response = await request(app).post('/api/activities').send(mockActivityEmpty);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"activityName\" is required');
   });
@@ -197,7 +197,7 @@ describe('POST /api/activities/', () => {
       .post('/api/activities');
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"activityName\" is required');
   });
@@ -207,7 +207,7 @@ describe('POST /api/activities/', () => {
       .send(mockActivityBadValidations);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"activityName\" length must be less than or equal to 30 characters long');
   });
@@ -224,7 +224,7 @@ describe('POST /api/activities/', () => {
     const response = await request(app).post('/api/activities').send(mockActivity);
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
   });
 });
 
@@ -254,7 +254,7 @@ describe('PUT /api/activities/:id', () => {
     jest.spyOn(Activity, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).put(`/api/activities/${activityId}`).send(mockActivity);
     expect(response.status).toBe(500);
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
   });
 });
 describe('DELETE /api/activities/:id', () => {
@@ -292,7 +292,7 @@ describe('POST /api/activities/', () => {
     const response = await request(app).post('/api/activities').send(mockActivityEmpty);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"activityName\" is required');
   });
@@ -301,7 +301,7 @@ describe('POST /api/activities/', () => {
       .post('/api/activities');
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"activityName\" is required');
   });
@@ -311,7 +311,7 @@ describe('POST /api/activities/', () => {
       .send(mockActivityBadValidations);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
     // eslint-disable-next-line
     expect(response.body.message).toBe('There was an error in the validation: \"activityName\" length must be less than or equal to 30 characters long');
   });
@@ -328,6 +328,6 @@ describe('POST /api/activities/', () => {
     const response = await request(app).post('/api/activities').send(mockActivity);
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.data).toBetoBeUndefined();
+    expect(response.body.data).toBeUndefined();
   });
 });
