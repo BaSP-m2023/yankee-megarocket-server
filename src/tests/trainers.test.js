@@ -63,6 +63,8 @@ describe('GET /api/trainers', () => {
     const response = await request(app).get('/api/trainers/').send();
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
 
@@ -104,6 +106,8 @@ describe('GET /api/trainers/:id', () => {
     const response = await request(app).get(`/api/trainers/${mockTrainerId}`).send();
     expect(response.status).toBe(500);
     expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
 
@@ -136,5 +140,8 @@ describe('POST /api/trainers/', () => {
     jest.spyOn(Trainer, 'create').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).post('/api/trainers').send(mockTrainer);
     expect(response.status).toBe(500);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.message).toEqual({});
   });
 });
