@@ -112,3 +112,67 @@ describe('POST /api/admins', () => {
     expect(response.body.error).toBeTruthy();
   });
 });
+
+describe('PUT /api/admins', () => {
+  test('should update an existing admin and return a status 200', async () => {
+    const response = await request(app).put(`/api/admins/${mockAdminId}`).send(mockAdmin);
+    expect(response.body.data.phone).toBe(mockAdmin.phone);
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe('Admin was updated succesfully!');
+    expect(response.body.error).toBeFalsy();
+  });
+  test('should return status 400', async () => {
+    const response = await request(app).put(`/api/admins/${mockAdminIdNotFound}`).send(mockAdmin);
+    expect(response.body.data).toEqual({});
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('Admin could not be found and updated!');
+    expect(response.body.error).toBeTruthy();
+  });
+  test('should return status 400', async () => {
+    const response = await request(app).put('/api/admins/sarasa').send(mockAdmin);
+    expect(response.body.data).toEqual({});
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('This is not a valid object Id');
+    expect(response.body.error).toBeTruthy();
+  });
+  test('should update an existing admin and return a status 400', async () => {
+    const response = await request(app).put(`/api/admins/${mockAdminId}`).send(mockAdminFail);
+    expect(response.body.data).toBe(undefined);
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('There was an error: \"firstName\" is required'); // eslint-disable-line
+    expect(response.body.error).toBeTruthy();
+  });
+  test('should return status 500', async () => {
+    jest.spyOn(Admin, 'findByIdAndUpdate').mockRejectedValue(new Error('Somenthing went wrong with the server'));
+    const response = await request(app).put(`/api/admins/${mockAdminId}`).send(mockAdmin);
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(500);
+    expect(response.body.message).toStrictEqual({});
+    expect(response.body.error).toBeTruthy();
+  });
+});
+
+describe('DELETE /api/admins', () => {
+  test('should delete an existing admin and return a status 200', async () => {
+    const response = await request(app).delete(`/api/admins/${mockAdminId}`).send();
+    expect(response.status).toBe(200);
+    expect(response.body.data.password).toBe(adminSeed[0].password);
+    expect(response.body.message).toBe('Admin was deleted succesfully');
+    expect(response.body.error).toBeFalsy();
+  });
+  test('should return status 400', async () => {
+    const response = await request(app).delete(`/api/admins/${mockAdminIdNotFound}`).send();
+    expect(response.body.data).toEqual({});
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('Admin could not be found and deleted!');
+    expect(response.body.error).toBeTruthy();
+  });
+  test('should return status 500', async () => {
+    jest.spyOn(Admin, 'findByIdAndDelete').mockRejectedValue(new Error('Somenthing went wrong with the server'));
+    const response = await request(app).delete(`/api/admins/${mockAdminId}`).send();
+    expect(response.body.data).toBeUndefined();
+    expect(response.status).toBe(500);
+    expect(response.body.message).toStrictEqual({});
+    expect(response.body.error).toBeTruthy();
+  });
+});
