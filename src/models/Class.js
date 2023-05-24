@@ -5,8 +5,8 @@ const { Schema } = mongoose;
 const classSchema = new Schema(
   {
     activityId: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Activity',
     },
     hour: {
       type: Number,
@@ -20,8 +20,8 @@ const classSchema = new Schema(
       enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
     },
     trainerId: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Trainer',
     },
     maxCapacity: {
       type: Number,

@@ -1,22 +1,68 @@
 {
 	"info": {
-		"_postman_id": "a4c5e1bf-25f6-40ce-ad53-785338e51e23",
+		"_postman_id": "89379e34-7994-42cc-9ae3-371d299fc999",
 		"name": "Yankee Megarocket Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25295561"
+		"_exporter_id": "27289120"
 	},
 	"item": [
 		{
 			"name": "Admins",
 			"item": [
 				{
-					"name": "Post - admin",
+					"name": "Get Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admin By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6465631c2c2d037df75e72f5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Admin",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"firstName\": \"Luchi\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luch@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"raw": " {\r\n    \"firstName\": \"Matias\",\r\n    \"lastName\": \"Test\",\r\n    \"dni\": 4444444,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"testmail@gamil.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,59 +85,13 @@
 					"response": []
 				},
 				{
-					"name": "Get - admin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins/",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetById - admin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins/:id",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "6462dce582927fa9ffe2dab9"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update - admin",
+					"name": "Update Admin",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Luchitoo\",\r\n    \"lastName\": \"Suarez\",\r\n    \"dni\": 6666666,\r\n    \"phone\": 1111111111,\r\n    \"email\": \"luchito@luchito.com\",\r\n    \"password\": \"1234567Ww\"\r\n  }",
+							"raw": "{\r\n  \"firstName\": \"Test\",\r\n  \"lastName\": \"Update\",\r\n  \"dni\": 1111111,\r\n  \"phone\": 1111111111,\r\n  \"email\": \"testmail@gamil.com\",\r\n  \"password\": \"1234567Ww\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -112,7 +112,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "646155d3f94573fa8d3b969f"
+									"value": "64690a4934c0b55f8875c5b2"
 								}
 							]
 						}
@@ -120,7 +120,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete - admin",
+					"name": "Delete  Admin",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -138,7 +138,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "646155d3f94573fa8d3b969f"
+									"value": "64690a4934c0b55f8875c5b2"
 								}
 							]
 						}
@@ -151,13 +151,61 @@
 			"name": "Activities",
 			"item": [
 				{
+					"name": "Get Activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/activities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/activities/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "646555a32c2d037df75e72bb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Activity",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"activityName\": \"Boxing\",\n    \"activityDescription\": \"Practice get punched in the face and not fall over\"\n  }",
+							"raw": "{\n    \"activityName\": \"Testing\",\n    \"activityDescription\": \"Test1234567\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -180,61 +228,13 @@
 					"response": []
 				},
 				{
-					"name": "Get Activity",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/activities/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activities",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get by Id Activity",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/activities/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activities",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "646294697abbe85fa5dfeff1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update Activity",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"activityName\": \"Crossfit\",\r\n    \"activityDescription\": \"SIUUUUUUUUUUUUUU\"\r\n}",
+							"raw": "{\r\n  \"activityName\": \"Testing Update\",\r\n  \"activityDescription\": \"Test1234567\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -256,7 +256,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "64690b3234c0b55f8875c5b9"
 								}
 							]
 						}
@@ -283,7 +283,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "64690b8334c0b55f8875c5bb"
 								}
 							]
 						}
@@ -296,7 +296,7 @@
 			"name": "Classes",
 			"item": [
 				{
-					"name": "get classes",
+					"name": "Get Classes",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -316,7 +316,7 @@
 					"response": []
 				},
 				{
-					"name": "get class by id",
+					"name": "Get Class By Id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -334,7 +334,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "6461625cd4bc722514cf4579"
 								}
 							]
 						}
@@ -342,13 +342,13 @@
 					"response": []
 				},
 				{
-					"name": "create class",
+					"name": "Create Class",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"activityId\": \"5\",\r\n    \"hour\": 12,\r\n    \"day\": \"monday\",\r\n    \"trainerId\": \"4\",\r\n    \"maxCapacity\": 25\r\n}",
+							"raw": "{\r\n    \"activityId\": \"011001110110100101101100\",\r\n    \"hour\": 15.30,\r\n    \"day\": \"tuesday\",\r\n    \"trainerId\": \"1\",\r\n    \"maxCapacity\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -371,10 +371,19 @@
 					"response": []
 				},
 				{
-					"name": "put classes",
+					"name": "Update Class",
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"activityId\": \"011001110110100101101100\",\r\n  \"hour\": 15.3,\r\n  \"day\": \"friday\",\r\n  \"trainerId\": \"1\",\r\n  \"maxCapacity\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/api/classes/:id",
 							"protocol": "http",
@@ -390,7 +399,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "64690e8954fb430565d9ee4a"
 								}
 							]
 						}
@@ -398,7 +407,7 @@
 					"response": []
 				},
 				{
-					"name": "delete classes",
+					"name": "Delete Class",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -417,7 +426,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "64663cbb48d443224d3f4669"
+									"value": "6468e99491e527373c912256"
 								}
 							]
 						}
@@ -429,6 +438,117 @@
 		{
 			"name": "Trainers",
 			"item": [
+				{
+					"name": "Get Trainer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trainer By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/trainers/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6468d2753f487ebd1c4162d3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Araceli\",\r\n    \"lastName\": \"Fernandez\",\r\n    \"dni\": 37000000,\r\n    \"email\": \"fperigoe2@mapy.cz\",\r\n    \"phone\": 6563233891,\r\n    \"password\": \"Ms2QlQql\",\r\n    \"rate\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Trainer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Franco\",\r\n  \"lastName\": \"Rossi\",\r\n  \"dni\": 37000000,\r\n  \"email\": \"fperigoe2@mapy.cz\",\r\n  \"phone\": 6563233891,\r\n  \"password\": \"Ms2QlQql\",\r\n  \"rate\": 14,\r\n  \"assignedActivities\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/trainers/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6469109354fb430565d9ee57"
+								}
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Delete Trainer",
 					"request": {
@@ -448,123 +568,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "64624e32b5725b8336d25b2f"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put Trainer",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"firstName\": \"Matias\",\r\n  \"lastName\": \"Sauvanet\",\r\n  \"dni\": 30253569,\r\n  \"email\": \"araefe@mapy.cz\",\r\n  \"phone\": 1234567890,\r\n  \"password\": \"123qwer\",\r\n  \"rate\": 10,\r\n  \"assignedActivities\": []\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/trainers/:id",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"trainers",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "64624ea0b5725b8336d25b31"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Trainers",
-			"item": [
-				{
-					"name": "Get trainer",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/trainers",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"trainers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create trainer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Friedrick\",\r\n    \"lastName\": \"Perigoe\",\r\n    \"dni\": 32211626,\r\n    \"email\": \"fperigoe2@mapy.cz\",\r\n    \"phone\": 6563233891,\r\n    \"password\": \"Ms2QlQql\",\r\n    \"rate\": 12\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/trainers",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"trainers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get trainer by Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/trainers/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"trainers",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "6462d285ebb82e6a2e413836"
+									"value": "646912f5333281ea60b8068d"
 								}
 							]
 						}
@@ -577,7 +581,7 @@
 			"name": "Subscriptions",
 			"item": [
 				{
-					"name": "getAll",
+					"name": "Get Subscriptions",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -596,35 +600,7 @@
 					"response": []
 				},
 				{
-					"name": "create sub",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"classId\": \"newells\",\r\n    \"memberId\": \"4444444\",\r\n    \"date\": \"10/05/2023\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/subscriptions",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"subscriptions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getById",
+					"name": "Get Subscription By Id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -642,8 +618,36 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "646240ce1c656317d8ab0d83"
+									"value": "6466eaa001616acb38f9fe55"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"Premium\",\r\n    \"memberId\": \"1012313\",\r\n    \"date\": \"10/05/2023\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/subscriptions",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscriptions"
 							]
 						}
 					},
@@ -656,7 +660,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"classId\": \"ale1122\",\r\n    \"memberId\": \"33332\",\r\n    \"date\": \"2023-10-06\"\r\n}",
+							"raw": "{\r\n  \"classId\": \"Premium\",\r\n  \"memberId\": \"1012313\",\r\n  \"date\": \"10/04/2023\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -678,7 +682,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "646240a31c656317d8ab0d80"
+									"value": "646913bc333281ea60b80692"
 								}
 							]
 						}
@@ -705,7 +709,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6462706e9fe73206c3281fd"
+									"value": "6466e5bc01616acb38f9fe33"
 								}
 							]
 						}
@@ -718,7 +722,7 @@
 			"name": "Members",
 			"item": [
 				{
-					"name": "Get members",
+					"name": "Get Members",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -738,7 +742,7 @@
 					"response": []
 				},
 				{
-					"name": "Get by Id Members",
+					"name": "Get Member By Id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -757,7 +761,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "64613f5dcb551427a34fff73"
+									"value": "64655cf22c2d037df75e72dd"
 								}
 							]
 						}
@@ -765,13 +769,42 @@
 					"response": []
 				},
 				{
-					"name": "editMembers",
+					"name": "Create Member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"firstName\": \"Matias\",\n    \"lastName\": \"Test\",\n    \"dni\": 41317666,\n    \"email\": \"testeando@Radium.com\",\n    \"phone\": \"1763060997\",\n    \"password\": \"d9vUeOyuKs\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/members",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Member",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\r\n    \"firstName\": \"Juan Manuel\",\r\n    \"lastName\": \"Blois\",\r\n    \"dni\": 31754828,\r\n    \"email\": \"aprobame@elcurso.com\",\r\n    \"phone\": \"9273706494\",\r\n    \"password\": \"vF7uGhjyoffe\"\r\n  }",
+							"raw": "{\r\n  \"firstName\": \"Juan\",\r\n  \"lastName\": \"Perez\",\r\n  \"dni\": 41317666,\r\n  \"email\": \"testeando@Radium.com\",\r\n  \"phone\": 1763060997,\r\n  \"password\": \"d9vUeOyuKs\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -793,7 +826,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "64624b7e9f23acb63b6a3e04"
+									"value": "64691519333281ea60b8069d"
 								}
 							]
 						}
@@ -801,7 +834,7 @@
 					"response": []
 				},
 				{
-					"name": "deleteMembers",
+					"name": "Delete Member",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -815,7 +848,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/api/members/64603f5dcb551427a34fff74",
+							"raw": "http://localhost:4000/api/members/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -824,36 +857,13 @@
 							"path": [
 								"api",
 								"members",
-								"64603f5dcb551427a34fff74"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create member",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Blois\",\n    \"dni\": 32208529,\n    \"email\": \"Aprobame@Radium.com\",\n    \"phone\": \"1763060997\",\n    \"password\": \"d9vUeOyuKs\"\n  }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/members",
-							"protocol": "http",
-							"host": [
-								"localhost"
+								":id"
 							],
-							"port": "4000",
-							"path": [
-								"api",
-								"members"
+							"variable": [
+								{
+									"key": "id",
+									"value": "6465675a37ace6b428d28889"
+								}
 							]
 						}
 					},
@@ -865,7 +875,7 @@
 			"name": "Super-admins",
 			"item": [
 				{
-					"name": "Get  SuperAdmins",
+					"name": "Get  Super Admins",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -886,12 +896,12 @@
 					"response": []
 				},
 				{
-					"name": "Get SuperAdmin",
+					"name": "Get Super Admin By Id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/superadmins/:id",
+							"raw": "http://localhost:4000/api/super-admins/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -899,13 +909,13 @@
 							"port": "4000",
 							"path": [
 								"api",
-								"superadmins",
+								"super-admins",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "6466b3ec0ebbac7a2a1b9f9a"
 								}
 							]
 						}
@@ -913,10 +923,19 @@
 					"response": []
 				},
 				{
-					"name": "Create SuperAdmin",
+					"name": "Create Super Admin",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"MatiasTesting@Radium.com\",\r\n  \"password\": \"asd1234asd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/api/super-admins/",
 							"protocol": "http",
@@ -934,13 +953,13 @@
 					"response": []
 				},
 				{
-					"name": "update superAdmin",
+					"name": "Update Super Admin",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"superadmin@yahoo.com.ar\",\r\n    \"password\": \"soyelmejorsuperadmin\"\r\n}",
+							"raw": "{\r\n  \"email\": \"Aprobame@Radium.com\",\r\n  \"password\": \"Sushi2020\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -962,7 +981,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6462b3d6d69e332a68666690"
+									"value": "6466f917b6e47d518005d895"
 								}
 							]
 						}
@@ -970,7 +989,7 @@
 					"response": []
 				},
 				{
-					"name": "delete SuperAdmin",
+					"name": "Delete Super Admin",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -989,7 +1008,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6462b3d6d69e332a68666690"
+									"value": "6466dc2312a75be8390b1122"
 								}
 							]
 						}
