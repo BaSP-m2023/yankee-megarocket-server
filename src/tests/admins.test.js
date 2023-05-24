@@ -128,6 +128,13 @@ describe('PUT /api/admins', () => {
     expect(response.body.message).toBe('Admin could not be found and updated!');
     expect(response.body.error).toBeTruthy();
   });
+  test('should return status 400', async () => {
+    const response = await request(app).put('/api/admins/sarasa').send(mockAdmin);
+    expect(response.body.data).toEqual({});
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('This is not a valid object Id');
+    expect(response.body.error).toBeTruthy();
+  });
   test('should update an existing admin and return a status 400', async () => {
     const response = await request(app).put(`/api/admins/${mockAdminId}`).send(mockAdminFail);
     expect(response.body.data).toBe(undefined);
