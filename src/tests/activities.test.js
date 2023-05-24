@@ -123,6 +123,51 @@ describe('GETById /api/activities/:id', () => {
     expect(response.body.error).toBeFalsy();
     expect(response.body.message).toBe('Activity found successfully!');
   });
+  test('should return status 404', async () => {
+    await Activity.collection.deleteMany();
+    const response = await request(app).get('/api/activities').send();
+    expect(response.body.error).toBeTruthy();
+    expect(response.status).toBe(404);
+    expect(response.body.data.length).toBe(0);
+    expect(response.body.message).toBe('There are no activities!');
+  });
+  test('should respond with a 500 status, server error', async () => {
+    jest.spyOn(Activity, 'find').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).get('/api/activities').send();
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBeTruthy();
+  });
+});
+describe('GETById /api/activities/:id', () => {
+  test('should return status 400, send no id', async () => {
+    const response = await request(app).get('/api/activities/:id').send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data.length).toBe(undefined);
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+  test('should return status 400, send invalid id', async () => {
+    const response = await request(app).get(`/api/activities/${mockActivityBadValidations.phone}`).send();
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data.length).toBe(undefined);
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+  test('should return status 404, send valid id but without member', async () => {
+    const response = await request(app).get(`/api/activities/${mockIdBad.id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.data.length).toBe(undefined);
+    expect(response.body.message).toBe('Activity with id: 64691519333281ea60b8069a not found!');
+  });
+  test('should return status 200', async () => {
+    const response = await request(app).get(`/api/activities/${activityId}`).send();
+    expect(response.status).toBe(200);
+    /* eslint no-underscore-dangle: 0 */
+    expect(response.body.data._id).toBe(activityId.toString());
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toBe('Activity found successfully!');
+  });
   test('should respond with a 500 status, server error', async () => {
     jest.spyOn(Activity, 'findById').mockRejectedValue(new Error('Something went wrong'));
     const response = await request(app).get(`/api/activities/${activityId}`).send();
