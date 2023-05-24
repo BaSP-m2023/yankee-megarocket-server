@@ -145,3 +145,82 @@ describe('POST /api/trainers/', () => {
     expect(response.body.message).toEqual({});
   });
 });
+
+describe('PUT /api/trainers/:id', () => {
+  test('Should return status 200, trainer updated', async () => {
+    const response = await request(app).put(`/api/trainers/${mockTrainerId}`).send(mockTrainer);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toBe('Trainer updated successfully');
+  });
+
+  test('Should respond with a 400 status, Id is invalid', async () => {
+    const response = await request(app).put('/api/trainers/5454dgd').send(mockTrainer);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('Should respond with a 400 status, Id is not found or non-existent', async () => {
+    const response = await request(app).put(`/api/trainers/${notFoundId}`).send(mockTrainer);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Trainer could not be found and updated!');
+  });
+
+  test('Should respond with a 500 status, server error', async () => {
+    jest.spyOn(Trainer, 'findByIdAndUpdate').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).put(`/api/trainers/${mockTrainerId}`).send(mockTrainer);
+    expect(response.status).toBe(500);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toEqual({});
+  });
+});
+
+describe('DELETE /api/trainers/:id', () => {
+  test('Should respond with a  200 status, trainer deleted', async () => {
+    const response = await request(app).delete(`/api/trainers/${mockTrainerId}`).send();
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toBe('Trainer deleted successfully!');
+  });
+
+  test('Should respond with a 400 status, invalid Id', async () => {
+    const response = await request(app).delete(`/api/trainers/${invalidId}`).send();
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('This is not a valid object Id');
+  });
+
+  test('Should respond with a 400 status, trainer could not be found and deleted', async () => {
+    await Trainer.deleteMany();
+    const response = await request(app).delete(`/api/trainers/${mockTrainerId}`).send();
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Trainer could not be found and deleted!');
+  });
+
+  test('Should respond with a 400 status, Id is not found or non-existent', async () => {
+    const response = await request(app).delete(`/api/trainers/${notFoundId}`).send(mockTrainer);
+    expect(response.status).toBe(400);
+    expect(response.body.data).toEqual({});
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toBe('Trainer could not be found and deleted!');
+  });
+
+  test('Should respond with a 500 status, server error', async () => {
+    jest.spyOn(Trainer, 'findByIdAndDelete').mockRejectedValue(new Error('Something went wrong'));
+    const response = await request(app).delete(`/api/trainers/${mockTrainerId}`).send();
+    expect(response.status).toBe(500);
+    expect(response.body.data).toBeUndefined();
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toEqual({});
+  });
+});
