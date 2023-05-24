@@ -1,8 +1,21 @@
 import Classes from '../models/Class';
+import Trainer from '../models/Trainer';
+import Activity from '../models/Activity';
 
 export const getClasses = async (req, res) => {
   try {
-    const classes = await Classes.find();
+    const classes = await Classes.find()
+      .populate({
+        path: 'activityId',
+        select: 'activityName activityDescription',
+        model: Activity,
+      })
+      .populate({
+        path: 'trainerId',
+        select: 'firstName lastName email',
+        model: Trainer,
+      });
+
     if (!classes.length) {
       return res.status(404).json({
         message: 'There are no classes!',
@@ -10,6 +23,7 @@ export const getClasses = async (req, res) => {
         error: true,
       });
     }
+
     return res.status(200).json({
       message: 'Classes found successfully!',
       data: classes,
@@ -27,7 +41,10 @@ export const getClasses = async (req, res) => {
 export const getClassById = async (req, res) => {
   try {
     const { id } = req.params;
-    const foundClass = await Classes.findById(id);
+    const foundClass = await Classes.findById(id)
+      .populate('activityId')
+      .populate('trainerId');
+
     if (!foundClass) {
       return res.status(404).json({
         message: `Class with id: ${id} not found`,
@@ -110,7 +127,7 @@ export const deleteClassById = async (req, res) => {
     const deletedClass = await Classes.findByIdAndDelete(id);
     if (!deletedClass) {
       return res.status(400).json({
-        message: 'Class could not be found and updated!',
+        message: 'Class could not be found and deleted!',
         data: {},
         error: false,
       });

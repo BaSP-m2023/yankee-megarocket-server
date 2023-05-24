@@ -47,9 +47,11 @@ const trainerSchema = new Schema(
       min: 10,
       max: 15,
     },
-    assignedActivities: {
-      type: [String],
-    },
+    assignedActivities: [{
+      _id: false,
+      type: Schema.Types.ObjectId,
+      ref: 'Activity',
+    }],
   },
   { timestamps: true },
 );
