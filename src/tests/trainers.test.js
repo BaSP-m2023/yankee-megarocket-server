@@ -177,6 +177,7 @@ describe('PUT /api/trainers/:id', () => {
     expect(response.status).toBe(500);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toEqual({});
   });
 });
 
@@ -220,5 +221,6 @@ describe('DELETE /api/trainers/:id', () => {
     expect(response.status).toBe(500);
     expect(response.body.data).toBeUndefined();
     expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toEqual({});
   });
 });
