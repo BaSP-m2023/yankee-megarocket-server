@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId('64623a627aebbd9653af45e3'),
-  activityId: 'Coding',
+  _id: new mongoose.Types.ObjectId('64693c420b3782bf437c382f'),
+  activityId: '646939300b3782bf437c381b',
   hour: 14,
-  day: 'friday',
-  trainerId: 'trainerpepito1',
-  maxCapacity: 30,
+  day: 'tuesday',
+  trainerId: '64693b1d0b3782bf437c3826',
+  maxCapacity: 10,
 }];

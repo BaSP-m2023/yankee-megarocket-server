@@ -127,7 +127,7 @@ export const deleteClassById = async (req, res) => {
     const deletedClass = await Classes.findByIdAndDelete(id);
     if (!deletedClass) {
       return res.status(400).json({
-        message: 'Class could not be found and updated!',
+        message: 'Class could not be found and deleted!',
         data: {},
         error: false,
       });
